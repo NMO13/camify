@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Shared.Geometry;
-using Shared.Geometry.OpenTK;
 
 namespace Shared
 {

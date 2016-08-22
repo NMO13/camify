@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shared.Geometry.OpenTK;
 using Shared.Helper;
 
 namespace Shared.Geometry

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{385D20DC-440E-42BB-A9D5-A0E34C241C4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderEngine", "RenderEngine\RenderEngine.csproj", "{7363670C-A51E-4C03-85A7-F9440CEA4E5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
