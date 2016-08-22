@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camify", "Camify\Camify.csproj", "{262911A0-4E38-42C0-AB29-17EA884251A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "Camify\UserInterface.csproj", "{262911A0-4E38-42C0-AB29-17EA884251A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManagement\DataManagement.csproj", "{56C5FB7A-09B0-41A3-B873-DDA42B06B4CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{385D20DC-440E-42BB-A9D5-A0E34C241C4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{262911A0-4E38-42C0-AB29-17EA884251A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{262911A0-4E38-42C0-AB29-17EA884251A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{262911A0-4E38-42C0-AB29-17EA884251A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C5FB7A-09B0-41A3-B873-DDA42B06B4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C5FB7A-09B0-41A3-B873-DDA42B06B4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C5FB7A-09B0-41A3-B873-DDA42B06B4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C5FB7A-09B0-41A3-B873-DDA42B06B4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385D20DC-440E-42BB-A9D5-A0E34C241C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
