@@ -10,15 +10,18 @@ using System.Windows.Forms;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
+using Delegation;
+using EventHandling;
 using RenderEngine;
 
 namespace UserInterface
 {
-    public partial class MainWindow : KryptonForm
+    public partial class MainWindow : KryptonForm, IObserver
     {
         public MainWindow()
         {
             InitializeComponent();
+            ObserverRegistry.RegisterObserver(this);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -30,7 +33,6 @@ namespace UserInterface
 
             // Add initial docking pages
             kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewDocument()});
-
         }
 
         private KryptonPage NewDocument()
@@ -58,6 +60,11 @@ namespace UserInterface
 
 
             return p;
+        }
+
+        public void Notify(IMessage m)
+        {
+            
         }
     }
 }

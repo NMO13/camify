@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderEngine", "RenderEngine\RenderEngine.csproj", "{7363670C-A51E-4C03-85A7-F9440CEA4E5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delegation", "Delegation\Delegation.csproj", "{ABBE09F2-2593-4E4F-99AC-EF07055B357A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHandling", "EventHandling\EventHandling.csproj", "{26B2CDB6-4FFC-447C-B908-33B4A990E257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7363670C-A51E-4C03-85A7-F9440CEA4E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABBE09F2-2593-4E4F-99AC-EF07055B357A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABBE09F2-2593-4E4F-99AC-EF07055B357A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABBE09F2-2593-4E4F-99AC-EF07055B357A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABBE09F2-2593-4E4F-99AC-EF07055B357A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B2CDB6-4FFC-447C-B908-33B4A990E257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B2CDB6-4FFC-447C-B908-33B4A990E257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B2CDB6-4FFC-447C-B908-33B4A990E257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B2CDB6-4FFC-447C-B908-33B4A990E257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
