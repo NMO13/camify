@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderEngine", "RenderEngin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delegation", "Delegation\Delegation.csproj", "{ABBE09F2-2593-4E4F-99AC-EF07055B357A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandling", "EventHandling\MessageHandling.csproj", "{26B2CDB6-4FFC-447C-B908-33B4A990E257}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandling", "MessageHandling\MessageHandling.csproj", "{26B2CDB6-4FFC-447C-B908-33B4A990E257}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

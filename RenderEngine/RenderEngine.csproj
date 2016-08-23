@@ -75,7 +75,7 @@
       <Project>{56c5fb7a-09b0-41a3-b873-dda42b06b4ce}</Project>
       <Name>DataManagement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EventHandling\MessageHandling.csproj">
+    <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
       <Name>MessageHandling</Name>
     </ProjectReference>

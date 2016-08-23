@@ -111,7 +111,7 @@
       <Project>{abbe09f2-2593-4e4f-99ac-ef07055b357a}</Project>
       <Name>Delegation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EventHandling\MessageHandling.csproj">
+    <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
       <Name>MessageHandling</Name>
     </ProjectReference>
