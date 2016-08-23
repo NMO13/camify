@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assimp;
 using Assimp.Configs;
+using Delegation;
+using MessageHandling;
 using Mesh = Shared.Mesh;
 using Shared;
 
 namespace DataManagement
 {
-    public class MeshImporter
+    public class MeshImporter : IObserver
     {
         private List<Mesh> meshes = new List<Mesh>();
         public List<Mesh> GenerateMeshes(String path)
@@ -120,6 +119,15 @@ namespace DataManagement
             transformationMatrix.M44 = transformations.D4;
 
             return transformationMatrix;
+        }
+
+        public void Notify(Message m)
+        {
+            FileMessage fm = m as FileMessage;
+            var meshes = GenerateMeshes(fm.FilePath);
+            MeshMessage message = MessageFactory.GenerateMessage(MessageType.NewMesh) as MeshMessage;
+            meshes.ForEach(x => message.AddMesh(x));
+            MessageSender.Instance.SendMessage(message);
         }
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventHandling
+namespace RenderEngine
 {
-    public interface IMessage
+    class Shader
     {
-        Object[] Payload { get; set; }
     }
 }

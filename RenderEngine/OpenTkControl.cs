@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using DataManagement;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using Shared;
 
 namespace RenderEngine
 {
     public partial class OpenTkControl : OpenTK.GLControl
     {
         private bool _loaded;
+        List<Mesh> _meshes = new List<Mesh>();
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
             InitializeComponent();
+            LoadMeshes();
         }
 
         private void OpenTkControl_Load(object sender, EventArgs e)
@@ -47,6 +52,12 @@ namespace RenderEngine
             // Render();
             Invalidate();
 
+        }
+
+        private void LoadMeshes()
+        {
+            MeshImporter importer = new MeshImporter();
+            _meshes = importer.GenerateMeshes(@"Path\To\File");
         }
     }
 }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EventHandling;
+﻿using MessageHandling;
 
 namespace Delegation
 {
     public static class ObserverRegistry
     {
         private static Dispatcher dispatcher = Dispatcher.Instance;
-        public static void RegisterObserver(IObserver observer)
+        public static void RegisterObserver(IObserver observer, MessageType messageType)
         {
-            dispatcher.AddObserver(observer);
+            dispatcher.AddObserver(observer, messageType);
         }
     }
 }

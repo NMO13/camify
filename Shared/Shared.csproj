@@ -72,7 +72,8 @@
     <Compile Include="Geometry\Ray3d.cs" />
     <Compile Include="Geometry\Vector2m.cs" />
     <Compile Include="Geometry\Vector4d.cs" />
-    <Compile Include="Helper\MathHelper.cs" />
+    <Compile Include="Helper\EnumExtensions.cs" />
+    <Compile Include="Math\MathHelper.cs" />
     <Compile Include="Helper\Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Geometry\Vector3d.cs" />

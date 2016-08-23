@@ -49,6 +49,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Delegation\Delegation.csproj">
+      <Project>{abbe09f2-2593-4e4f-99ac-ef07055b357a}</Project>
+      <Name>Delegation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventHandling\MessageHandling.csproj">
+      <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
+      <Name>MessageHandling</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{385d20dc-440e-42bb-a9d5-a0e34c241c4f}</Project>
       <Name>Shared</Name>

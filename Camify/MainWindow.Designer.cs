@@ -37,7 +37,7 @@
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
-            this.kryptonRibbonGroupButton1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.ImportButton = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace1)).BeginInit();
@@ -45,10 +45,6 @@
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // kryptonManager1
-            // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Blue;
             // 
             // kryptonDockableWorkspace1
             // 
@@ -64,7 +60,7 @@
             this.kryptonDockableWorkspace1.Root.UniqueName = "8CE221DE9BB644F2B781F212245F4FF2";
             this.kryptonDockableWorkspace1.Root.WorkspaceControl = this.kryptonDockableWorkspace1;
             this.kryptonDockableWorkspace1.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(2567, 813);
+            this.kryptonDockableWorkspace1.Size = new System.Drawing.Size(2567, 863);
             this.kryptonDockableWorkspace1.TabIndex = 0;
             this.kryptonDockableWorkspace1.TabStop = true;
             // 
@@ -72,9 +68,9 @@
             // 
             this.kryptonPanel1.Controls.Add(this.kryptonDockableWorkspace1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 287);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 237);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(2567, 813);
+            this.kryptonPanel1.Size = new System.Drawing.Size(2567, 863);
             this.kryptonPanel1.TabIndex = 1;
             // 
             // kryptonRibbon1
@@ -84,8 +80,9 @@
             this.kryptonRibbon1.RibbonAppButton.AppButtonShowRecentDocs = false;
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
-            this.kryptonRibbon1.Size = new System.Drawing.Size(2567, 287);
+            this.kryptonRibbon1.Size = new System.Drawing.Size(2567, 237);
             this.kryptonRibbon1.TabIndex = 2;
             // 
             // kryptonRibbonTab1
@@ -101,9 +98,14 @@
             // kryptonRibbonGroupTriple1
             // 
             this.kryptonRibbonGroupTriple1.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.kryptonRibbonGroupButton1,
+            this.ImportButton,
             this.kryptonRibbonGroupButton2,
             this.kryptonRibbonGroupButton3});
+            // 
+            // ImportButton
+            // 
+            this.ImportButton.TextLine1 = "Import";
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // MainWindow
             // 
@@ -134,7 +136,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonTab kryptonRibbonTab1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup kryptonRibbonGroup1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple1;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton1;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton ImportButton;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton3;
     }

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using Delegation;
-using EventHandling;
+using MessageHandling;
 using RenderEngine;
+using Message = MessageHandling.Message;
 
 namespace UserInterface
 {
@@ -21,7 +15,7 @@ namespace UserInterface
         public MainWindow()
         {
             InitializeComponent();
-            ObserverRegistry.RegisterObserver(this);
+            ObserverRegistry.RegisterObserver(this, MessageType.NewMesh);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -62,9 +56,39 @@ namespace UserInterface
             return p;
         }
 
-        public void Notify(IMessage m)
+        public void Notify(Message m)
         {
             
+        }
+
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            // Create an instance of the open file dialog box.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Set filter options and filter index.
+            openFileDialog1.Filter = "Collada (.dae)|*.dae";
+            openFileDialog1.FilterIndex = 1;
+
+            openFileDialog1.Multiselect = true;
+
+            // Call the ShowDialog method to show the dialog box.
+            DialogResult result = openFileDialog1.ShowDialog();
+
+            // Process input if the user clicked OK.
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    FileMessage m = MessageFactory.GenerateMessage(MessageType.LoadFile) as FileMessage;
+                    m.FilePath = openFileDialog1.FileName;
+                    MessageSender.Instance.SendMessage(m);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
         }
     }
 }

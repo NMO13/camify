@@ -55,12 +55,34 @@
     <Compile Include="OpenTkControl.Designer.cs">
       <DependentUpon>OpenTkControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Postprocessing\Postprocess.cs" />
+    <Compile Include="Postprocessing\PostprocessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManager.cs" />
+    <Compile Include="Shader.cs" />
+    <Compile Include="Texture.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="OpenTkControl.resx">
       <DependentUpon>OpenTkControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Camera\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataManagement\DataManagement.csproj">
+      <Project>{56c5fb7a-09b0-41a3-b873-dda42b06b4ce}</Project>
+      <Name>DataManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventHandling\MessageHandling.csproj">
+      <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
+      <Name>MessageHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{385d20dc-440e-42bb-a9d5-a0e34c241c4f}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

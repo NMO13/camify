@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EventHandling;
+﻿using System.Collections.Generic;
+using MessageHandling;
 
 namespace Delegation
 {
@@ -11,7 +7,7 @@ namespace Delegation
     {
         private static MessageSender _instance = new MessageSender();
 
-        public void SendMessage(IMessage message)
+        public void SendMessage(Message message)
         {
             Dispatcher.Instance.ProcessMessage(message);
         }
@@ -23,23 +19,31 @@ namespace Delegation
 
     internal class Dispatcher
     {
-        private List<IObserver> _observerList = new List<IObserver>();
+        private Dictionary<MessageType, List<IObserver>> _observerDictionary = new Dictionary<MessageType, List<IObserver>>(); 
 
         private static Dispatcher _instance = new Dispatcher();
         internal static Dispatcher Instance { get { return _instance; } }
-        public void ReceiveMessage(IMessage m)
+        internal void SendMessage(Message m, MessageType messageType)
         {
             ProcessMessage(m);
         }
 
-        internal void AddObserver(IObserver observer)
+        internal void AddObserver(IObserver observer, MessageType messageType)
         {
-            _observerList.Add(observer);
+            List<IObserver> list;
+            _observerDictionary.TryGetValue(messageType, out list);
+            if (list == null)
+            {
+                list = new List<IObserver>();
+                _observerDictionary.Add(messageType, list);
+            }
+            list.Add(observer);
         }
 
-        internal void ProcessMessage(IMessage m)
+        internal void ProcessMessage(Message m)
         {
-            foreach (var observer in _observerList)
+            var observers = _observerDictionary[m.MessageType];
+            foreach (var observer in observers)
             {
                 observer.Notify(m);
             }
