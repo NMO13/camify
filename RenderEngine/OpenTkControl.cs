@@ -15,7 +15,8 @@ namespace RenderEngine
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
             InitializeComponent();
-            LoadMeshes();
+            MeshImporter importer = new MeshImporter();
+            _meshes = importer.InitializeMeshes(@"C:\Users\Flo\Dropbox\BooleanOpEnv\Blender\Collada_Files\Cylinders\Cylinder1.dae");
         }
 
         private void OpenTkControl_Load(object sender, EventArgs e)
@@ -52,12 +53,6 @@ namespace RenderEngine
             // Render();
             Invalidate();
 
-        }
-
-        private void LoadMeshes()
-        {
-            MeshImporter importer = new MeshImporter();
-            _meshes = importer.GenerateMeshes(@"Path\To\File");
         }
     }
 }

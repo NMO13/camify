@@ -20,7 +20,7 @@ namespace DataManagement
         {
             MeshImporter importer = new MeshImporter();
             List<Mesh> meshes =
-                importer.GenerateMeshes(GetDropboxFolderPath() +
+                importer.InitializeMeshes(GetDropboxFolderPath() +
                                         filepath);
             return meshes;
         }

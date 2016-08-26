@@ -12,7 +12,7 @@ namespace DataManagement
     public class MeshImporter : IObserver
     {
         private List<Mesh> meshes = new List<Mesh>();
-        public List<Mesh> GenerateMeshes(String path)
+        public List<Mesh> InitializeMeshes(String path)
         {
             AssimpImporter importer = new AssimpImporter();
             importer.SetConfig(new RemoveComponentConfig(ExcludeComponent.Animations | ExcludeComponent.Boneweights |
@@ -124,7 +124,7 @@ namespace DataManagement
         public void Notify(Message m)
         {
             FileMessage fm = m as FileMessage;
-            var meshes = GenerateMeshes(fm.FilePath);
+            var meshes = InitializeMeshes(fm.FilePath);
             MeshMessage message = MessageFactory.GenerateMessage(MessageType.NewMesh) as MeshMessage;
             meshes.ForEach(x => message.AddMesh(x));
             MessageSender.Instance.SendMessage(message);
