@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEngine.Additional
 {
-    internal enum PropertyConstants
+    public enum PropertyConstants
     {
         Marked, FaceListIndex, Median, IncidentEdges, HeVertexIndex
     }

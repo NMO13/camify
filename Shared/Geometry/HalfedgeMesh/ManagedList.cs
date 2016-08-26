@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    internal class ManagedList<T> : IEnumerable where T : class, IIndexable
+    public class ManagedList<T> : IEnumerable where T : class, IIndexable
     {
         internal ManagedList(int initialSize)
         {
@@ -60,7 +60,7 @@ namespace GraphicsEngine.HalfedgeMesh
             FreeList.Push(index);
         }
 
-        internal int Count
+        public int Count
         {
             get
             {
@@ -69,7 +69,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        internal T this[int index]
+        public T this[int index]
         {
             get
             {
@@ -93,7 +93,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return GetEnumerator();
         }
 
-        internal T[] ToArray()
+        public T[] ToArray()
         {
             T[] arr = new T[this.Count];
             int i = 0;
@@ -105,7 +105,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return arr;
         }
 
-        internal T[] ToRawArray()
+        public T[] ToRawArray()
         {
             return List.ToArray();
         }

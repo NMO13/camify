@@ -6,7 +6,7 @@ using GraphicsEngine.HalfedgeMesh;
 
 namespace Geometry.Bounding_Volume_Hierarchy
 {
-    internal class BoundingVolumeHierarchyNode
+    public class BoundingVolumeHierarchyNode
     {
         protected int m_Depth;
         protected AxisAlignedBoundingBox MAabb;
@@ -15,7 +15,7 @@ namespace Geometry.Bounding_Volume_Hierarchy
         public BoundingVolumeHierarchyNode Left, Right;
         internal int Id;
 
-        internal AxisAlignedBoundingBox AABB { get { return MAabb; } }
+        public AxisAlignedBoundingBox AABB { get { return MAabb; } }
         internal BoundingVolumeHierarchyNode(int id, int depth, AxisAlignedBoundingBox aabb, int itemCount)
         {
             Id = id;

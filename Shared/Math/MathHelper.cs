@@ -96,7 +96,7 @@ namespace Shared.Helper
         {
             return a < b ? a : b;
         }
-        internal static decimal Pow(decimal x, uint y)
+        public static decimal Pow(decimal x, uint y)
         {
             decimal A = 1m;
             BitArray e = new BitArray(BitConverter.GetBytes(y));
@@ -113,7 +113,7 @@ namespace Shared.Helper
             return A;
         }
 
-        internal static Rational Pow(Rational x, uint y)
+        public static Rational Pow(Rational x, uint y)
         {
             Rational A = 1;
             BitArray e = new BitArray(BitConverter.GetBytes(y));
@@ -130,7 +130,7 @@ namespace Shared.Helper
             return A;
         }
 
-        internal static decimal Sqrt(decimal x, decimal epsilon = 0.0M)
+        public static decimal Sqrt(decimal x, decimal epsilon = 0.0M)
         {
             if (x < 0) throw new OverflowException("Cannot calculate square root from a negative number");
 

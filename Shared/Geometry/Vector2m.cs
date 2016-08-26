@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using GraphicsEngine;
 using Microsoft.SolverFoundation.Common;
+using Shared.Additional;
 
 public class Vector2m
 {

@@ -3,8 +3,9 @@ using System.Windows.Forms;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
-using Delegation;
+using DataManagement;
 using MessageHandling;
+using Model;
 using RenderEngine;
 using Message = MessageHandling.Message;
 
@@ -12,10 +13,15 @@ namespace UserInterface
 {
     public partial class MainWindow : KryptonForm, IObserver
     {
+        private AbstractModel _meshAbstractModel;
+        private SubtractionModel _subtractionModel;
+        OpenTkControl _openTkControl = new OpenTkControl();
         public MainWindow()
         {
             InitializeComponent();
-            ObserverRegistry.RegisterObserver(this, MessageType.NewMesh);
+            _meshAbstractModel = new MeshModel();
+            _subtractionModel = new SubtractionModel();
+            _meshAbstractModel.AttachModelObserver(_openTkControl.AbstractModel);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -31,7 +37,7 @@ namespace UserInterface
 
         private KryptonPage NewDocument()
         {
-            KryptonPage page = NewPage("Document ", 0, new OpenTkControl());
+            KryptonPage page = NewPage("Document ", 0, _openTkControl);
 
             // Document pages cannot be docked or auto hidden
             page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden | KryptonPageFlags.DockingAllowDocked);
@@ -56,11 +62,6 @@ namespace UserInterface
             return p;
         }
 
-        public void Notify(Message m)
-        {
-            
-        }
-
         private void ImportButton_Click(object sender, EventArgs e)
         {
             // Create an instance of the open file dialog box.
@@ -80,15 +81,25 @@ namespace UserInterface
             {
                 try
                 {
-                    FileMessage m = MessageFactory.GenerateMessage(MessageType.LoadFile) as FileMessage;
-                    m.FilePath = openFileDialog1.FileName;
-                    MessageSender.Instance.SendMessage(m);
+                    MeshImporter m = new MeshImporter();
+                    var meshes = m.GenerateMeshes(openFileDialog1.FileName);
+                    ((MeshModel)_meshAbstractModel).AddMeshes(meshes);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
             }
+        }
+
+        public void Notify(AbstractModel abstractModel, Message m)
+        {
+            
+        }
+
+        private void BuildButton_Click(object sender, EventArgs e)
+        {
+            //_subtractionModel.
         }
     }
 }

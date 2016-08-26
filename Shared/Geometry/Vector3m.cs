@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using GraphicsEngine;
 using GraphicsEngine.Math;
+using Shared.Additional;
 using Shared.Helper;
 
 namespace Shared
 {
     public class Vector3m : ICloneable
     {
-        internal DynamicProperties DynamicProperties = new DynamicProperties();
+        public DynamicProperties DynamicProperties = new DynamicProperties();
 
         public Vector3m(Rational x, Rational y, Rational z)
         {
@@ -133,7 +134,7 @@ namespace Shared
             );
         }
 
-        internal bool IsZero()
+        public bool IsZero()
         {
             return X == 0 && Y == 0 && Z == 0;
         }

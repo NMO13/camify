@@ -10,7 +10,7 @@ namespace MessageHandling
     public enum MessageType 
     {
         //Use power of two values here!
-        NewMesh = 1,
-        LoadFile = 2
+        NewMeshes = 1,
+        LoadFile = 2,
     }
 }

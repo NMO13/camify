@@ -1090,6 +1090,15 @@ namespace Shared
             return Matrix4d.Mult(left, right);
         }
 
+        public static Vector4d operator *(Matrix4d left, Vector4d right)
+        {
+            var x = left.M11 * right.X + left.M12 * right.Y + left.M13 * right.Z + left.M14 * right.W;
+            var y = left.M21 * right.X + left.M22 * right.Y + left.M23 * right.Z + left.M24 * right.W;
+            var z = left.M31 * right.X + left.M32 * right.Y + left.M33 * right.Z + left.M34 * right.W;
+            var w = left.M41 * right.X + left.M42 * right.Y + left.M43 * right.Z + left.M44 * right.W;
+            return new Vector4d(x, y, z, w);
+        }
+
         /// <summary>
         /// Compares two instances for equality.
         /// </summary>

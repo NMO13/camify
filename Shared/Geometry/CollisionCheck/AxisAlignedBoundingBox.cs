@@ -5,7 +5,7 @@ using Microsoft.SolverFoundation.Common;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {
-    internal class AxisAlignedBoundingBox : IBoundingBox
+    public class AxisAlignedBoundingBox : IBoundingBox
     {
         /** maximum from the x coordinate */
         internal Rational XMax;

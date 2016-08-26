@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    interface IIndexable
+    public interface IIndexable
     {
         int Index { get; set; }
     }

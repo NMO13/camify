@@ -107,20 +107,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Delegation\Delegation.csproj">
-      <Project>{abbe09f2-2593-4e4f-99ac-ef07055b357a}</Project>
-      <Name>Delegation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
       <Name>MessageHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{df392daf-7f31-4fd9-bbb5-1459ea8bc6fa}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\RenderEngine\RenderEngine.csproj">
       <Project>{7363670c-a51e-4c03-85a7-f9440cea4e5a}</Project>
       <Name>RenderEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{385d20dc-440e-42bb-a9d5-a0e34c241c4f}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>XCOPY "$(SolutionDir)\third_party\Assimp\*.dll" "$(ProjectDir)\$(OutDir)" /s /i /y</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

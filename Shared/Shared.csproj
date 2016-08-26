@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AssimpNet">
+      <HintPath>..\third_party\Assimp\AssimpNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Solver.Foundation">
       <HintPath>..\third_party\Microsoft.Solver.Foundation.dll</HintPath>
     </Reference>
@@ -45,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Additional\DynamicProperties.cs" />
     <Compile Include="Additional\PropertyConstants.cs" />
+    <Compile Include="Export\MeshExporter.cs" />
     <Compile Include="Geometry\CollisionCheck\AxisAlignedBoundingBox.cs" />
     <Compile Include="Geometry\CollisionCheck\BoundingVolumeHierarchy.cs" />
     <Compile Include="Geometry\CollisionCheck\BoundingVolumeHierarchyNode.cs" />
@@ -52,7 +56,6 @@
     <Compile Include="Geometry\CollisionCheck\BvhRayCheck.cs" />
     <Compile Include="Geometry\CollisionCheck\FacePair.cs" />
     <Compile Include="Geometry\CollisionCheck\IBoundingBox.cs" />
-    <Compile Include="Geometry\CollisionCheck\IntersectionResult.cs" />
     <Compile Include="Geometry\CollisionCheck\MedianPartitionStrategy.cs" />
     <Compile Include="Geometry\CollisionCheck\PartitionStrategy.cs" />
     <Compile Include="Geometry\CollisionCheck\RayAABBIntersection.cs" />
@@ -68,11 +71,14 @@
     <Compile Include="Geometry\Matrix3d.cs" />
     <Compile Include="Geometry\Mesh.cs" />
     <Compile Include="Geometry\Matrix4d.cs" />
+    <Compile Include="Geometry\Meshes\DefaultMeshes.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
     <Compile Include="Geometry\Ray3d.cs" />
     <Compile Include="Geometry\Vector2m.cs" />
     <Compile Include="Geometry\Vector4d.cs" />
     <Compile Include="Helper\EnumExtensions.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Import\MeshImporter.cs" />
     <Compile Include="Math\MathHelper.cs" />
     <Compile Include="Helper\Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

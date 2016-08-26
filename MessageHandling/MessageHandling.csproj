@@ -42,8 +42,6 @@
   <ItemGroup>
     <Compile Include="Messages\FileMessage.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="IObserver.cs" />
-    <Compile Include="MessageFactory.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Messages\MeshMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

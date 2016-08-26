@@ -8,15 +8,15 @@ using GraphicsEngine.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {
-    class FacePair
+    public class FacePair
     {
-        internal FacePair(HeFace a, HeFace b)
+        public FacePair(HeFace a, HeFace b)
         {
             Debug.Assert(a != null && b != null);
             A = a;
             B = b;
         }
-        internal HeFace A;
-        internal HeFace B;
+        public HeFace A;
+        public HeFace B;
     }
 }

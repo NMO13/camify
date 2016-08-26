@@ -12,9 +12,9 @@ using Shared.Helper;
 
 namespace GraphicsEngine.Math
 {
-    internal class Misc
+    public class Misc
     {
-        internal static Rational CalcAngle(HeFace faceA, HeFace faceB, Vector3m testPointB)
+        public static Rational CalcAngle(HeFace faceA, HeFace faceB, Vector3m testPointB)
         {
             var na = faceA.OuterComponent.Normal;
             var nb = faceB.OuterComponent.Normal.Negated();

@@ -8,7 +8,7 @@ using Shared;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    class IncidentEdgesList : IEnumerable<HeHalfedge>
+    public class IncidentEdgesList : IEnumerable<HeHalfedge>
     {
         internal IncidentEdgesList(HeVertex owner)
         {
@@ -27,7 +27,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return list;
         }
 
-        internal int Count { get { return _incidentEdges.Count; } }
+        public int Count { get { return _incidentEdges.Count; } }
         internal void Add(HeHalfedge edge)
         {
             if (!edge.Origin.Equals(_owner))
@@ -89,7 +89,7 @@ namespace GraphicsEngine.HalfedgeMesh
             get { return _incidentEdges[i]; }
         }
 
-        internal void ForEach(Action<HeHalfedge> action)
+        public void ForEach(Action<HeHalfedge> action)
         {
             foreach (var incidentEdge in _incidentEdges)
             {
@@ -98,7 +98,7 @@ namespace GraphicsEngine.HalfedgeMesh
         }
     }
 
-    internal class HeVertex : IIndexable
+    public class HeVertex : IIndexable
     {
         private float _xd;
         private float _yd;
@@ -110,13 +110,13 @@ namespace GraphicsEngine.HalfedgeMesh
 
         private Vector3m vector3m;
 
-        internal IncidentEdgesList IncidentEdges;
+        public IncidentEdgesList IncidentEdges;
         //internal List<HeHalfedge> EqualIncidentEdgeList = new List<HeHalfedge>(); 
         public bool IsOnSweptVolumeSurface;
 
         public int Index { get; set; }
 
-        internal HeVertex(Rational x, Rational y, Rational z)
+        public HeVertex(Rational x, Rational y, Rational z)
         {
             X = x;
             Y = y;
@@ -126,12 +126,12 @@ namespace GraphicsEngine.HalfedgeMesh
             IncidentEdges = new IncidentEdgesList(this);
         }
 
-        internal Vector3m Vector3m
+        public Vector3m Vector3m
         {
             get { return vector3m; }
         }
 
-        internal Vector3d Vector3d
+        public Vector3d Vector3d
         {
             get { return new Vector3d(XD, YD, ZD); }
         }
@@ -198,7 +198,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        internal Rational X
+        public Rational X
         {
             get { return _x; }
             set
@@ -209,7 +209,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        internal Rational Y
+        public Rational Y
         {
             get { return _y; }
             set
@@ -220,7 +220,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        internal Rational Z
+        public Rational Z
         {
             get { return _z; }
             set

@@ -1,7 +1,8 @@
 ﻿using System;
 using RenderEngine.Rendering;
+using Shared;
 
-namespace Shared.Converter
+namespace RenderEngine.Converter
 {
     class MeshConverter
     {

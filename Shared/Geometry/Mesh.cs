@@ -21,6 +21,7 @@ namespace Shared
             Indices = indices;
             Normals = normals ?? new Vector3d[0];
             NormalIndices = normalIndices ?? new int[0];
+            ModelMatrix = Matrix4d.Identity;
         }
         public Vector3d[] Normals { get; private set; }
         public Vector3d[] Vertices { get; private set; }

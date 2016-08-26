@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared;
+using Shared.Additional;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    internal class HeFace : ICloneable, IIndexable
+    public class HeFace : ICloneable, IIndexable
     {
         private HeHalfedge _outerComponent;
         internal AxisAlignedBoundingBox Aabb;
 
-        internal DynamicProperties DynamicProperties = new DynamicProperties();
+        public DynamicProperties DynamicProperties = new DynamicProperties();
 
         public HeHalfedge OuterComponent
         {
@@ -30,7 +31,7 @@ namespace GraphicsEngine.HalfedgeMesh
             Index = -1;
         }
 
-        internal IEnumerable<HeHalfedge> GetFaceCirculator()
+        public IEnumerable<HeHalfedge> GetFaceCirculator()
         {
             if (_outerComponent == null) { yield break; }
             HeHalfedge h = _outerComponent;
@@ -153,30 +154,30 @@ namespace GraphicsEngine.HalfedgeMesh
             return a * v.X + b * v.Y + c * v.Z + d;
         }
 
-        internal int DistanceSign(Vector3m v)
+        public int DistanceSign(Vector3m v)
         {
             var distance = ComputeDistance(v);
             return distance.Sign;
         }
 
-        internal HeVertex V0
+        public HeVertex V0
         {
             get { return OuterComponent.Origin; }
         }
 
-        internal HeVertex V1
+        public HeVertex V1
         {
             get { return OuterComponent.Next.Origin; }
         }
 
-        internal HeVertex V2
+        public HeVertex V2
         {
             get { return OuterComponent.Next.Next.Origin; }
         }
 
         public int VboBucketId { get; set; }
 
-        internal bool IsValid
+        public bool IsValid
         {
             get
             {

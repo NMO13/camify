@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DataManagement;
+using MessageHandling;
+using Model;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using Shared;
 
 namespace RenderEngine
 {
-    public partial class OpenTkControl : OpenTK.GLControl
+    public partial class OpenTkControl : OpenTK.GLControl, IObserver
     {
         private bool _loaded;
         List<Mesh> _meshes = new List<Mesh>();
+        SceneModel _sceneModel = new SceneModel();
+
+        public AbstractModel AbstractModel { get { return _sceneModel; } }
+
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
             InitializeComponent();
-            MeshImporter importer = new MeshImporter();
-            _meshes = importer.InitializeMeshes(@"C:\Users\Flo\Dropbox\BooleanOpEnv\Blender\Collada_Files\Cylinders\Cylinder1.dae");
+            _sceneModel.AttachObserver(this);
         }
 
         private void OpenTkControl_Load(object sender, EventArgs e)
@@ -53,6 +58,11 @@ namespace RenderEngine
             // Render();
             Invalidate();
 
+        }
+
+        public void Notify(AbstractModel abstractModel, MessageHandling.Message m)
+        {
+            
         }
     }
 }

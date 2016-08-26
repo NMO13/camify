@@ -78,13 +78,13 @@
     <Folder Include="Resources\Shader\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataManagement\DataManagement.csproj">
-      <Project>{56c5fb7a-09b0-41a3-b873-dda42b06b4ce}</Project>
-      <Name>DataManagement</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
       <Name>MessageHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{df392daf-7f31-4fd9-bbb5-1459ea8bc6fa}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{385d20dc-440e-42bb-a9d5-a0e34c241c4f}</Project>

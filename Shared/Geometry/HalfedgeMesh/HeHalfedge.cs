@@ -4,18 +4,18 @@ using Shared;
 
 namespace GraphicsEngine.HalfedgeMesh
 { 
-    internal class HeHalfedge : ICloneable, IIndexable
+    public class HeHalfedge : ICloneable, IIndexable
     {
-        internal HeHalfedge Next;
-        internal HeHalfedge Prev;
-        internal HeVertex Origin { get; private set; }
-        internal HeFace IncidentFace;
-        internal HeHalfedge Twin;
+        public HeHalfedge Next;
+        public HeHalfedge Prev;
+        public HeVertex Origin { get; private set; }
+        public HeFace IncidentFace;
+        public HeHalfedge Twin;
 
-        internal Vector3m Normal { get; set; }
+        public Vector3m Normal { get; set; }
         public int Index { get; set; }
 
-        internal bool IsSplitLine { get; private set; }
+        public bool IsSplitLine { get; private set; }
 
         internal HeHalfedge(HeVertex origin)
         {
@@ -71,12 +71,12 @@ namespace GraphicsEngine.HalfedgeMesh
             return halfedge;
         }
 
-        internal Vector3m Vector3D
+        public Vector3m Vector3D
         {
             get { return new Vector3m(Twin.Origin.X - this.Origin.X, Twin.Origin.Y - this.Origin.Y, Twin.Origin.Z - this.Origin.Z); }
         }
 
-        internal void SetSplitline(bool value)
+        public void SetSplitline(bool value)
         {
             IsSplitLine = value;
         }

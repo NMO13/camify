@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    interface IMeshObserver
+    public interface IMeshObserver
     {
 
         void VertexAdded(HeVertex v, HeMesh source);

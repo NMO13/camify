@@ -8,13 +8,13 @@ using GraphicsEngine.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {
-    internal class BoundingVolumeHierarchy : IMeshObserver
+    public class BoundingVolumeHierarchy : IMeshObserver
     {
         internal uint MaxItemCount = 1;
         internal int Height = 0;
-        internal BoundingVolumeHierarchyNode Root { get; private set; }
+        public BoundingVolumeHierarchyNode Root { get; private set; }
 
-        internal BoundingVolumeHierarchy(HeFace[] faces, uint maxItemCount)
+        public BoundingVolumeHierarchy(HeFace[] faces, uint maxItemCount)
         {
             if (maxItemCount == 0)
                 throw new ArgumentException("Item count and max depth have to be greater zero");

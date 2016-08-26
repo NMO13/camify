@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {
-    interface IBoundingBox
+    public interface IBoundingBox
     {
         bool Overlap(IBoundingBox other);
     }

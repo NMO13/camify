@@ -11,7 +11,7 @@ using Shared;
 
 namespace GraphicsEngine.HalfedgeMesh
 {
-    internal class HeMesh
+    public class HeMesh
     {
         private readonly ManagedList<HeHalfedge> _halfedgeList;
         private readonly ManagedList<HeFace> _faceList;
@@ -19,34 +19,34 @@ namespace GraphicsEngine.HalfedgeMesh
 
         private readonly List<IMeshObserver> _observerList = new List<IMeshObserver>();
 
-        internal HeMesh()
+        public HeMesh()
         {
             _vertexList = new ManagedList<HeVertex>(500000);
             _halfedgeList = new ManagedList<HeHalfedge>(10000000);
             _faceList = new ManagedList<HeFace>(500000);
         }
 
-        internal HeMesh(HeMesh other, Vector3m translate) : this()
+        public HeMesh(HeMesh other, Vector3m translate) : this()
         {            
             SetMesh(other, translate);
         }
 
-        internal void AddObserver(IMeshObserver obs)
+        public void AddObserver(IMeshObserver obs)
         {
             _observerList.Add(obs);
         }
 
-        internal ManagedList<HeFace> FaceList
+        public ManagedList<HeFace> FaceList
         {
             get { return _faceList; }
         }
 
-        internal ManagedList<HeVertex> VertexList
+        public ManagedList<HeVertex> VertexList
         {
             get { return _vertexList; }
         }
 
-        internal ManagedList<HeHalfedge> HalfedgeList
+        public ManagedList<HeHalfedge> HalfedgeList
         {
             get { return _halfedgeList; }
         }
@@ -198,7 +198,7 @@ namespace GraphicsEngine.HalfedgeMesh
 
         // we are looking for an existing halfedge which does not have a face attached to it
         // note that it is possible that identical halfedges could exist
-        internal bool GetFacelessHalfedge(HeVertex v0, HeVertex v1, out HeHalfedge res)
+        public bool GetFacelessHalfedge(HeVertex v0, HeVertex v1, out HeHalfedge res)
         {
             foreach (var incidentEdge in VertexList[v0.Index].IncidentEdges)
             {
@@ -215,7 +215,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return false;
         }
 
-        internal void RemoveFace(HeFace f0, bool removeOrphanVertices)
+        public void RemoveFace(HeFace f0, bool removeOrphanVertices)
         {
             Debug.Assert(f0.Index > -1);
             NotifyFaceDeleted(f0);
@@ -272,7 +272,7 @@ namespace GraphicsEngine.HalfedgeMesh
             _observerList.ForEach(obs => obs.FaceDeleted(face, this));
         }
 
-        internal void Translate(Rational x, Rational y, Rational z)
+        public void Translate(Rational x, Rational y, Rational z)
         {
             foreach (var vertex in _vertexList)
             {
@@ -294,7 +294,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        internal HeFace[] SplitFaceInTwo(HeHalfedge heA, HeVertex heVertex)
+        public HeFace[] SplitFaceInTwo(HeHalfedge heA, HeVertex heVertex)
         {
             var faces = new HeFace[2];
             var face = heA.IncidentFace;
@@ -323,7 +323,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return faces;
         }
 
-        internal void ResetMesh(HeMesh other, Vector3m translate)
+        public void ResetMesh(HeMesh other, Vector3m translate)
         {
             VertexList.Clear();
             HalfedgeList.Clear();
@@ -420,7 +420,7 @@ namespace GraphicsEngine.HalfedgeMesh
         // so vertices are never duplicated
         // we check here if vertex already exists by checking the incident edges
         // of their test vertices
-        internal HeVertex AddVertexUnique(HeVertex vertex, params HeVertex[] testVertices)
+        public HeVertex AddVertexUnique(HeVertex vertex, params HeVertex[] testVertices)
         {
             foreach (var testVertex in testVertices)
             {
@@ -433,7 +433,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return AddVertex(vertex);
         }
 
-        internal void Collapse(int heHalfedgeIndex)
+        public void Collapse(int heHalfedgeIndex)
         {
             HeHalfedge e = HalfedgeList[heHalfedgeIndex];
             HeVertex u = e.Origin;
@@ -465,7 +465,7 @@ namespace GraphicsEngine.HalfedgeMesh
             Debug.Assert(u.Index == -1);
         }
 
-        internal void RemoveOrphanVertices()
+        public void RemoveOrphanVertices()
         {
             List<int> orphanIndices = new List<int>();
             foreach (var heVertex in VertexList)
