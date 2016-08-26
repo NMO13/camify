@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BooleanSubractorTests;
 using DataManagement;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Boolean_Ops;
@@ -239,7 +240,7 @@ namespace BooleanSubtractorTests
             var obj2 = new DeformableObject();
             obj2.Initialize(cube2);
             obj2.CheckSanity();
-            obj2.TranslateAndBuildBvh(Single.Epsilon, 0, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(Single.Epsilon, 0, 0));
 
             BooleanModeller.SubtractSweptVolume(obj, obj2);
         }

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using GraphicsEngine.HalfedgeMesh;
 using System.Diagnostics;
 using Geometry.Bounding_Volume_Hierarchy;
-using GeometryCalculation;
-using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.CollisionCheck;
+using GraphicsEngine.HalfedgeMesh;
 using GraphicsEngine.HalfedgeMesh.Simplification;
 using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
 using Shared;
 
-namespace GraphicsEngine.Geometry
+namespace GeometryCalculation.DataStructures
 {
     public class DeformableObject
     {
@@ -197,14 +194,14 @@ namespace GraphicsEngine.Geometry
             HeMesh.AddObserver(Bvh);
         }
 
-        public void Translate(Rational x, Rational y, Rational z)
+        public void Translate(Vector3m amount)
         {
-            HeMesh.Translate(x, y, z);
+            HeMesh.Translate(amount);
         }
 
-        public void TranslateAndBuildBvh(Rational x, Rational y, Rational z)
+        public void TranslateAndBuildBvh(Vector3m amount)
         {
-            Translate(x, y, z);
+            Translate(amount);
             BuildBvh();
         }
 
@@ -228,6 +225,31 @@ namespace GraphicsEngine.Geometry
             obj.HeMesh = new HeMesh(HeMesh, translate);
             obj.BuildBvh();
             return obj;
+        }
+
+        public Mesh GetMesh()
+        {
+            var vertices = new List<Vector3d>();
+            HeMesh.VertexList.Compact();
+            foreach (var heVertex in HeMesh.VertexList.ToRawArray())
+            {
+                vertices.Add(heVertex.Vector3d);
+            }
+            List<int> indices = new List<int>();
+            List<Vector3d> normals = new List<Vector3d>();
+            foreach (var heFace in HeMesh.FaceList)
+            {
+                indices.Add(heFace.OuterComponent.Origin.Index);
+                normals.Add(heFace.OuterComponent.Normal.Vector3d);
+
+                indices.Add(heFace.OuterComponent.Next.Origin.Index);
+                normals.Add(heFace.OuterComponent.Next.Normal.Vector3d);
+
+                indices.Add(heFace.OuterComponent.Next.Next.Origin.Index);
+                normals.Add(heFace.OuterComponent.Next.Next.Normal.Vector3d);
+            }
+
+            return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray(), null);
         }
     }
 

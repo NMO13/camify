@@ -107,6 +107,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CNCSpecific\CNCSpecific.csproj">
+      <Project>{76527d19-7fb4-48a8-b08b-1f201fa92635}</Project>
+      <Name>CNCSpecific</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
       <Name>MessageHandling</Name>

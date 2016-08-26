@@ -25,7 +25,7 @@ namespace RenderEngine
 
         public override void ModelNotified(AbstractModel sender, Message message)
         {
-            if (message.MessageType == MessageType.NewMeshes)
+            if (message.MessageType == MessageType.NewRoughParts)
             {
                 Changed(this, message);
             }

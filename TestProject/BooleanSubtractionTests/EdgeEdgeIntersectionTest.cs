@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BooleanSubractorTests;
 using DataManagement;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using NUnit.Framework;

@@ -202,7 +202,7 @@ namespace Shared
             return (xDistSquared + yDistSquared + zDistSquared);
         }
 
-        internal Vector3d Vector3d
+        public Vector3d Vector3d
         {
             get { return new Vector3d((float)X.ToDouble(), (float)Y.ToDouble(), (float)Z.ToDouble()); }
         }

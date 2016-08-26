@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataManagement;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Meshes;
@@ -36,7 +37,7 @@ namespace BooleanSubractorTests
             Mesh mesh = meshes[0];
             DeformableObject o = new DeformableObject();
             o.Initialize(mesh);
-            o.Translate(0, 200, 0);
+            o.Translate(new Vector3m(0, 200, 0));
             var cl = o.Clone(Vector3m.Zero());
             o.SweepVolume(cl, new Vector3m(250, 0, 180));
             TestFramework.CheckSanity(o);

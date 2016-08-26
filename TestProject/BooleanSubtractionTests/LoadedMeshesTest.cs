@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataManagement;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using NUnit.Framework;

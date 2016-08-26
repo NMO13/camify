@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BooleanSubractorTests;
 using DataManagement;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Boolean_Ops;
@@ -37,9 +38,9 @@ namespace BooleanOpEnv
             DeformableObject tool = new DeformableObject();
             tool.Initialize(meshes[0]);
             tool.CheckSanity();
-            tool.Translate(0, 200, 0);
-            tool.Translate(250, 0, 180);
-            tool.Translate(0, -150, 0);
+            tool.Translate(new Vector3m(0, 200, 0));
+            tool.Translate(new Vector3m(250, 0, 180));
+            tool.Translate(new Vector3m(0, -150, 0));
 
             var tsv = tool.Clone(Vector3m.Zero());
 
@@ -47,7 +48,7 @@ namespace BooleanOpEnv
             tsv.SweepVolume(tool, translate);
             BooleanModeller.SubtractSweptVolume(roughpart, tsv);
 
-            tool.Translate(translate.X, translate.Y, translate.Z);
+            tool.Translate(new Vector3m(translate.X, translate.Y, translate.Z));
 
             tool.CheckSanity();
             tsv.CheckSanity();
@@ -78,20 +79,20 @@ namespace BooleanOpEnv
             DeformableObject obj3 = new DeformableObject(1);
             var mesh3 = DefaultMeshes.Box(50, 50, 50);
             obj3.Initialize(mesh3);
-            obj3.TranslateAndBuildBvh(0, 0, 90);
+            obj3.TranslateAndBuildBvh(new Vector3m(0, 0, 90));
 
             _bTester.Test(obj, obj3, true, 3, 71, 426, 142);
             obj.BuildBvh();
 
             DeformableObject obj4 = new DeformableObject(1);
             obj4.Initialize(mesh3);
-            obj4.TranslateAndBuildBvh(0, 0, 90);
-            obj4.TranslateAndBuildBvh(70, 0, 0);
+            obj4.TranslateAndBuildBvh(new Vector3m(0, 0, 90));
+            obj4.TranslateAndBuildBvh(new Vector3m(70, 0, 0));
 
             _bTester.Test(obj, obj4, true, 3, 92, 540, 180);
             obj.BuildBvh();
 
-            obj4.TranslateAndBuildBvh(0, 0, -30.007);
+            obj4.TranslateAndBuildBvh(new Vector3m(0, 0, -30.007));
             _bTester.Test(obj, obj4, true, 3, 117, 690, 230);
         }
     }

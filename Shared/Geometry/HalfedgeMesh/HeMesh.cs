@@ -272,13 +272,13 @@ namespace GraphicsEngine.HalfedgeMesh
             _observerList.ForEach(obs => obs.FaceDeleted(face, this));
         }
 
-        public void Translate(Rational x, Rational y, Rational z)
+        public void Translate(Vector3m amount)
         {
             foreach (var vertex in _vertexList)
             {
-                vertex.X += x;
-                vertex.Y += y;
-                vertex.Z += z;
+                vertex.X += amount.X;
+                vertex.Y += amount.Y;
+                vertex.Z += amount.Z;
             }
 
             // not needed for translation but we will improve this method in the future to support rotation and then, we will

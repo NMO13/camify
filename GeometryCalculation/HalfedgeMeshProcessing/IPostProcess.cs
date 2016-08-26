@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.HalfedgeMesh;
 

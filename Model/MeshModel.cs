@@ -30,7 +30,7 @@ namespace Model
         public void AddMeshes(List<Mesh> meshes)
         {
             _meshes.AddRange(meshes);
-            Changed(this, new MeshMessage(MessageType.NewMeshes, meshes));
+            Changed(this, new MeshMessage(MessageType.NewRoughParts, meshes));
         }
 
     }

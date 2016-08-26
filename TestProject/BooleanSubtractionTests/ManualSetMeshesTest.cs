@@ -1,4 +1,5 @@
-﻿using GraphicsEngine.Geometry;
+﻿using GeometryCalculation.DataStructures;
+using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Meshes;
 using NUnit.Framework;
 using Shared;
@@ -22,7 +23,7 @@ namespace BooleanSubractorTests
             var mesh = DefaultMeshes.Box(1f, 1f, 1f);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
-            obj.TranslateAndBuildBvh(0, 0, -1);
+            obj.TranslateAndBuildBvh(new Vector3m(0, 0, -1));
 
             Vector3d[] verts2 =
             {
@@ -50,7 +51,7 @@ namespace BooleanSubractorTests
             obj.Initialize(mesh);
             obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
-            obj.TranslateAndBuildBvh(0, 0, -1);
+            obj.TranslateAndBuildBvh(new Vector3m(0, 0, -1));
             _bTester.Test(obj2, obj, true, 1, 10, 48, 16);
 
         }
@@ -698,7 +699,7 @@ namespace BooleanSubractorTests
             var obj2 = new DeformableObject();
             obj2.Initialize(cube2);
 
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
 
             _bTester.Test(obj, obj2, true, 1, 20, 108, 36);
 
@@ -707,7 +708,7 @@ namespace BooleanSubractorTests
             obj.Initialize(cube);
             obj2 = new DeformableObject(1);
             obj2.Initialize(cube2);
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj2, obj, true, 1, 18, 96, 32);
         }
 
@@ -722,7 +723,7 @@ namespace BooleanSubractorTests
             var obj2 = new DeformableObject();
             obj2.Initialize(cube2);
 
-            obj2.TranslateAndBuildBvh(25, 25, 25);
+            obj2.TranslateAndBuildBvh(new Vector3m(25, 25, 25));
 
             _bTester.Test(obj, obj2, true, 1, 21, 114, 38);
 
@@ -731,7 +732,7 @@ namespace BooleanSubractorTests
             obj.Initialize(cube);
             obj2 = new DeformableObject(1);
             obj2.Initialize(cube2);
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj2, obj, true, 1, 16, 84, 28);
         }
 
@@ -746,7 +747,7 @@ namespace BooleanSubractorTests
             var obj2 = new DeformableObject();
             obj2.Initialize(pyramid2);
 
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj, obj2, true, 1, 11, 54, 18);
 
             // try it the other way round
@@ -754,7 +755,7 @@ namespace BooleanSubractorTests
             obj.Initialize(pyramid);
             obj2 = new DeformableObject(1);
             obj2.Initialize(pyramid2);
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj2, obj, true, 1, 12, 60, 20);
         }
 
@@ -769,7 +770,7 @@ namespace BooleanSubractorTests
             var sphere2 = DefaultMeshes.Icosphere(5, 50);
             var obj2 = new DeformableObject();
             obj2.Initialize(sphere2);
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj, obj2, true, 1, 10955, 65718, 21906);
             obj.Clone(Vector3m.Zero());
 
@@ -778,7 +779,7 @@ namespace BooleanSubractorTests
             obj.Initialize(sphere1);
             obj2 = new DeformableObject(1);
             obj2.Initialize(sphere2);
-            obj2.TranslateAndBuildBvh(20, 20, 0);
+            obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj2, obj, true, 1, 10954, 65712, 21904);
             TestConfigurator.CheckSanity = true;
         }

@@ -14,7 +14,5 @@ namespace MessageHandling
             MessageType = type; 
         }
         public MessageType MessageType { get; }
-
-        public Message Next;
     }
 }

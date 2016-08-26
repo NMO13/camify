@@ -168,13 +168,13 @@ namespace GraphicsEngine.HalfedgeMesh
             return false;
         }
 
-        internal void Clear()
+        public void Clear()
         {
             List.Clear();
             FreeList.Clear();
         }
 
-        internal void Compact()
+        public void Compact()
         {
             bool noMoreElements = false;
             int i = 0;
