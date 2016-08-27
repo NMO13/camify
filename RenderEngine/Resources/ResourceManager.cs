@@ -45,7 +45,7 @@ namespace RenderEngine
             throw new NotImplementedException();
         }
 
-        private Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath)
+        private Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath, string geoShaderPath)
         {
             string vertexShader, fragmentShader;
             using (var streamReader = new StreamReader(vertexShaderPath, Encoding.UTF8))
