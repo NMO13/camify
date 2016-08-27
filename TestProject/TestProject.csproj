@@ -79,13 +79,26 @@
     <Compile Include="ContourCalculationTests\ContourCalculationTest.cs" />
     <Compile Include="MeshSimplificationTests\MeshSimplificationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubtractionModelTests\SimpleSubtractionTest.cs" />
     <Compile Include="SweepingTests\SweptVolumeTest.cs" />
     <Compile Include="TriangulationTests\TriangulationTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CNCSpecific\CNCSpecific.csproj">
+      <Project>{76527d19-7fb4-48a8-b08b-1f201fa92635}</Project>
+      <Name>CNCSpecific</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeometryCalculation\GeometryCalculation.csproj">
       <Project>{9b488362-61a8-4d47-9a44-7fabd8cd6040}</Project>
       <Name>GeometryCalculation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
+      <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>
+      <Name>MessageHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{df392daf-7f31-4fd9-bbb5-1459ea8bc6fa}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{385d20dc-440e-42bb-a9d5-a0e34c241c4f}</Project>
