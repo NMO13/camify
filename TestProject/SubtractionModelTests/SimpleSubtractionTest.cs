@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CNCSpecific.Milling;
+using DataManagement;
+using GraphicsEngine.Geometry.Meshes;
 using Model;
 using NUnit.Framework;
 using Shared;
@@ -14,12 +16,16 @@ namespace TestProject.SubtractionModelTest
     [TestFixture]
     class SimpleSubtraction
     {
+        private MeshModel _meshModel;
+        private SubtractionModel _subtractionModel;
+
         [SetUp]
         public void Setup()
         {
-            MeshModel m = new MeshModel();
-            SubtractionModel s = new SubtractionModel();
-            m.AttachModelObserver(s);
+            _meshModel = new MeshModel();
+            _subtractionModel = new SubtractionModel();
+            _meshModel = new MeshModel();
+            _meshModel.AttachModelObserver(_subtractionModel);
         }
 
         [Test]
@@ -45,7 +51,16 @@ namespace TestProject.SubtractionModelTest
             program.AddPath(new Vector3m(0, 60, 0), 0);
             program.AddPath(new Vector3m(0, 0, 100), 0);
             program.AddPath(new Vector3m(0, -60, 0), 0);
+            _subtractionModel.NCProgram = program;
 
+            var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
+            _meshModel.AddTools(meshes);
+
+            var rps = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Roughpart1.dae");
+            _meshModel.AddRoughPart(rps[0]);
+
+            _subtractionModel.BuildSnapshotList();
+            var snapshotList = _subtractionModel.SnapshotList;
         }
     }
 }

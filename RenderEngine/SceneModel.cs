@@ -15,7 +15,7 @@ namespace RenderEngine
         List<RenderMesh> _renderMeshes = new List<RenderMesh>();
         public override void AttachObserver(IObserver observer)
         {
-            Changed += observer.Notify;
+            Changed += observer.Notified;
         }
 
         public override void AttachModelObserver(AbstractModel abstractModel)

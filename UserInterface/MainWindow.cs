@@ -84,7 +84,7 @@ namespace UserInterface
                 {
                     MeshImporter m = new MeshImporter();
                     var meshes = m.GenerateMeshes(openFileDialog1.FileName);
-                    ((MeshModel)_meshModel).AddMeshes(meshes);
+                    ((MeshModel)_meshModel).AddRoughParts(meshes);
                 }
                 catch (Exception ex)
                 {
@@ -93,14 +93,14 @@ namespace UserInterface
             }
         }
 
-        public void Notify(AbstractModel abstractModel, Message m)
+        public void Notified(AbstractModel abstractModel, Message m)
         {
             
         }
 
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            //_subtractionModel.
+            _subtractionModel.BuildSnapshotList();
         }
     }
 }

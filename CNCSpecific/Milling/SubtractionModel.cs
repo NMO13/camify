@@ -15,17 +15,11 @@ namespace Model
     public class SubtractionModel : AbstractModel
     {
         private event ModelHandler<AbstractModel> Changed;
-        private List<NCPath> _pathList = new List<NCPath>();
         private List<DeformableObject> _tools = new List<DeformableObject>();
         private List<DeformableObject> _roughParts = new List<DeformableObject>();
-        
-        public void AddPath(Vector3m path, int toolNumber)
-        {
-            NCPath ncPath = new NCPath();
-            ncPath.ActiveTool = toolNumber;
-            ncPath.RelativePosition = path;
-            _pathList.Add(ncPath);
-        }
+        public List<Mesh> SnapshotList = new List<Mesh>(); 
+
+        public NCProgram NCProgram { get; set; }
 
         public override void AttachModelObserver(AbstractModel abstractModel)
         {
@@ -34,7 +28,7 @@ namespace Model
 
         public override void AttachObserver(IObserver observer)
         {
-            Changed += observer.Notify;
+            Changed += observer.Notified;
         }
 
         public override void ModelNotified(AbstractModel sender, Message message)
@@ -55,7 +49,7 @@ namespace Model
         {
             DeformableObject tsv = new DeformableObject();
             SnapshotCollector collector = new SnapshotCollector();
-            foreach (var path in _pathList)
+            foreach (var path in NCProgram.PathList)
             {
                 //TODO var tool = _tools.Find(x => x.Id == path.ActiveTool);
                 tsv.SweepVolume(_tools[0], path.RelativePosition);
@@ -63,7 +57,9 @@ namespace Model
                 collector.AddNextMesh(_roughParts[0].GetMesh());
                 _tools[0].Translate(path.RelativePosition);
             }
-            Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
+            if(Changed != null)
+                Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
+            SnapshotList = collector.Meshes;
         }
 
         private void AddDeformableObjectsToList(List<Mesh> getMeshes, List<DeformableObject> deformableObjects)

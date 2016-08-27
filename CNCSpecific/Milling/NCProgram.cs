@@ -19,5 +19,7 @@ namespace CNCSpecific.Milling
             path.ActiveTool = toolId;
             _paths.Add(path);
         }
+
+        public List<NCPath> PathList { get { return _paths; } }  
     }
 }

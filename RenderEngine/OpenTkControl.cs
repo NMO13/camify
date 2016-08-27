@@ -11,7 +11,7 @@ using Shared.Geometry;
 
 namespace RenderEngine
 {
-    public partial class OpenTkControl : OpenTK.GLControl, IObserver
+    public partial class OpenTkControl : OpenTK.GLControl
     {
         private bool _loaded;
         private SceneModel _sceneModel = new SceneModel();
@@ -22,7 +22,6 @@ namespace RenderEngine
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
             InitializeComponent();
-            _sceneModel.AttachObserver(this);
         }
 
         private void OpenTkControl_Load(object sender, EventArgs e)
@@ -59,12 +58,6 @@ namespace RenderEngine
             // Render();
             Invalidate();
 
-        }
-
-        public void Notify(AbstractModel abstractModel, MessageHandling.Message m)
-        {
-            List <Mesh> meshes = (m as MeshMessage).GetMeshes;
-            renderMeshes = MeshConverter.ToRenderMeshes(meshes);
         }
     }
 }

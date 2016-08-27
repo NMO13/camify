@@ -10,6 +10,6 @@ namespace Model
 {
     public interface IObserver
     {
-        void Notify(AbstractModel abstractModel, Message m);
+        void Notified(AbstractModel abstractModel, Message m);
     }
 }
