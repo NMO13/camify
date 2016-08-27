@@ -29,9 +29,9 @@ namespace RenderEngine
             return tex;
         }
 
-        internal void LoadShader(string vertexShaderPath, string fragShaderPath, string name)
+        internal void LoadShader(string vertexShaderPath, string fragShaderPath, string geoShaderPath, string name)
         {
-            Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath);
+            Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath, geoShaderPath);
             _shaderDict.Add(name, shader);
         }
 
@@ -57,7 +57,6 @@ namespace RenderEngine
             {
                 fragmentShader = streamReader.ReadToEnd();
             }
-
             return null;
         }
     }
