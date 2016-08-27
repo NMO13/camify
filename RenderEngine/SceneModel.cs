@@ -9,7 +9,7 @@ using RenderEngine.Rendering;
 
 namespace RenderEngine
 {
-    class SceneModel : AbstractModel
+    public class SceneModel : AbstractModel
     {
         private event ModelHandler<AbstractModel> Changed;
         List<RenderMesh> _renderMeshes = new List<RenderMesh>();

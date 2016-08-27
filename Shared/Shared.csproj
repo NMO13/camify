@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Additional\DynamicProperties.cs" />
-    <Compile Include="Additional\PropertyConstants.cs" />
+    <Compile Include="Attributes\DynamicProperties.cs" />
+    <Compile Include="Attributes\PropertyConstants.cs" />
     <Compile Include="Assets\Material.cs" />
     <Compile Include="Export\MeshExporter.cs" />
     <Compile Include="Geometry\CollisionCheck\AxisAlignedBoundingBox.cs" />

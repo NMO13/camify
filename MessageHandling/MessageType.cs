@@ -10,6 +10,7 @@ namespace MessageHandling
     {
         NewRoughParts,
         NewTools,
+        SnapshotList,
         LoadFile
     }
 }

@@ -13,15 +13,16 @@ namespace UserInterface
 {
     public partial class MainWindow : KryptonForm, IObserver
     {
-        private AbstractModel _meshAbstractModel;
+        private AbstractModel _meshModel;
         private SubtractionModel _subtractionModel;
         OpenTkControl _openTkControl = new OpenTkControl();
         public MainWindow()
         {
             InitializeComponent();
-            _meshAbstractModel = new MeshModel();
+            _meshModel = new MeshModel();
             _subtractionModel = new SubtractionModel();
-            _meshAbstractModel.AttachModelObserver(_openTkControl.AbstractModel);
+            _meshModel.AttachModelObserver(_openTkControl.Model);
+            _subtractionModel.AttachModelObserver(_openTkControl.Model);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -83,7 +84,7 @@ namespace UserInterface
                 {
                     MeshImporter m = new MeshImporter();
                     var meshes = m.GenerateMeshes(openFileDialog1.FileName);
-                    ((MeshModel)_meshAbstractModel).AddMeshes(meshes);
+                    ((MeshModel)_meshModel).AddMeshes(meshes);
                 }
                 catch (Exception ex)
                 {

@@ -37,11 +37,6 @@ namespace Model
             Changed += observer.Notify;
         }
 
-        public void CalcSubtractions()
-        {
-            
-        }
-
         public override void ModelNotified(AbstractModel sender, Message message)
         {
             if (message.MessageType == MessageType.NewRoughParts)
@@ -68,6 +63,7 @@ namespace Model
                 collector.AddNextMesh(_roughParts[0].GetMesh());
                 _tools[0].Translate(path.RelativePosition);
             }
+            Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
         }
 
         private void AddDeformableObjectsToList(List<Mesh> getMeshes, List<DeformableObject> deformableObjects)

@@ -17,7 +17,7 @@ namespace RenderEngine
         private SceneModel _sceneModel = new SceneModel();
         private List<RenderMesh> renderMeshes;
 
-        public AbstractModel AbstractModel { get { return _sceneModel; } }
+        public SceneModel Model { get { return _sceneModel; } }
 
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
