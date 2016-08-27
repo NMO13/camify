@@ -102,5 +102,10 @@ namespace UserInterface
         {
             _subtractionModel.BuildSnapshotList();
         }
+
+        private void ImportTool_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

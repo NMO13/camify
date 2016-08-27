@@ -65,8 +65,9 @@
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\RenderObject.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
+    <Compile Include="Resources\Shader\Shader.cs" />
+    <Compile Include="Resources\Shader\ShaderDirectory.cs" />
     <Compile Include="SceneModel.cs" />
-    <Compile Include="Shader.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Vertex.cs" />
   </ItemGroup>
@@ -78,7 +79,6 @@
   <ItemGroup>
     <Folder Include="Camera\" />
     <Folder Include="Lighting\" />
-    <Folder Include="Resources\Shader\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">

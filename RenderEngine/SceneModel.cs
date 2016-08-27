@@ -28,7 +28,7 @@ namespace RenderEngine
             if (message.MessageType == MessageType.NewRoughParts)
             {
                 var meshMessage = message as MeshMessage;
-                RenderMeshes = meshMessage.GetMeshes;
+                //RenderMeshes = meshMessage.GetMeshes;
             }
         }
     }
