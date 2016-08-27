@@ -4,20 +4,13 @@ using Shared.Geometry;
 namespace RenderEngine.Rendering
 {
     class Renderer
-    {
-        public List<RenderMesh> Mesh { private get; set; }
-
-        public void Render()
+    { 
+        public void Render(List<IRenderable> meshes)
         {
-            foreach (var mesh in Mesh)
+            foreach (var mesh in meshes)
             {
-                mesh.Draw();
+                mesh.Render();
             }
-        }
-
-        private void Draw()
-        {
-            
         }
     }
 }

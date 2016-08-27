@@ -14,10 +14,8 @@ namespace RenderEngine
     public partial class OpenTkControl : OpenTK.GLControl
     {
         private bool _loaded;
-        private SceneModel _sceneModel = new SceneModel();
-        private List<RenderMesh> renderMeshes;
-
-        public SceneModel Model { get { return _sceneModel; } }
+        public readonly SceneModel SceneModel = new SceneModel();
+        private readonly Renderer renderer = new Renderer();
 
         public OpenTkControl() : base(new GraphicsMode(32, 24, 8, 8), 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
@@ -31,13 +29,15 @@ namespace RenderEngine
 
             GL.ClearColor(0.4f, 0.4f, 0.4f, 1.0f);
             Application.Idle += Application_Idle;
-
         }
 
         private void OpenTkControl_Paint(object sender, PaintEventArgs e)
         {
             if (!_loaded) // Play nice
                 return;
+
+            List<IRenderable> renderMeshes = SceneModel.RenderMeshes;
+            renderer.Render(renderMeshes);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             SwapBuffers();
         }

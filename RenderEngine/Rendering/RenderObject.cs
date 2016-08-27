@@ -3,10 +3,11 @@ using System.Runtime.InteropServices;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using Vector3d = Shared.Geometry.Vector3d;
+using Matrix4d = Shared.Geometry.Matrix4d;
 
 namespace RenderEngine.Rendering
 {
-    class RenderObject
+    class RenderObject : IRenderable
     {
         private int[] vao = new int[1];
         private int[] vbo = new int[1];
@@ -14,13 +15,13 @@ namespace RenderEngine.Rendering
         private Vertex[] vertices;
         private int[] indices;
 
-        protected RenderObject(Vector3d[] vertices, int[] indices)
+        public RenderObject(Vector3d[] vertices, int[] indices, Matrix4d transformations)
         {
             //this.vertices = vertices;
             this.indices = indices;
         }
 
-        protected void Setup()
+        public void Setup()
         {
             GL.GenVertexArrays(1, out vao[0]);
             GL.GenBuffers(1, out vbo[0]);
@@ -47,7 +48,7 @@ namespace RenderEngine.Rendering
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
 
-        public void Draw()
+        public void Render()
         {
             // Draw mesh
             GL.BindVertexArray(vao[0]);

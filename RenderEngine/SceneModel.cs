@@ -12,7 +12,7 @@ namespace RenderEngine
     public class SceneModel : AbstractModel
     {
         private event ModelHandler<AbstractModel> Changed;
-        List<RenderMesh> _renderMeshes = new List<RenderMesh>();
+        internal List<IRenderable> RenderMeshes = new List<IRenderable>();
         public override void AttachObserver(IObserver observer)
         {
             Changed += observer.Notified;
@@ -27,7 +27,8 @@ namespace RenderEngine
         {
             if (message.MessageType == MessageType.NewRoughParts)
             {
-                Changed(this, message);
+                var meshMessage = message as MeshMessage;
+                RenderMeshes = meshMessage.GetMeshes;
             }
         }
     }

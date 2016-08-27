@@ -6,12 +6,12 @@ namespace RenderEngine.Converter
 {
     class MeshConverter
     {
-        public static List<RenderMesh> ToRenderMeshes(List<Mesh> meshes)
+        public static List<RenderObject> ToRenderMeshes(List<Mesh> meshes)
         {
-            var renderMeshes = new List<RenderMesh>();
+            var renderMeshes = new List<RenderObject>();
             foreach (var mesh in meshes)
-            { 
-                RenderMesh renderMesh = new RenderMesh(mesh.Vertices, mesh.Indices, mesh.ModelMatrix);
+            {
+                RenderObject renderMesh = new RenderObject(mesh.Vertices, mesh.Indices, mesh.ModelMatrix);
                 renderMeshes.Add(renderMesh);
             }
 
