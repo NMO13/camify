@@ -10,7 +10,7 @@ using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.Math;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubractorTests
 {

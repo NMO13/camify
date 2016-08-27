@@ -8,6 +8,7 @@ using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Boolean_Ops;
 using Shared;
 using MessageHandling;
+using Shared.Geometry;
 
 namespace Model
 {

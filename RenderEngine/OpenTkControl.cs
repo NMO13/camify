@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DataManagement;
 using MessageHandling;
 using Model;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using Shared;
+using RenderEngine.Converter;
+using RenderEngine.Rendering;
+using Shared.Geometry;
 
 namespace RenderEngine
 {
     public partial class OpenTkControl : OpenTK.GLControl, IObserver
     {
         private bool _loaded;
-        List<Mesh> _meshes = new List<Mesh>();
-        SceneModel _sceneModel = new SceneModel();
+        private SceneModel _sceneModel = new SceneModel();
+        private List<RenderMesh> renderMeshes;
 
         public AbstractModel AbstractModel { get { return _sceneModel; } }
 
@@ -62,7 +63,8 @@ namespace RenderEngine
 
         public void Notify(AbstractModel abstractModel, MessageHandling.Message m)
         {
-            
+            List <Mesh> meshes = (m as MeshMessage).GetMeshes;
+            renderMeshes = MeshConverter.ToRenderMeshes(meshes);
         }
     }
 }

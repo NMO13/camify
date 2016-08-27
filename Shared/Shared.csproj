@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Additional\DynamicProperties.cs" />
     <Compile Include="Additional\PropertyConstants.cs" />
+    <Compile Include="Assets\Material.cs" />
     <Compile Include="Export\MeshExporter.cs" />
     <Compile Include="Geometry\CollisionCheck\AxisAlignedBoundingBox.cs" />
     <Compile Include="Geometry\CollisionCheck\BoundingVolumeHierarchy.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Geometry\Meshes\DefaultMeshes.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
     <Compile Include="Geometry\Ray3d.cs" />
+    <Compile Include="Geometry\Vector2d.cs" />
     <Compile Include="Geometry\Vector2m.cs" />
     <Compile Include="Geometry\Vector4d.cs" />
     <Compile Include="Helper\EnumExtensions.cs" />

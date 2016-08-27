@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using GraphicsEngine.Additional;
 using GraphicsEngine.HalfedgeMesh;
+using Shared.Additional;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {

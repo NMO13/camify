@@ -1,7 +1,7 @@
 ﻿using GraphicsEngine.Math;
 using Shared;
 
-namespace GraphicsEngine.Geometry
+namespace Shared.Geometry
 {
     internal class Ray3d
     {

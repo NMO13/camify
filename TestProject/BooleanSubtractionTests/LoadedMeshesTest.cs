@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataManagement;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine;
 using GraphicsEngine.Geometry;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubractorTests
 {

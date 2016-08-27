@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GraphicsEngine.Geometry.Triangulation;
-using GraphicsEngine.Math;
-using Microsoft.SolverFoundation.Common;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubtractorTests
 {

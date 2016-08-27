@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Assimp;
 using Assimp.Configs;
-using Mesh = Shared.Mesh;
-using Shared;
+using Mesh = Shared.Geometry.Mesh;
+using Shared.Geometry;
 
 namespace DataManagement
 {
@@ -76,20 +76,20 @@ namespace DataManagement
 
         private void SetMaterialProps(Mesh mesh, Assimp.Material material)
         {
-            mesh.material.ambientR = material.ColorAmbient.R;
-            mesh.material.ambientG = material.ColorAmbient.G;
-            mesh.material.ambientB = material.ColorAmbient.B;
+            mesh.Material.ambientR = material.ColorAmbient.R;
+            mesh.Material.ambientG = material.ColorAmbient.G;
+            mesh.Material.ambientB = material.ColorAmbient.B;
 
-            mesh.material.diffuseR = material.ColorDiffuse.R;
-            mesh.material.diffuseG = material.ColorDiffuse.G;
-            mesh.material.diffuseB = material.ColorDiffuse.B;
+            mesh.Material.diffuseR = material.ColorDiffuse.R;
+            mesh.Material.diffuseG = material.ColorDiffuse.G;
+            mesh.Material.diffuseB = material.ColorDiffuse.B;
 
-            mesh.material.specularR = material.ColorSpecular.R;
-            mesh.material.specularG = material.ColorSpecular.G;
-            mesh.material.specularB = material.ColorSpecular.B;
+            mesh.Material.specularR = material.ColorSpecular.R;
+            mesh.Material.specularG = material.ColorSpecular.G;
+            mesh.Material.specularB = material.ColorSpecular.B;
 
-            mesh.material.shininess = material.Shininess;
-            mesh.material.isSet = true;
+            mesh.Material.shininess = material.Shininess;
+            mesh.Material.isSet = true;
         }
 
         private Matrix4d Convert(Matrix4x4 transformations)

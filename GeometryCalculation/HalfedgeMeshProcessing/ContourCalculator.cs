@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Additional;
-using GraphicsEngine.Geometry;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.HalfedgeMesh.Simplification;
-using GraphicsEngine.Math;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace GraphicsEngine.HalfedgeMeshProcessing
 {

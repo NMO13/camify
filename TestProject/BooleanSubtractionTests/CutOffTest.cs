@@ -8,7 +8,7 @@ using DataManagement;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubtractorTests
 {

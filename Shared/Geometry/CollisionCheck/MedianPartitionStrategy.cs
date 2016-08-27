@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Geometry.Bounding_Volume_Hierarchy;
-using GraphicsEngine.Additional;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
+using Shared.Additional;
 
 namespace GraphicsEngine.Geometry
 {

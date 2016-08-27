@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using GraphicsEngine.Additional;
 using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
-using Microsoft.SolverFoundation.Services;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace GraphicsEngine.HalfedgeMesh
 {

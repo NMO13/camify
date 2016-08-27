@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DataManagement;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine;
-using GraphicsEngine.Additional;
-using GraphicsEngine.Geometry;
-using GraphicsEngine.HalfedgeMesh.Simplification;
-using GraphicsEngine.HalfedgeMeshProcessing;
 using NUnit.Framework;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace BooleanSubtractorTests
 {

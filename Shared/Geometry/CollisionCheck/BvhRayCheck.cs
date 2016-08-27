@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Geometry.Bounding_Volume_Hierarchy;
+﻿using Geometry.Bounding_Volume_Hierarchy;
 using GraphicsEngine.Math;
 using GraphicsEngine.Selection;
-using Shared;
+using Shared.Geometry;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {

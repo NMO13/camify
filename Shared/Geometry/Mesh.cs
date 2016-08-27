@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.Assets;
 
-namespace Shared
+namespace Shared.Geometry
 {
     public class Mesh
     {
@@ -29,26 +30,7 @@ namespace Shared
         public int[] NormalIndices { get; private set; }
 
         public Matrix4d ModelMatrix { get; set; }
-        public Material material = new Material();
+        public Material Material = new Material();
 
-    }
-
-    public class Material
-    {
-        public float ambientR;
-        public float ambientG;
-        public float ambientB;
-
-        public float diffuseR;
-        public float diffuseG;
-        public float diffuseB;
-
-        public float specularR;
-        public float specularG;
-        public float specularB;
-
-        public float shininess;
-
-        public bool isSet;
     }
 }

@@ -8,6 +8,7 @@ using GraphicsEngine.HalfedgeMesh.Simplification;
 using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
 using Shared;
+using Shared.Geometry;
 
 namespace GeometryCalculation.DataStructures
 {

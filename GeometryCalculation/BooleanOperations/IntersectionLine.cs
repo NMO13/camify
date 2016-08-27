@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Drawing;
-using System.Runtime.CompilerServices;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
-using Shared;
+using Shared.Geometry;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops
 {

@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Additional;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops
 {

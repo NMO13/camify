@@ -1,4 +1,4 @@
-﻿using Shared;
+﻿using Shared.Geometry;
 using System;
 using System.Collections.Generic;
 

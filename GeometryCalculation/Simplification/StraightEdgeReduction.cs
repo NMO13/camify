@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Additional;
-using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Triangulation;
 using GraphicsEngine.HalfedgeMeshProcessing;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace GraphicsEngine.HalfedgeMesh.Simplification
 {

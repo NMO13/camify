@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GraphicsEngine.Additional;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
-using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 using Shared.Helper;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops

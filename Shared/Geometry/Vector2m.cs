@@ -4,74 +4,77 @@ using GraphicsEngine;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 
-public class Vector2m
+namespace Shared.Geometry
 {
-    public Rational X { get; private set; }
-    public Rational Y { get; private set; }
-
-    internal  DynamicProperties DynamicProperties = new DynamicProperties();
-
-    public Vector2m(Rational x, Rational y)
+    public class Vector2m
     {
-        X = x;
-        Y = y;
-    }
+        public Rational X { get; private set; }
+        public Rational Y { get; private set; }
 
-    public Vector2m(Vector2m v)
-    {
-        X = v.X;
-        Y = v.Y;
-    }
+        internal DynamicProperties DynamicProperties = new DynamicProperties();
 
-    public override bool Equals(object obj)
-    {
-        var other = obj as Vector2m;
-
-        if (other == null)
+        public Vector2m(Rational x, Rational y)
         {
-            return false;
+            X = x;
+            Y = y;
         }
 
-        return X == other.X && Y == other.Y;
-    }
+        public Vector2m(Vector2m v)
+        {
+            X = v.X;
+            Y = v.Y;
+        }
 
-    public override int GetHashCode()
-    {
-        return this.X.GetHashCode() ^ this.Y.GetHashCode();
-    }
+        public override bool Equals(object obj)
+        {
+            var other = obj as Vector2m;
 
-    public static Vector2m operator -(Vector2m a, Vector2m b)
-    {
-        return a.Minus(b);
-    }
+            if (other == null)
+            {
+                return false;
+            }
 
-    public Vector2m Minus(Vector2m a)
-    {
-        return new Vector2m(this.X - a.X, this.Y - a.Y);
-    }
+            return X == other.X && Y == other.Y;
+        }
 
-    public static Vector2m operator +(Vector2m a, Vector2m b)
-    {
-        return a.Plus(b);
-    }
+        public override int GetHashCode()
+        {
+            return this.X.GetHashCode() ^ this.Y.GetHashCode();
+        }
 
-    public Vector2m Plus(Vector2m a)
-    {
-        return new Vector2m(this.X + a.X, this.Y + a.Y);
-    }
+        public static Vector2m operator -(Vector2m a, Vector2m b)
+        {
+            return a.Minus(b);
+        }
 
-    public Vector2m Times(Rational r)
-    {
-        return new Vector2m(X * r, Y * r);
-    }
+        public Vector2m Minus(Vector2m a)
+        {
+            return new Vector2m(this.X - a.X, this.Y - a.Y);
+        }
 
-    public Rational Dot(Vector2m a)
-    {
-        return X * a.X + Y * a.Y;
-    }
+        public static Vector2m operator +(Vector2m a, Vector2m b)
+        {
+            return a.Plus(b);
+        }
 
-    public override string ToString()
-    {
-        return "Vector:" + " " + X.ToDouble() + " " + Y.ToDouble() + " ";
+        public Vector2m Plus(Vector2m a)
+        {
+            return new Vector2m(this.X + a.X, this.Y + a.Y);
+        }
+
+        public Vector2m Times(Rational r)
+        {
+            return new Vector2m(X * r, Y * r);
+        }
+
+        public Rational Dot(Vector2m a)
+        {
+            return X * a.X + Y * a.Y;
+        }
+
+        public override string ToString()
+        {
+            return "Vector:" + " " + X.ToDouble() + " " + Y.ToDouble() + " ";
+        }
     }
 }

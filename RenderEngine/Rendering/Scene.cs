@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RenderEngine
+namespace RenderEngine.Rendering
 {
-    class ResourceManager
+    class Scene
     {
     }
 }

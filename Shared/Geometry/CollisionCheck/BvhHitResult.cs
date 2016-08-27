@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Geometry.Bounding_Volume_Hierarchy;
-using GraphicsEngine.Geometry;
+﻿using Geometry.Bounding_Volume_Hierarchy;
+using Shared.Geometry;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 
 namespace GraphicsEngine.Selection
 {

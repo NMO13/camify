@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using GraphicsEngine.Math;
-using Shared;
+using Shared.Geometry;
 
 namespace GraphicsEngine.Geometry.Meshes
 {

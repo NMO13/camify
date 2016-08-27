@@ -62,10 +62,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\RenderMesh.cs" />
-    <Compile Include="ResourceManager.cs" />
+    <Compile Include="Rendering\RenderObject.cs" />
+    <Compile Include="Rendering\Scene.cs" />
+    <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="SceneModel.cs" />
     <Compile Include="Shader.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="OpenTkControl.resx">

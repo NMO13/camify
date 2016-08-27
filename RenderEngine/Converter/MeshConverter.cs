@@ -1,14 +1,21 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using RenderEngine.Rendering;
-using Shared;
+using Shared.Geometry;
 
 namespace RenderEngine.Converter
 {
     class MeshConverter
     {
-        public static RenderMesh ToRenderMesh(Mesh mesh)
+        public static List<RenderMesh> ToRenderMeshes(List<Mesh> meshes)
         {
-            throw new NotImplementedException();
+            var renderMeshes = new List<RenderMesh>();
+            foreach (var mesh in meshes)
+            { 
+                RenderMesh renderMesh = new RenderMesh(mesh.Vertices, mesh.Indices, mesh.ModelMatrix);
+                renderMeshes.Add(renderMesh);
+            }
+
+            return renderMeshes;
         }
     }
 }

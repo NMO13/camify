@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared
+namespace Shared.Geometry
 {
     [Serializable]
     public class Vector3d : ICloneable

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using GeometryCalculation.DataStructures;
+﻿using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubractorTests
 {

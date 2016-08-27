@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Geometry;
 
-namespace Shared
+namespace Shared.Geometry
 {
     /// <summary>
     /// Represents a 4x4 Matrix

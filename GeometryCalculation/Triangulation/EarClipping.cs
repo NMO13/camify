@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GraphicsEngine.Additional;
 using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared;
+using Shared.Additional;
+using Shared.Geometry;
 
 namespace GraphicsEngine.Geometry.Triangulation
 {

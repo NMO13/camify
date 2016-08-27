@@ -10,7 +10,7 @@ using GraphicsEngine.Math;
 using Shared.Additional;
 using Shared.Helper;
 
-namespace Shared
+namespace Shared.Geometry
 {
     public class Vector3m : ICloneable
     {

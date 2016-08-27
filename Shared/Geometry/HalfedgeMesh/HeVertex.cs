@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
-using Shared;
+using Shared.Geometry;
 
 namespace GraphicsEngine.HalfedgeMesh
 {

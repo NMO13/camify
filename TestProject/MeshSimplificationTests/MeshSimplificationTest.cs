@@ -12,7 +12,7 @@ using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
-using Shared;
+using Shared.Geometry;
 
 namespace BooleanSubtractorTests
 {
