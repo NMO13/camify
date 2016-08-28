@@ -11,6 +11,7 @@ namespace MessageHandling
         NewRoughParts,
         NewTools,
         SnapshotList,
-        LoadFile
+        LoadFile,
+        NewMesh
     }
 }

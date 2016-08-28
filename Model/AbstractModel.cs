@@ -14,5 +14,7 @@ namespace Model
         public abstract void AttachModelObserver(AbstractModel abstractModel);
         public abstract void ModelNotified(AbstractModel sender, Message message);
 
+        event ModelHandler<AbstractModel> Changed;
+
     }
 }
