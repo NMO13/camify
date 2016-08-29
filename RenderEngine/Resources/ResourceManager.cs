@@ -12,9 +12,27 @@ namespace RenderEngine
     {
         private Dictionary<string, Shader> _shaderDict = new Dictionary<string, Shader>(); 
         private Dictionary<string, Texture> _textureDict = new Dictionary<string, Texture>();
+        private static ResourceManager _instance;
+
+        internal static ResourceManager Instance
+        {
+            get
+            {
+                if(_instance == null)
+                    _instance = new ResourceManager();
+                return _instance;
+            }
+        }
+        private ResourceManager() { }
         internal Shader GetShader(string name)
         {
             return _shaderDict[name];
+        }
+
+        internal void LoadShader(string vertexShaderPath, string fragShaderPath, string geoShaderPath, string name)
+        {
+            Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath, geoShaderPath);
+            _shaderDict.Add(name, shader);
         }
 
         internal Texture GetTexture(string name)
@@ -29,12 +47,6 @@ namespace RenderEngine
             return tex;
         }
 
-        internal void LoadShader(string vertexShaderPath, string fragShaderPath, string geoShaderPath, string name)
-        {
-            Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath, geoShaderPath);
-            _shaderDict.Add(name, shader);
-        }
-
         internal void Clear()
         {
             
@@ -47,17 +59,26 @@ namespace RenderEngine
 
         private Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath, string geoShaderPath)
         {
-            string vertexShader, fragmentShader;
+            string strVertexShader = null, strFragmentShader = null, strGeoShader = null;
             using (var streamReader = new StreamReader(vertexShaderPath, Encoding.UTF8))
             {
-                vertexShader = streamReader.ReadToEnd();
+                strVertexShader = streamReader.ReadToEnd();
             }
 
             using (var streamReader = new StreamReader(fragShaderPath, Encoding.UTF8))
             {
-                fragmentShader = streamReader.ReadToEnd();
+                strFragmentShader = streamReader.ReadToEnd();
             }
-            return null;
+
+            if (geoShaderPath != null)
+            {
+                using (var streamReader = new StreamReader(geoShaderPath, Encoding.UTF8))
+                {
+                    strGeoShader = streamReader.ReadToEnd();
+                }
+            }
+
+            return new Shader(strVertexShader, strFragmentShader, strGeoShader);
         }
     }
 }

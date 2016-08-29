@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RenderEngine.Postprocessing
 {
-    class PostprocessorFactory
+    class PostprocessFactory
     {
     }
 }

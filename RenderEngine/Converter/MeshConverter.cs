@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RenderEngine.Objects;
 using RenderEngine.Rendering;
 using Shared.Geometry;
 
@@ -11,8 +12,8 @@ namespace RenderEngine.Converter
             var renderMeshes = new List<RenderObject>();
             foreach (var mesh in meshes)
             {
-                RenderObject renderMesh = new RenderObject(mesh.Vertices, mesh.Indices, mesh.ModelMatrix);
-                renderMeshes.Add(renderMesh);
+                //RenderObject renderMesh = new RenderMesh();
+                //renderMeshes.Add(renderMesh);
             }
 
             return renderMeshes;

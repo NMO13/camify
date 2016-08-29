@@ -21,8 +21,8 @@ namespace UserInterface
             InitializeComponent();
             _meshModel = new MeshModel();
             _subtractionModel = new SubtractionModel();
-            _meshModel.AttachModelObserver(_openTkControl.SceneModel);
-            _subtractionModel.AttachModelObserver(_openTkControl.SceneModel);
+            _meshModel.AttachModelObserver(SceneModel.Instance);
+            _subtractionModel.AttachModelObserver(SceneModel.Instance);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
