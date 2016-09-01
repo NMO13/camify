@@ -16,7 +16,7 @@ namespace RenderEngine.Rendering
 
         internal abstract bool HasNormals { get; }
 
-        protected BufferObjectComposite bufferObject = new BufferObjectComposite();
+        protected BufferObjectContainer bufferObject = new BufferObjectContainer();
         public abstract void Render();
 
         internal RenderObject()

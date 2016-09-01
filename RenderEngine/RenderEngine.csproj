@@ -59,6 +59,8 @@
     <Compile Include="GraphicObjects\Perpetual\CoordinateAxis.cs" />
     <Compile Include="GraphicObjects\ObjectType.cs" />
     <Compile Include="GraphicObjects\Deformable\RenderMesh.cs" />
+    <Compile Include="IO\MouseHandler.cs" />
+    <Compile Include="IO\MouseKeyEvents.cs" />
     <Compile Include="Scene\OpenTkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -77,9 +79,9 @@
     <Compile Include="Resources\Shader\ShaderLibrary.cs" />
     <Compile Include="Scene\SceneModel.cs" />
     <Compile Include="Scene\SceneManager.cs" />
-    <Compile Include="Texture.cs" />
-    <Compile Include="BufferObjectManagement\BufferObjectComposite.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="Resources\Texture.cs" />
+    <Compile Include="BufferObjectManagement\BufferObjectContainer.cs" />
+    <Compile Include="Resources\Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scene\OpenTkControl.resx">

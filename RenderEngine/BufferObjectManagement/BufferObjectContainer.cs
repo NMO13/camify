@@ -8,7 +8,7 @@ using Shared.Geometry;
 
 namespace RenderEngine.BufferObjectManagement
 {
-    class BufferObjectComposite
+    class BufferObjectContainer
     {
         internal int Vbo { get; set; }
         internal int Ebo { get; set; }

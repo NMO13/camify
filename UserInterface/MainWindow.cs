@@ -4,9 +4,9 @@ using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using DataManagement;
-using MessageHandling;
 using Model;
 using RenderEngine;
+using RenderEngine.Scene;
 using Message = MessageHandling.Message;
 
 namespace UserInterface

@@ -1,4 +1,4 @@
-﻿namespace RenderEngine
+﻿namespace RenderEngine.Scene
 {
     partial class OpenTkControl
     {
@@ -32,11 +32,13 @@
             // 
             // OpenTkControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "OpenTkControl";
             this.Load += new System.EventHandler(this.OpenTkControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OpenTkControl_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseDown);
             this.Resize += new System.EventHandler(this.OpenTkControl_Resize);
             this.ResumeLayout(false);
 
