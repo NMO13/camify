@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Rendering;
 
-namespace RenderEngine.Objects
+namespace RenderEngine.GraphicObjects.Perpetual
 {
     sealed class CoordinateAxis : RenderObject
     {
         protected override Shader Shader { get; set; }
         protected override BufferUsageHint BufferUsage { get; }
-        protected override Vertex[] Vertices { get; }
-        protected override uint[] Indices { get; }
+        internal override Vertex[] Vertices { get; set; }
+        internal override int[] Indices { get; set; }
+        internal override bool HasNormals { get; } = true;
 
         public override void Render()
         {

@@ -381,7 +381,7 @@ namespace Shared.Geometry
         /// <returns>The conjugate of the given quaternion</returns>
         public static Quaternion Conjugate(Quaternion q)
         {
-            return new Quaternion(-q.Xyz, q.W);
+            return new Quaternion(q.Xyz.ExplicitNegated(), q.W);
         }
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace Shared.Geometry
         /// <param name="result">The conjugate of the given quaternion</param>
         public static void Conjugate(ref Quaternion q, out Quaternion result)
         {
-            result = new Quaternion(-q.Xyz, q.W);
+            result = new Quaternion(q.Xyz.ExplicitNegated(), q.W);
         }
 
         #endregion

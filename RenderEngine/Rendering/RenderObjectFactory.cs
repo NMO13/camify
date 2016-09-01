@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RenderEngine.GraphicObjects;
-using RenderEngine.Objects;
+using RenderEngine.GraphicObjects.Deformable;
+using RenderEngine.GraphicObjects.Perpetual;
 
 namespace RenderEngine.Rendering
 {
     class RenderObjectFactory
     {
-        internal static RenderObject CreateRenderObject(ObjectType type)
+        internal static RenderObject CreateRenderObject(ObjectType type, Vertex[] vertices = null, int[] indices = null)
         {
             switch (type)
             {
                 case ObjectType.Background: return new Background();
+                case ObjectType.RenderMesh: return new RenderMesh(vertices, indices);
                 default: throw new ArgumentException("Object type is not supported");
             }
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using RenderEngine.Converter;
+using Shared.Geometry;
+using Shared.Helper;
 
 namespace RenderEngine
 {
@@ -65,9 +67,15 @@ namespace RenderEngine
                 GL.DeleteShader(geoShaderIndex);
         }
 
-        public void SetInteger(string name, int val)
+        internal void SetInteger(string name, int val)
         {
-            GL.Uniform1(GL.GetUniformLocation(this.ProgramId, name), val);
+            GL.Uniform1(GL.GetUniformLocation(ProgramId, name), val);
+        }
+
+        internal void SetMatrixMatrix4(string name, Matrix4d matrix)
+        {
+            OpenTK.Matrix4 openTKMatrix = matrix.ToOpenTKMatrix4D();
+            GL.UniformMatrix4(GL.GetUniformLocation(ProgramId, name), false, ref openTKMatrix);
         }
     }
 }

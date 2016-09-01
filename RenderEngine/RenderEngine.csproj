@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera\Objective.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Converter\Matrix4Extensions.cs" />
     <Compile Include="Converter\MeshConverter.cs" />
+    <Compile Include="Converter\RenderObjectExtensions.cs" />
     <Compile Include="ErrorHandling\GLCheck.cs" />
     <Compile Include="GraphicObjects\Perpetual\Background.cs" />
     <Compile Include="GraphicObjects\Perpetual\CoordinateAxis.cs" />
@@ -84,7 +87,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Camera\" />
     <Folder Include="Lighting\" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +104,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\Files\mesh.frag" />
+    <None Include="Resources\Shader\Files\mesh.vs" />
     <None Include="Resources\Shader\Files\sceneShader.frag" />
     <None Include="Resources\Shader\Files\sceneShader.vs" />
   </ItemGroup>

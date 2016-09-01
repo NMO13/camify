@@ -33,13 +33,14 @@ namespace RenderEngine
             GL.ClearColor(0.4f, 0.4f, 0.4f, 1.0f);
             Application.Idle += Application_Idle;
 
-            _sceneManager.Load();
+            _sceneManager.Load(Width, Height);
         }
 
         private void OpenTkControl_Paint(object sender, PaintEventArgs e)
         {
             if (!_loaded) // Play nice
                 return;
+            _sceneManager.AdjustCamera();
             _sceneManager.Paint();
             SwapBuffers();
         }

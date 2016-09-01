@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
-using RenderEngine.Objects;
+using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.Deformable;
 using RenderEngine.Rendering;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace RenderEngine.Converter
 {
     class MeshConverter
     {
-        public static List<RenderObject> ToRenderMeshes(List<Mesh> meshes)
+        public static List<IRenderable> ToRenderMeshes(List<Mesh> meshes)
         {
-            var renderMeshes = new List<RenderObject>();
+            var renderMeshes = new List<IRenderable>();
             foreach (var mesh in meshes)
             {
-                //RenderObject renderMesh = new RenderMesh();
-                //renderMeshes.Add(renderMesh);
+                Vertex[] vertices = mesh.ToRenderVertices();
+                int[] indices = mesh.Indices;
+                renderMeshes.Add(RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, vertices, indices));
             }
-
             return renderMeshes;
         }
     }

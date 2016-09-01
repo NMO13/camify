@@ -17,6 +17,12 @@ namespace RenderEngine.Resources.Shader
         internal static string SceneFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
             Config.SceneFragmentShaderFilename);
 
+        internal static string MeshVertexShader { get; set; } = Path.Combine(ShaderBasePath,
+           Config.MeshVertexShaderFilename);
+
+        internal static string MeshFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
+            Config.MeshFragmentShaderFilename);
+
         private static string GetBasePath()
         {
             string currentDirectory = Directory.GetCurrentDirectory();

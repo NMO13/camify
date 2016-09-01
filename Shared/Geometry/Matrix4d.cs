@@ -842,7 +842,7 @@ namespace Shared.Geometry
                                         new Vector4d(x.Z, y.Z, z.Z, 0.0f),
                                         Vector4d.UnitW);
 
-            Matrix4d trans = Matrix4d.CreateTranslation(-eye);
+            Matrix4d trans = Matrix4d.CreateTranslation(eye.ExplicitNegated());
 
             return trans * rot;
         }

@@ -38,12 +38,7 @@ namespace Shared.Geometry
             return new Vector3d(X, Y, Z);
         }
 
-        public void ImplizitNegated()
-        {
-            X = -X; Y = -Y; Z = -Z;
-        }
-
-        public Vector3d Negated()
+        public Vector3d ExplicitNegated()
         {
             return new Vector3d(-X, -Y, -Z);
         }

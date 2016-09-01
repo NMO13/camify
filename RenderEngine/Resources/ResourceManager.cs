@@ -4,14 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenTK.Graphics.OpenGL;
 using RenderEngine.Resources.Shader;
 
 namespace RenderEngine
 {
     class ResourceManager
     {
-        private Dictionary<string, Shader> _shaderDict = new Dictionary<string, Shader>(); 
-        private Dictionary<string, Texture> _textureDict = new Dictionary<string, Texture>();
+        private readonly Dictionary<string, Shader> _shaderDict = new Dictionary<string, Shader>(); 
+        private readonly Dictionary<string, Texture> _textureDict = new Dictionary<string, Texture>();
         private static ResourceManager _instance;
 
         internal static ResourceManager Instance
@@ -49,7 +50,16 @@ namespace RenderEngine
 
         internal void Clear()
         {
-            
+            //TODO: Call this when application is destroyed
+            foreach (KeyValuePair<string, Shader> entry in _shaderDict)
+            {
+                GL.DeleteProgram(entry.Value.ProgramId);
+            }
+
+            foreach (KeyValuePair<string, Texture> entry in _textureDict)
+            {
+                GL.DeleteTexture(entry.Value.TextureId);   
+            }
         }
 
         private Texture LoadTextureFromFile(string path, bool alpha)

@@ -8,5 +8,6 @@ namespace RenderEngine
 {
     class Texture
     {
+        internal int TextureId { get; set; }
     }
 }
