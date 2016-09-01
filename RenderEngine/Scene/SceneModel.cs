@@ -65,13 +65,8 @@ namespace RenderEngine.Scene
             }
             if (message.MessageType == MessageType.ClearMeshes)
             {
-                ClearMeshList();
+                RenderMeshes.Clear();
             }
-        }
-
-        public void ClearMeshList()
-        {
-            RenderMeshes.Clear();
         }
 
         public void AddMeshes(List<Mesh> meshes)

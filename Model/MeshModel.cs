@@ -45,5 +45,7 @@ namespace Model
         {
             Changed(this, new MeshMessage(MessageType.ClearMeshes, _meshes));
         }
+
+        public List<Mesh> RoughParts { get { return _meshes;} } 
     }
 }
