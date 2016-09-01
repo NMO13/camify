@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.BufferObjectManagement;
+using Shared.Geometry;
 
 namespace RenderEngine.Rendering
 {
@@ -15,6 +16,7 @@ namespace RenderEngine.Rendering
         internal abstract int[] Indices { get; set; }
 
         internal abstract bool HasNormals { get; }
+        public Mesh Mesh { get; internal set; }
 
         protected BufferObjectContainer bufferObject = new BufferObjectContainer();
         public abstract void Render();

@@ -7,6 +7,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Rendering;
 using RenderEngine.Resources.Shader;
+using RenderEngine.Scene;
 using Shared.Geometry;
 
 namespace RenderEngine.GraphicObjects.Deformable

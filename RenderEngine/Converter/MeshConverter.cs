@@ -16,7 +16,9 @@ namespace RenderEngine.Converter
             {
                 Vertex[] vertices = mesh.ToRenderVertices();
                 int[] indices = mesh.Indices;
-                renderMeshes.Add(RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, vertices, indices));
+                var renderMesh = RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, vertices, indices);
+                renderMesh.Mesh = mesh;
+                renderMeshes.Add(renderMesh);
             }
             return renderMeshes;
         }

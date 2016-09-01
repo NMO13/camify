@@ -40,5 +40,10 @@ namespace Model
             List<Mesh> roughParts = new List<Mesh>() {roughPart};
             AddRoughParts(roughParts);
         }
+
+        public void ClearMeshList()
+        {
+            Changed(this, new MeshMessage(MessageType.ClearMeshes, _meshes));
+        }
     }
 }

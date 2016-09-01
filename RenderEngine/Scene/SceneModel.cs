@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessageHandling;
+using MessageHandling.Messages;
 using Model;
 using RenderEngine.Converter;
 using RenderEngine.Rendering;
 using Shared.Geometry;
 
-namespace RenderEngine
+namespace RenderEngine.Scene
 {
     public class SceneModel : AbstractModel
     {
@@ -59,9 +60,23 @@ namespace RenderEngine
         {
             if (message.MessageType == MessageType.NewRoughParts)
             {
-                var meshMessage = message as MeshMessage;
-                RenderMeshes.AddRange(MeshConverter.ToRenderMeshes(meshMessage.GetMeshes));
+                var meshMessage = (MeshMessage) message;
+                AddMeshes(meshMessage.GetMeshes);
             }
+            if (message.MessageType == MessageType.ClearMeshes)
+            {
+                ClearMeshList();
+            }
+        }
+
+        public void ClearMeshList()
+        {
+            RenderMeshes.Clear();
+        }
+
+        public void AddMeshes(List<Mesh> meshes)
+        {
+            RenderMeshes.AddRange(MeshConverter.ToRenderMeshes(meshes));
         }
     }
 }

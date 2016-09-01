@@ -84,6 +84,7 @@ namespace UserInterface
                 {
                     MeshImporter m = new MeshImporter();
                     var meshes = m.GenerateMeshes(openFileDialog1.FileName);
+                    ((MeshModel) _meshModel).ClearMeshList();
                     ((MeshModel)_meshModel).AddRoughParts(meshes);
                 }
                 catch (Exception ex)
