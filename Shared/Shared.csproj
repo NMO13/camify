@@ -70,13 +70,17 @@
     <Compile Include="Geometry\HalfedgeMesh\IMeshObserver.cs" />
     <Compile Include="Geometry\HalfedgeMesh\ManagedList.cs" />
     <Compile Include="Geometry\Matrix3d.cs" />
+    <Compile Include="Geometry\Matrix4F.cs" />
     <Compile Include="Geometry\Mesh.cs" />
     <Compile Include="Geometry\Matrix4d.cs" />
     <Compile Include="Geometry\Meshes\DefaultMeshes.cs" />
+    <Compile Include="Geometry\Point2F.cs" />
+    <Compile Include="Geometry\Quat4F.cs" />
     <Compile Include="Geometry\Quaternion.cs" />
     <Compile Include="Geometry\Ray3d.cs" />
     <Compile Include="Geometry\Vector2d.cs" />
     <Compile Include="Geometry\Vector2m.cs" />
+    <Compile Include="Geometry\Vector3F.cs" />
     <Compile Include="Geometry\Vector4d.cs" />
     <Compile Include="Helper\EnumExtensions.cs" />
     <Compile Include="Helper\FileHelper.cs" />

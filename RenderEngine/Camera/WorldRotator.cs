@@ -23,7 +23,7 @@ namespace GraphicsEngine.Rotation
 
         public void StartDrag(Point mousePt)
         {
-            LastTransformation.set_Renamed(ThisTransformation); // Set Last Static Rotation To Last Dynamic One
+            LastTransformation.SetRenamed(ThisTransformation); // Set Last Static Rotation To Last Dynamic One
             m_arcBall.Click(mousePt); // Update Start Vector And Prepare For Dragging
             _isRotating = true;
         }
