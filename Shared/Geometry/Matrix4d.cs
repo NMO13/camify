@@ -116,6 +116,14 @@ namespace Shared.Geometry
         /// </summary>
         public Vector4d Column0
         {
+            set
+            {
+                this.Row0.X = value.X;
+                this.Row1.X = value.Y;
+                this.Row2.X = value.Z;
+                this.Row3.X = value.W;
+                
+            }
             get { return new Vector4d(Row0.X, Row1.X, Row2.X, Row3.X); }
         }
 
@@ -124,6 +132,14 @@ namespace Shared.Geometry
         /// </summary>
         public Vector4d Column1
         {
+            set
+            {
+                this.Row0.Y = value.X;
+                this.Row1.Y = value.Y;
+                this.Row2.Y = value.Z;
+                this.Row3.Y = value.W;
+
+            }
             get { return new Vector4d(Row0.Y, Row1.Y, Row2.Y, Row3.Y); }
         }
 
@@ -132,6 +148,14 @@ namespace Shared.Geometry
         /// </summary>
         public Vector4d Column2
         {
+            set
+            {
+                this.Row0.Z = value.X;
+                this.Row1.Z = value.Y;
+                this.Row2.Z = value.Z;
+                this.Row3.Z = value.W;
+
+            }
             get { return new Vector4d(Row0.Z, Row1.Z, Row2.Z, Row3.Z); }
         }
 
@@ -140,6 +164,14 @@ namespace Shared.Geometry
         /// </summary>
         public Vector4d Column3
         {
+            set
+            {
+                this.Row0.W = value.X;
+                this.Row1.W = value.Y;
+                this.Row2.W = value.Z;
+                this.Row3.W = value.W;
+
+            }
             get { return new Vector4d(Row0.W, Row1.W, Row2.W, Row3.W); }
         }
 
@@ -1187,5 +1219,12 @@ namespace Shared.Geometry
         }
 
         #endregion
+    }
+
+    public class MException : Exception
+    {
+        public MException(string Message)
+            : base(Message)
+        { }
     }
 }

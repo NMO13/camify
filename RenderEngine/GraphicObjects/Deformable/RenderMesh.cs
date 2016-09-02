@@ -31,8 +31,8 @@ namespace RenderEngine.GraphicObjects.Deformable
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 
-            Shader.SetMatrixMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
-            Shader.SetMatrixMatrix4("proj", SceneModel.Instance.ProjectionMatrix);
+            Shader.SetMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
+            Shader.SetMatrix4("proj", SceneModel.Instance.ProjectionMatrix);
 
             DrawMesh(PrimitiveType.Triangles);
         }

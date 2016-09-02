@@ -5,10 +5,16 @@ namespace RenderEngine.IO
 {
     class MouseKeyEvents
     {
-        private readonly MouseHandler _mouseHandler = new MouseHandler();
+        private readonly MouseHandler _mouseHandler;
+
+        internal MouseKeyEvents(SceneManager manager)
+        {
+            _mouseHandler = new MouseHandler(manager);
+        }
 
         public void MouseMove(object sender, Point pt)
         {
+            _mouseHandler.RotateSceen(pt);
         }
 
         public void LeftMouseButtonDown(object sender, Point pt)

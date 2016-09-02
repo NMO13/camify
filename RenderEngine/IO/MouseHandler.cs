@@ -1,10 +1,18 @@
 ﻿using System.Drawing;
+using GraphicsEngine.Rotation;
 using RenderEngine.Camera;
+using RenderEngine.Scene;
 
 namespace RenderEngine.IO
 {
     class MouseHandler
     {
+        private readonly SceneManager _manager;
+        internal MouseHandler(SceneManager manager)
+        {
+            _manager = manager;
+        }   
+
         internal void Zoom(int delta)
         {
             if (delta > 0 && Objective.CurZoom > Objective.MinZoom)
@@ -15,12 +23,17 @@ namespace RenderEngine.IO
 
         internal void StartRotation(Point pt)
         {
-            throw new System.NotImplementedException();
+            _manager.WorldRotator.StartDrag(pt);
         }
 
         internal void StopRotation(Point pt)
         {
-            throw new System.NotImplementedException();
+            _manager.WorldRotator.StopDrag();
+        }
+
+        internal void RotateSceen(Point pt)
+        {
+            _manager.WorldRotator.Drag(pt);
         }
     }
 }

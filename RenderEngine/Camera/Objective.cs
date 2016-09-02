@@ -1,4 +1,6 @@
 ﻿using Shared.Geometry;
+using Shared.Helper;
+using Vector3d = Shared.Geometry.Vector3d;
 
 namespace RenderEngine.Camera
 {
@@ -12,5 +14,16 @@ namespace RenderEngine.Camera
         internal static float MinZoom = Config.MinZoom;
         internal static float MaxZoom = Config.MaxZoom;
         internal static float GranularityZoom = Config.GranularityZoom;
+
+        internal static Matrix4d InitialPitch
+        {
+            get
+            {  
+                Matrix4d left = Matrix4d.CreateRotationZ(MathHelper.DegreesToRadians(Config.PitchZ));
+                Matrix4d right = Matrix4d.CreateRotationY(MathHelper.DegreesToRadians(Config.PitchY));
+                Matrix4d rotationMatrix = Matrix4d.Mult(left, right);
+                return rotationMatrix;
+            }   
+        }
     }
 }

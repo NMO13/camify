@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using OpenTK.Graphics.OpenGL;
-using RenderEngine.Converter;
+using RenderEngine.Conversion;
 using Shared.Geometry;
-using Shared.Helper;
 
 namespace RenderEngine
 {
@@ -72,7 +71,7 @@ namespace RenderEngine
             GL.Uniform1(GL.GetUniformLocation(ProgramId, name), val);
         }
 
-        internal void SetMatrixMatrix4(string name, Matrix4d matrix)
+        internal void SetMatrix4(string name, Matrix4d matrix)
         {
             OpenTK.Matrix4 openTKMatrix = matrix.ToOpenTKMatrix4D();
             GL.UniformMatrix4(GL.GetUniformLocation(ProgramId, name), false, ref openTKMatrix);
