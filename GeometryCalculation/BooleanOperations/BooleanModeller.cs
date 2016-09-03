@@ -152,9 +152,19 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
                 
                 Debug.Assert(index0 != index1 && index1 != index2);
                 Debug.Assert(index0 != -1 && index1 != -1 && index2 != -1);
-                objA.HeMesh.AddFace(index0, index1, index2);
-
+                var renderNormals = SetRenderNormals(insideFaceB.OuterComponent, insideFaceB.OuterComponent.Next.Next,
+                    insideFaceB.OuterComponent.Next);
+                objA.HeMesh.AddFace(index0, index1, index2, renderNormals);
             }
+        }
+
+        private static Vector3d[] SetRenderNormals(HeHalfedge h0, HeHalfedge h1, HeHalfedge h2)
+        {
+            Vector3d[] renderNormals = new Vector3d[3];
+            renderNormals[0] = h0.RenderNormal.Negated();
+            renderNormals[1] = h1.RenderNormal.Negated();
+            renderNormals[2] = h2.RenderNormal.Negated();
+            return renderNormals;
         }
 
         internal static void ResetState(DeformableObject obj)

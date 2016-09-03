@@ -168,5 +168,10 @@ namespace Shared.Geometry
                 return X * X + Y * Y + Z * Z;
             }
         }
+
+        public Vector3d Negated()
+        {
+            return new Vector3d(-X, -Y, -Z);
+        }
     }
 }
