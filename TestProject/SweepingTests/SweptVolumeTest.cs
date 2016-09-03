@@ -33,7 +33,7 @@ namespace BooleanSubractorTests
         [Test]
         public void MovedCylinder()
         {
-            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\Cylinders\\Cylinder1.dae");
+            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\CNC_Milling\\Cylinder1.dae");
             Mesh mesh = meshes[0];
             DeformableObject o = new DeformableObject();
             o.Initialize(mesh);
@@ -46,7 +46,7 @@ namespace BooleanSubractorTests
         [Test]
         public void MovedCylinder2()
         {
-            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\Cylinders\\Cylinder1.dae");
+            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\CNC_Milling\\Cylinder1.dae");
             Mesh mesh = meshes[0];
             DeformableObject o = new DeformableObject();
             o.Initialize(mesh);

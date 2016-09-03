@@ -77,6 +77,8 @@ namespace GraphicsEngine.HalfedgeMesh
             get { return new Vector3m(Twin.Origin.X - this.Origin.X, Twin.Origin.Y - this.Origin.Y, Twin.Origin.Z - this.Origin.Z); }
         }
 
+        public Vector3d RenderNormal { get; internal set; }
+
         public void SetSplitline(bool value)
         {
             IsSplitLine = value;

@@ -35,7 +35,7 @@ namespace BooleanOpEnv
             var roughpart = new DeformableObject();
             roughpart.Initialize(rp);
 
-            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\Cylinders\\Cylinder1.dae");
+            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\CNC_Milling\\Cylinder1.dae");
             DeformableObject tool = new DeformableObject();
             tool.Initialize(meshes[0]);
             tool.CheckSanity();

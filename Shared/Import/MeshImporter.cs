@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assimp;
 using Assimp.Configs;
 using Mesh = Shared.Geometry.Mesh;
@@ -15,7 +16,7 @@ namespace DataManagement
             AssimpImporter importer = new AssimpImporter();
             importer.SetConfig(new RemoveComponentConfig(ExcludeComponent.Animations | ExcludeComponent.Boneweights |
                                 ExcludeComponent.Cameras | ExcludeComponent.Lights |
-                                ExcludeComponent.TexCoords | ExcludeComponent.Textures | ExcludeComponent.Normals));
+                                ExcludeComponent.TexCoords | ExcludeComponent.Textures));
 
             var scene = importer.ImportFile(path, PostProcessSteps.JoinIdenticalVertices | PostProcessSteps.RemoveComponent);
             ProcessNode(scene.RootNode, scene);
@@ -46,32 +47,71 @@ namespace DataManagement
         private Mesh ProcessMesh(Assimp.Mesh mesh, Node node, Assimp.Material material)
         {
             // Data to fill
-            List<Vector3d> vertices = new List<Vector3d>();
-            List<int> indices = new List<int>();
+            List<int> vertexIndices = new List<int>();
+            Dictionary<int, int> vertexMapping = new Dictionary<int, int>();
+            HashSet<Vector3d> vertices = new HashSet<Vector3d>();
 
-            for (var i = 0; i < mesh.VertexCount; i++)
-            {
-                Vector3d vertex = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
-                vertices.Add(vertex);
-            }
+            VertexMapping(mesh, vertices, vertexMapping);
 
+            Vector3d[] normals = null;
+            if (mesh.HasNormals)
+                normals = new Vector3d[mesh.FaceCount * 3];
             // Now walk through each of the mesh's faces and retrieve the corresponding vertex indices.
             for (int i = 0; i < mesh.FaceCount; i++)
             {
                 Face face = mesh.Faces[i];
                 // Retrieve all indices of the face and store them in the indices vector
+                if (face.IndexCount != 3)
+                    throw new Exception("A face must have exactly three vertices");
+                
                 for (int j = 0; j < face.IndexCount; j++)
-                    indices.Add((int)face.Indices[j]);
+                {
+                    int index = (int)face.Indices[j];
+                    vertexIndices.Add(vertexMapping[index]);
+                    if (mesh.HasNormals)
+                        normals[i * 3 + j] = new Vector3d(mesh.Normals[index].X, mesh.Normals[index].Y, mesh.Normals[index].Z);
+                }
             }
 
-            //node.Transform
-            Mesh m = new Mesh(vertices.ToArray(), indices.ToArray(), null, null);
+            Mesh m = new Mesh(vertices.ToArray(), vertexIndices.ToArray(), normals, null);
             if (!material.Name.Contains("DefaultMaterial"))
             {
                 SetMaterialProps(m, material);
             }
             m.ModelMatrix = Convert(node.Transform);
             return m;
+        }
+
+        private void NormalMapping(Assimp.Mesh mesh, HashSet<Vector3d> normals, Dictionary<int, int> normalMapping)
+        {
+            for (int i = 0; i < mesh.Normals.Length; i++)
+            {
+                Vector3d normal = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
+                normals.Add(normal);
+            }
+            List<Vector3d> vertsList = normals.ToList();
+            for (var i = 0; i < mesh.VertexCount; i++)
+            {
+                Vector3d vertex = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
+                int index = vertsList.FindIndex(x => x.Equals(vertex));
+                normalMapping.Add(i, index);
+            }
+        }
+
+        private void VertexMapping(Assimp.Mesh mesh, HashSet<Vector3d> vertices, Dictionary<int, int> vertexMapping)
+        {
+            for (var i = 0; i < mesh.VertexCount; i++)
+            {
+                Vector3d vertex = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
+                vertices.Add(vertex);
+            }
+            List<Vector3d> vertsList = vertices.ToList();
+            for (var i = 0; i < mesh.VertexCount; i++)
+            {
+                Vector3d vertex = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
+                int index = vertsList.FindIndex(x => x.Equals(vertex));
+                vertexMapping.Add(i, index);
+            }
         }
 
         private void SetMaterialProps(Mesh mesh, Assimp.Material material)

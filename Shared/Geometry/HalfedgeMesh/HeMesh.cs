@@ -57,14 +57,15 @@ namespace GraphicsEngine.HalfedgeMesh
             return vertex;
         }
 
-        public HeFace AddFace(int i0, int i1, int i2, Vector3m[] normals = null)
+        public HeFace AddFace(int i0, int i1, int i2, Vector3d[] renderNormals = null)
         {
-            if (normals == null)
-                normals = HeFace.CreateNormals(_vertexList[i0], _vertexList[i1], _vertexList[i2]);
-            if (normals.Length != 3)
-                throw new ArgumentException("Normals array size != 3");
-
-            HeFace face = CreateHalfEdges(normals, i0, i1, i2);
+            if (renderNormals != null)
+            {
+                if (renderNormals.Length != 3)
+                    throw new Exception("Exactly three normals are expected");
+            }
+            Vector3m[] normals = HeFace.CreateNormals(_vertexList[i0], _vertexList[i1], _vertexList[i2]);
+            HeFace face = CreateHalfEdges(normals, renderNormals, i0, i1, i2);
             ReconnectEqualedgeFaces(face);
             NotifyNewFace(face);
             return face;
@@ -133,7 +134,7 @@ namespace GraphicsEngine.HalfedgeMesh
             }
         }
 
-        protected HeFace CreateHalfEdges(Vector3m[] normals, params int[] vertices)
+        protected HeFace CreateHalfEdges(Vector3m[] normals, Vector3d[] renderNormals, params int[] vertices)
         {
             if (vertices.Length < 3)
                 throw new ArgumentException("Too few vertices specified");
@@ -145,7 +146,10 @@ namespace GraphicsEngine.HalfedgeMesh
                 var v1 = _vertexList[vertices[(i + 1) % vertices.Length]];
                 if (v0.Equals(v1))
                     throw new ArgumentException("Vertices have same coordinates: " + v0);
-                HeHalfedge current = CreateHalfedgePair(v0, v1, face, normals[i]);
+                Vector3d renderNormal = null;
+                if (renderNormals != null)
+                    renderNormal = renderNormals[i];
+                HeHalfedge current = CreateHalfedgePair(v0, v1, face, normals[i], renderNormal);
 
                 first = (i == 0) ? current : first; // remember first
                 if (prev != null)
@@ -165,7 +169,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return face;
         }
 
-        private HeHalfedge CreateHalfedgePair(HeVertex v0, HeVertex v1, HeFace face, Vector3m normal)
+        private HeHalfedge CreateHalfedgePair(HeVertex v0, HeVertex v1, HeFace face, Vector3m normal, Vector3d renderNormal)
         {
             Debug.Assert(normal != null);
             var h0 = new HeHalfedge(v0);
@@ -181,6 +185,7 @@ namespace GraphicsEngine.HalfedgeMesh
                 h1.Origin.IncidentEdges.Add(h1);
                 h0.IncidentFace = face;
                 h0.Normal = normal;
+                h0.RenderNormal = renderNormal;
                 return h0;
             }
            
@@ -191,6 +196,7 @@ namespace GraphicsEngine.HalfedgeMesh
             Debug.Assert(res.Next == null && res.Prev == null);
             res.IncidentFace = face;
             res.Normal = normal;
+            h0.RenderNormal = renderNormal;
             return res;
         }
 

@@ -47,7 +47,6 @@ namespace GeometryCalculation.DataStructures
 
         internal void LoadMesh(Mesh mesh)
         {
-
             if (mesh.Vertices.Length < 3)
                 throw new Exception("Mesh must have at least 3 vertices");
             Debug.Assert(mesh.Vertices.Length >= 3);
@@ -58,22 +57,14 @@ namespace GeometryCalculation.DataStructures
             }
             for (int i = 0; i < mesh.Indices.Length; i += 3)
             {
-                Vector3m[] normals = null;
+                Vector3d[] normals = null;
                 if (mesh.Normals.Length > 0)
                 {
-                    normals = new Vector3m[3];
-                    if (mesh.NormalIndices != null)
+                    normals = new Vector3d[]
                     {
-                        normals[0] = (Vector3m) mesh.Normals[mesh.NormalIndices[i]];
-                        normals[1] = (Vector3m) mesh.Normals[mesh.NormalIndices[i + 1]];
-                        normals[2] = (Vector3m) mesh.Normals[mesh.NormalIndices[i + 2]];
-                    }
-                    else
-                    {
-                        normals[0] = (Vector3m)mesh.Normals[i];
-                        normals[1] = (Vector3m)mesh.Normals[i + 1];
-                        normals[2] = (Vector3m)mesh.Normals[i + 2];
-                    }
+                        mesh.Normals[i], mesh.Normals[i + 1], mesh.Normals[i + 2]
+                    };
+
                 }
                 HeMesh.AddFace(mesh.Indices[i], mesh.Indices[i + 1], mesh.Indices[i + 2], normals);
             }
@@ -241,13 +232,13 @@ namespace GeometryCalculation.DataStructures
             foreach (var heFace in HeMesh.FaceList)
             {
                 indices.Add(heFace.OuterComponent.Origin.Index);
-                normals.Add(heFace.OuterComponent.Normal.Vector3d);
+                normals.Add(heFace.OuterComponent.RenderNormal);
 
                 indices.Add(heFace.OuterComponent.Next.Origin.Index);
-                normals.Add(heFace.OuterComponent.Next.Normal.Vector3d);
+                normals.Add(heFace.OuterComponent.Next.RenderNormal);
 
                 indices.Add(heFace.OuterComponent.Next.Next.Origin.Index);
-                normals.Add(heFace.OuterComponent.Next.Next.Normal.Vector3d);
+                normals.Add(heFace.OuterComponent.Next.Next.RenderNormal);
             }
 
             return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray(), null);
