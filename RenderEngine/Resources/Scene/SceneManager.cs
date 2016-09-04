@@ -53,7 +53,7 @@ namespace RenderEngine.Scene
 
             //Rotate camera
             Matrix4d test = WorldRotator.GetRotationMatrix();
-            Matrix4d rotation = Matrix4d.Mult(test, Objective.InitialPitch);
+            Matrix4d rotation = Matrix4d.Mult(Objective.InitialPitch, test);
             SceneModel.Instance.WorldTransformationMatrix = Matrix4d.Mult(rotation,
                 SceneModel.Instance.WorldTransformationMatrix);
         }
