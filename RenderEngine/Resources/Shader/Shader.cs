@@ -76,5 +76,15 @@ namespace RenderEngine
             OpenTK.Matrix4 openTKMatrix = matrix.ToOpenTKMatrix4D();
             GL.UniformMatrix4(GL.GetUniformLocation(ProgramId, name), false, ref openTKMatrix);
         }
+
+        internal void SetUniform1(string name, float x)
+        {
+            GL.Uniform1(GL.GetUniformLocation(ProgramId, name), x);
+        }
+
+        internal void SetUniform3(string name, float x, float y, float z)
+        {
+            GL.Uniform3(GL.GetUniformLocation(ProgramId, name), x, y, z);
+        }
     }
 }

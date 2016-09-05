@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters;
 using Shared.Geometry;
 
 namespace RenderEngine
@@ -20,5 +21,6 @@ namespace RenderEngine
         internal static readonly float PitchX = 0;
         internal static readonly float PitchY = -45f;
         internal static readonly float PitchZ = -30f;
+
     }
 }

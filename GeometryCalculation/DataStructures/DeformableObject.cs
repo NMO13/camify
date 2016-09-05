@@ -58,11 +58,11 @@ namespace GeometryCalculation.DataStructures
             for (int i = 0; i < mesh.Indices.Length; i += 3)
             {
                 Vector3d[] normals = null;
-                if (mesh.Normals.Length > 0)
+                if (mesh.RenderNormals.Length > 0)
                 {
                     normals = new Vector3d[]
                     {
-                        mesh.Normals[i], mesh.Normals[i + 1], mesh.Normals[i + 2]
+                        mesh.RenderNormals[i], mesh.RenderNormals[i + 1], mesh.RenderNormals[i + 2]
                     };
 
                 }

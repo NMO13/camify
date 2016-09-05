@@ -8,20 +8,20 @@ namespace Shared.Assets
 {
     public class Material
     {
-        public float ambientR;
-        public float ambientG;
-        public float ambientB;
+        public float AmbientR;
+        public float AmbientG;
+        public float AmbientB;
 
-        public float diffuseR;
-        public float diffuseG;
-        public float diffuseB;
+        public float DiffuseR;
+        public float DiffuseG;
+        public float DiffuseB;
 
-        public float specularR;
-        public float specularG;
-        public float specularB;
+        public float SpecularR;
+        public float SpecularG;
+        public float SpecularB;
 
-        public float shininess;
+        public float Shininess;
 
-        public bool isSet;
+        public bool IsSet;
     }
 }

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.BufferObjectManagement;
+using RenderEngine.Lighting;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering
@@ -13,9 +14,7 @@ namespace RenderEngine.Rendering
         protected abstract Shader Shader { get; set; }
         protected abstract BufferUsageHint BufferUsage { get;}
         internal abstract Vertex[] Vertices { get; set; }
-        internal abstract int[] Indices { get; set; }
-
-        internal abstract bool HasNormals { get; }
+        internal abstract bool HasNormals { get; set; }
         public Mesh Mesh { get; internal set; }
 
         protected BufferObjectContainer bufferObject = new BufferObjectContainer();
@@ -23,20 +22,18 @@ namespace RenderEngine.Rendering
 
         internal RenderObject()
         {
-            Setup(Vertices, Indices, HasNormals);
+            Setup(Vertices, HasNormals);
         }
 
-        internal RenderObject(Vertex[] vertices, int[] indices)
+        internal RenderObject(Vertex[] vertices, bool hasNormals)
         {
-            Setup(vertices, indices, HasNormals);
+            Setup(vertices, hasNormals);
         }
 
-        protected void Setup(Vertex[] vertices, int[] indices, bool hasNormals)
+        protected void Setup(Vertex[] vertices, bool hasNormals)
         {
             if(vertices == null)
                 throw new ArgumentNullException("Vertices must not be null.");
-            if(indices == null)
-                throw new ArgumentNullException("Indices must not be null.");
 
             bufferObject.InitializeBuffers();
             //Bind vao, vbo and ebo
@@ -44,9 +41,6 @@ namespace RenderEngine.Rendering
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, bufferObject.Vbo);
             GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(vertices.Length * Marshal.SizeOf(typeof(Vertex))), vertices, BufferUsage);
-
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, bufferObject.Ebo);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(indices.Length * sizeof(int)), indices, BufferUsage);
 
             // Vertex Positions
             GL.EnableVertexAttribArray(0);
@@ -64,10 +58,10 @@ namespace RenderEngine.Rendering
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
 
-        protected void DrawMesh(PrimitiveType primitiveType)
+        protected void DrawMesh(PrimitiveType primitiveType = PrimitiveType.Triangles)
         {
             GL.BindVertexArray(bufferObject.Vao);
-            GLCheck.Call(() => GL.DrawElements(primitiveType, Indices.Length, DrawElementsType.UnsignedInt, 0));
+            GLCheck.Call(() => GL.DrawArrays(primitiveType, 0, Vertices.Length));
             GL.BindVertexArray(0);
         }
     }

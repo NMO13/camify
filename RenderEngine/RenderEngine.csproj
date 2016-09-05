@@ -29,6 +29,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,15 +75,17 @@
     <Compile Include="Conversion\Converter.cs" />
     <Compile Include="ErrorHandling\GLCheck.cs" />
     <Compile Include="GraphicObjects\Perpetual\Background.cs" />
-    <Compile Include="GraphicObjects\Perpetual\CoordinateAxis.cs" />
     <Compile Include="GraphicObjects\ObjectType.cs" />
     <Compile Include="GraphicObjects\Deformable\RenderMesh.cs" />
     <Compile Include="IO\MouseHandler.cs" />
     <Compile Include="IO\MouseKeyEvents.cs" />
-    <Compile Include="Resources\Scene\OpenTkControl.cs">
+    <Compile Include="Lighting\DirectionalLight.cs" />
+    <Compile Include="Lighting\LightBundle.cs" />
+    <Compile Include="Lighting\PointLight.cs" />
+    <Compile Include="Rendering\Scene\OpenTkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Resources\Scene\OpenTkControl.Designer.cs">
+    <Compile Include="Rendering\Scene\OpenTkControl.Designer.cs">
       <DependentUpon>OpenTkControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Postprocessing\Postprocess.cs" />
@@ -78,20 +98,17 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Resources\Shader\Shader.cs" />
     <Compile Include="Resources\Shader\ShaderLibrary.cs" />
-    <Compile Include="Resources\Scene\SceneModel.cs" />
-    <Compile Include="Resources\Scene\SceneManager.cs" />
+    <Compile Include="Rendering\Scene\SceneModel.cs" />
+    <Compile Include="Rendering\Scene\SceneManager.cs" />
     <Compile Include="Resources\Texture.cs" />
     <Compile Include="BufferObjectManagement\BufferObjectContainer.cs" />
-    <Compile Include="Resources\Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Scene\OpenTkControl.resx">
+    <EmbeddedResource Include="Rendering\Scene\OpenTkControl.resx">
       <DependentUpon>OpenTkControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Lighting\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MessageHandling\MessageHandling.csproj">
       <Project>{26b2cdb6-4ffc-447c-b908-33b4a990e257}</Project>

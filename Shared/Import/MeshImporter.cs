@@ -116,20 +116,20 @@ namespace DataManagement
 
         private void SetMaterialProps(Mesh mesh, Assimp.Material material)
         {
-            mesh.Material.ambientR = material.ColorAmbient.R;
-            mesh.Material.ambientG = material.ColorAmbient.G;
-            mesh.Material.ambientB = material.ColorAmbient.B;
+            mesh.Material.AmbientR = material.ColorAmbient.R;
+            mesh.Material.AmbientG = material.ColorAmbient.G;
+            mesh.Material.AmbientB = material.ColorAmbient.B;
 
-            mesh.Material.diffuseR = material.ColorDiffuse.R;
-            mesh.Material.diffuseG = material.ColorDiffuse.G;
-            mesh.Material.diffuseB = material.ColorDiffuse.B;
+            mesh.Material.DiffuseR = material.ColorDiffuse.R;
+            mesh.Material.DiffuseG = material.ColorDiffuse.G;
+            mesh.Material.DiffuseB = material.ColorDiffuse.B;
 
-            mesh.Material.specularR = material.ColorSpecular.R;
-            mesh.Material.specularG = material.ColorSpecular.G;
-            mesh.Material.specularB = material.ColorSpecular.B;
+            mesh.Material.SpecularR = material.ColorSpecular.R;
+            mesh.Material.SpecularG = material.ColorSpecular.G;
+            mesh.Material.SpecularB = material.ColorSpecular.B;
 
-            mesh.Material.shininess = material.Shininess;
-            mesh.Material.isSet = true;
+            mesh.Material.Shininess = material.Shininess;
+            mesh.Material.IsSet = true;
         }
 
         private Matrix4d Convert(Matrix4x4 transformations)

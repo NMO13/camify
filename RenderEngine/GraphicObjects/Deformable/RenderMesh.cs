@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using RenderEngine.Lighting;
 using RenderEngine.Rendering;
 using RenderEngine.Resources.Shader;
-using RenderEngine.Scene;
-using Shared.Geometry;
+using Shared.Assets;
+
 
 namespace RenderEngine.GraphicObjects.Deformable
 {
@@ -17,13 +18,18 @@ namespace RenderEngine.GraphicObjects.Deformable
         protected override Shader Shader { get; set; }
         protected override BufferUsageHint BufferUsage => BufferUsageHint.DynamicDraw;
         internal override Vertex[] Vertices { get; set; }
-        internal override int[] Indices { get; set; }
-        internal override bool HasNormals { get; } = false;
+        internal override bool HasNormals { get; set; }
+        private LightBundle LightBundle { get; }
+        private Material Material { get;  }
 
-        internal RenderMesh(Vertex[] vertices, int[] indices) : base(vertices, indices)
+        internal RenderMesh(Vertex[] vertices, Material material, bool hasNormals, LightBundle lightBundle) : base(vertices, hasNormals)
         {
-            Indices = indices;
             Shader = ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.Mesh.ToString());
+            LightBundle = lightBundle;
+            Material = material;
+
+            Vertices = vertices;
+            HasNormals = hasNormals;
         }
 
         public override void Render()
@@ -31,10 +37,53 @@ namespace RenderEngine.GraphicObjects.Deformable
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 
+            DeployLightConstants();
+            DeployMaterial(); 
+
             Shader.SetMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
             Shader.SetMatrix4("proj", SceneModel.Instance.ProjectionMatrix);
 
-            DrawMesh(PrimitiveType.Triangles);
+            DrawMesh();
+        }
+
+        private void DeployMaterial()
+        {
+            if (Material.IsSet)
+            {
+                Shader.SetUniform1("material.shininess", Material.Shininess);
+                Shader.SetUniform3("material.ambient", Material.AmbientR, Material.AmbientG, Material.AmbientB);
+                Shader.SetUniform3("material.diffuse", Material.DiffuseR, Material.DiffuseG, Material.DiffuseB);
+                Shader.SetUniform3("material.specular", Material.SpecularR, Material.SpecularG, Material.SpecularB);
+            }
+            else
+            {
+                Shader.SetUniform1("material.shininess", 1.0f);
+                Shader.SetUniform3("material.ambient", 0.59225f, 0.59225f, 0.59225f);
+                Shader.SetUniform3("material.diffuse", 0.50754f, 0.50754f, 0.50754f);
+                Shader.SetUniform3("material.specular", 0.508273f, 0.508273f, 0.508273f);
+            }
+        }
+
+        private void DeployLightConstants()
+        {
+            foreach (var dirLight in LightBundle.DirectionalLights)
+            {
+                Shader.SetUniform3("dirLight.direction", dirLight.DirX, dirLight.DirY, dirLight.DirZ);
+                Shader.SetUniform3("dirLight.ambient", dirLight.AmbientR, dirLight.AmbientG, dirLight.AmbientB);
+                Shader.SetUniform3("dirLight.diffuse", dirLight.DiffuseR, dirLight.DiffuseG, dirLight.DiffuseB);
+                Shader.SetUniform3("dirLight.specular", dirLight.SpecularR, dirLight.SpecularG, dirLight.SpecularB);
+            }
+
+            for (int i = 0; i < LightBundle.PointLights.Count; i++)
+            {
+                Shader.SetInteger("numPointLights", LightBundle.PointLights.Count);
+
+                PointLight pLight = LightBundle.PointLights[i];
+                Shader.SetUniform3("pointLights[" + i  + "].position", pLight.PosX, pLight.PosY, pLight.PosZ);
+                Shader.SetUniform3("pointLights[" + i + "].ambient", pLight.AmbientR, pLight.AmbientG, pLight.AmbientB);
+                Shader.SetUniform3("pointLights[" + i + "].diffuse", pLight.DiffuseR, pLight.DiffuseG, pLight.DiffuseB);
+                Shader.SetUniform3("pointLights[" + i + "].specular", pLight.SpecularR, pLight.SpecularG, pLight.SpecularB);
+            }
         }
     }
 }

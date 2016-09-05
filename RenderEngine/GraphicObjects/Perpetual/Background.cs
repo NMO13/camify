@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using RenderEngine.Lighting;
 using RenderEngine.Rendering;
 using RenderEngine.Resources.Shader;
 using RenderEngine.Scene;
@@ -16,11 +17,7 @@ namespace RenderEngine.GraphicObjects.Perpetual
             new Vertex(-1, 1, -1),
         };
 
-        internal override int[] Indices { get; set; } = {
-            0, 1, 2, 3
-        };
-
-        internal override bool HasNormals { get; } = false;
+        internal override bool HasNormals { get; set; } = false;
 
         //Constructor
         internal Background()

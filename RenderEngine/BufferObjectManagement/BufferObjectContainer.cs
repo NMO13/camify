@@ -11,7 +11,7 @@ namespace RenderEngine.BufferObjectManagement
     class BufferObjectContainer
     {
         internal int Vbo { get; set; }
-        internal int Ebo { get; set; }
+        internal int Ebo { get; set; } //Actually not needed since we draw everything with vertices
         internal int Vao { get; set; }
         internal void InitializeBuffers()
         {

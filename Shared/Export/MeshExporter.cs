@@ -406,8 +406,8 @@ namespace DataManagement
 
             writer.WriteStartElement("float_array");
             writer.WriteAttributeString("id", objectId + "-mesh-normals-array");
-            writer.WriteAttributeString("count", ((mesh.Normals.Length * 3).ToString(nfi)));
-            foreach (var normal in mesh.Normals)
+            writer.WriteAttributeString("count", ((mesh.RenderNormals.Length * 3).ToString(nfi)));
+            foreach (var normal in mesh.RenderNormals)
             {
                 writer.WriteString(normal.X.ToString(nfi) + " ");
                 writer.WriteString(normal.Y.ToString(nfi) + " ");
@@ -418,7 +418,7 @@ namespace DataManagement
             writer.WriteStartElement("technique_common");
             writer.WriteStartElement("accessor");
             writer.WriteAttributeString("source", "#" + objectId + "-mesh-normals-array");
-            writer.WriteAttributeString("count", mesh.Normals.Length.ToString(nfi));
+            writer.WriteAttributeString("count", mesh.RenderNormals.Length.ToString(nfi));
             writer.WriteAttributeString("stride", "3");
 
             writer.WriteStartElement("param");
