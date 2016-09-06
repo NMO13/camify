@@ -61,6 +61,10 @@ namespace RenderEngine.Rendering.Scene
                 var meshMessage = message as MeshMessage;
                 RenderMeshes.AddRange(Converter.ToRenderMeshes(meshMessage.GetMeshes));
             }
+            else if (message.MessageType == MessageType.ClearMeshes)
+            {
+                RenderMeshes.Clear();
+            }
         }
     }
 }
