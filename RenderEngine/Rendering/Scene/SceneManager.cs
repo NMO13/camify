@@ -11,7 +11,7 @@ namespace RenderEngine.Rendering.Scene
 {
     class SceneManager
     {
-        private readonly Renderer _renderer = new Renderer();
+        private readonly Renderer _renderer = new Renderer(SceneModel.Instance.RenderMeshes, SceneModel.Instance.PerpetualMeshes);
         internal WorldRotator WorldRotator = new WorldRotator();
 
         internal void Load(int width, int height)
@@ -25,8 +25,7 @@ namespace RenderEngine.Rendering.Scene
         internal void Paint()
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            List<IRenderable> renderMeshes = SceneModel.Instance.RenderMeshes;
-            _renderer.Render(renderMeshes);
+            _renderer.Render();
         }
 
         internal void Resized(int width, int height)
@@ -66,7 +65,7 @@ namespace RenderEngine.Rendering.Scene
         private void LoadPerpetualObjects()
         {
             RenderObject background = RenderObjectFactory.CreateRenderObject(ObjectType.Background);
-            SceneModel.Instance.AddRenderObject(background);
+            SceneModel.Instance.AddPerpetualObject(background);
         }
 
         private void InitializeGl()

@@ -19,8 +19,8 @@ namespace RenderEngine
         internal static readonly float MaxZoom = 700f;
         internal static readonly float InitialZoom = -400f;
         internal static readonly float PitchX = 0;
-        internal static readonly float PitchY = -45f;
-        internal static readonly float PitchZ = -30f;
+        internal static readonly float PitchY = 0f;
+        internal static readonly float PitchZ = 0f;
 
     }
 }

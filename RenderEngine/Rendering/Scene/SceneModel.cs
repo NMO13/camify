@@ -22,6 +22,7 @@ namespace RenderEngine.Rendering.Scene
         }
 
         internal List<IRenderable> RenderMeshes = new List<IRenderable>();
+        internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
         internal int SceneWidth { get; set; }
         internal int SceneHeight { get; set; }
         internal bool MeshUpdated { get; set; } //TODO: declare which mesh has been modified! Only mesh that has been changed must be modified.
@@ -42,6 +43,11 @@ namespace RenderEngine.Rendering.Scene
         internal void AddRenderObject(IRenderable renderObject)
         {
             RenderMeshes.Add(renderObject);
+        }
+
+        internal void AddPerpetualObject(IRenderable perpetual)
+        {
+            PerpetualMeshes.Add(perpetual);
         }
 
         public override void AttachObserver(IObserver observer)

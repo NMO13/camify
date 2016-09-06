@@ -4,10 +4,22 @@ using Shared.Geometry;
 namespace RenderEngine.Rendering
 {
     class Renderer
-    { 
-        public void Render(List<IRenderable> meshes)
+    {
+        private readonly List<IRenderable> _renderMeshes, _perpetualMeshes;
+        public Renderer(List<IRenderable> renderMeshes, List<IRenderable> perpetualMeshes)
         {
-            foreach (var mesh in meshes)
+            _renderMeshes = renderMeshes;
+            _perpetualMeshes = perpetualMeshes;
+        }
+
+        public void Render()
+        {
+            foreach (var perpetual in _perpetualMeshes)
+            {
+                perpetual.Render();
+            }
+
+            foreach (var mesh in _renderMeshes)
             {
                 mesh.Render();
             }
