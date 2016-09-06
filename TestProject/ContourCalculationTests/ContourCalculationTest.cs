@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using DataManagement;
 using GeometryCalculation.DataStructures;
 using NUnit.Framework;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace BooleanSubtractorTests
 {

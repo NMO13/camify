@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using BooleanSubractorTests;
-using DataManagement;
 using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Meshes;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace TestProject.BooleanSubtractionTests
 {

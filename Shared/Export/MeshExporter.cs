@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml;
 using Shared.Geometry;
 
-namespace DataManagement
+namespace Shared.Export
 {
     public class MeshExporter
     {

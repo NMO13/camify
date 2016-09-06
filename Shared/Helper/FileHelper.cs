@@ -1,8 +1,9 @@
-﻿using Shared.Geometry;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Shared.Geometry;
+using Shared.Import;
 
-namespace DataManagement
+namespace Shared.Helper
 {
     public class FileHelper
     {

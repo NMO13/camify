@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Assimp;
 using Assimp.Configs;
-using Mesh = Shared.Geometry.Mesh;
 using Shared.Geometry;
+using Mesh = Shared.Geometry.Mesh;
 
-namespace DataManagement
+namespace Shared.Import
 {
     public class MeshImporter
     {

@@ -2,9 +2,8 @@
 using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Geometry;
-using Shared.Helper;
 
-namespace GraphicsEngine.Math
+namespace Shared.Helper
 {
     public class Misc
     {

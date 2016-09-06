@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CNCSpecific.Milling;
-using DataManagement;
 using GraphicsEngine.Geometry.Meshes;
 using Model;
 using NUnit.Framework;
 using Shared;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace TestProject.SubtractionModelTest
 {

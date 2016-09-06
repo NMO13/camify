@@ -6,6 +6,7 @@ using Microsoft.SolverFoundation.Common;
 using Shared;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace GraphicsEngine.Geometry.Triangulation
 {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BooleanSubractorTests;
-using DataManagement;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace BooleanSubtractorTests
 {

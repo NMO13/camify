@@ -6,6 +6,7 @@ using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace GraphicsEngine.HalfedgeMesh
 {

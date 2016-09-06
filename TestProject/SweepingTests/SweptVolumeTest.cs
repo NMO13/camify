@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataManagement;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
@@ -11,6 +10,7 @@ using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.Math;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace BooleanSubractorTests
 {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataManagement;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Import;
 
 namespace BooleanSubractorTests
 {
