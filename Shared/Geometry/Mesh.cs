@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RenderEngine;
 using Shared.Assets;
 
@@ -50,7 +46,7 @@ namespace Shared.Geometry
         public Vertex[] RenderVertices { get; private set; }
 
         public Matrix4d ModelMatrix { get; set; }
-        public Material Material = new Material();
+        public Material Material = MaterialFactory.CreateDefaultMaterial(MaterialType.Silver);
 
     }
 }

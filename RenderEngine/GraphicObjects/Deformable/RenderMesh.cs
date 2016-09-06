@@ -43,20 +43,11 @@ namespace RenderEngine.GraphicObjects.Deformable
 
         private void DeployMaterial()
         {
-            if (Material.IsSet)
-            {
-                Shader.SetUniform1("material.shininess", Material.Shininess);
-                Shader.SetUniform3("material.ambient", Material.AmbientR, Material.AmbientG, Material.AmbientB);
-                Shader.SetUniform3("material.diffuse", Material.DiffuseR, Material.DiffuseG, Material.DiffuseB);
-                Shader.SetUniform3("material.specular", Material.SpecularR, Material.SpecularG, Material.SpecularB);
-            }
-            else
-            {
-                Shader.SetUniform1("material.shininess", 1.0f);
-                Shader.SetUniform3("material.ambient", 0.59225f, 0.59225f, 0.59225f);
-                Shader.SetUniform3("material.diffuse", 0.50754f, 0.50754f, 0.50754f);
-                Shader.SetUniform3("material.specular", 0.508273f, 0.508273f, 0.508273f);
-            }
+            Shader.SetUniform1("material.shininess", Material.Shininess);
+            Shader.SetUniform3("material.ambient", Material.AmbientR, Material.AmbientG, Material.AmbientB);
+            Shader.SetUniform3("material.diffuse", Material.DiffuseR, Material.DiffuseG, Material.DiffuseB);
+            Shader.SetUniform3("material.specular", Material.SpecularR, Material.SpecularG, Material.SpecularB);
+            
         }
 
         private void DeployLightConstants()

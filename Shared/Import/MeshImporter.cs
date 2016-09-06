@@ -74,10 +74,10 @@ namespace Shared.Import
             }
 
             Mesh m = new Mesh(vertices.ToArray(), vertexIndices.ToArray(), normals);
-            if (!material.Name.Contains("DefaultMaterial"))
-            {
-                SetMaterialProps(m, material);
-            }
+            //if (!material.Name.Contains("DefaultMaterial"))
+            //{
+            //    SetMaterialProps(m, material);
+            //}
             m.ModelMatrix = Convert(node.Transform);
             return m;
         }
@@ -114,23 +114,23 @@ namespace Shared.Import
             }
         }
 
-        private void SetMaterialProps(Mesh mesh, Assimp.Material material)
-        {
-            mesh.Material.AmbientR = material.ColorAmbient.R;
-            mesh.Material.AmbientG = material.ColorAmbient.G;
-            mesh.Material.AmbientB = material.ColorAmbient.B;
+        //private void SetMaterialProps(Mesh mesh, Assimp.Material material)
+        //{
+        //    mesh.Material.AmbientR = material.ColorAmbient.R;
+        //    mesh.Material.AmbientG = material.ColorAmbient.G;
+        //    mesh.Material.AmbientB = material.ColorAmbient.B;
 
-            mesh.Material.DiffuseR = material.ColorDiffuse.R;
-            mesh.Material.DiffuseG = material.ColorDiffuse.G;
-            mesh.Material.DiffuseB = material.ColorDiffuse.B;
+        //    mesh.Material.DiffuseR = material.ColorDiffuse.R;
+        //    mesh.Material.DiffuseG = material.ColorDiffuse.G;
+        //    mesh.Material.DiffuseB = material.ColorDiffuse.B;
 
-            mesh.Material.SpecularR = material.ColorSpecular.R;
-            mesh.Material.SpecularG = material.ColorSpecular.G;
-            mesh.Material.SpecularB = material.ColorSpecular.B;
+        //    mesh.Material.SpecularR = material.ColorSpecular.R;
+        //    mesh.Material.SpecularG = material.ColorSpecular.G;
+        //    mesh.Material.SpecularB = material.ColorSpecular.B;
 
-            mesh.Material.Shininess = material.Shininess;
-            mesh.Material.IsSet = true;
-        }
+        //    mesh.Material.Shininess = material.Shininess;
+        //    mesh.Material.IsSet = true;
+        //}
 
         private Matrix4d Convert(Matrix4x4 transformations)
         {

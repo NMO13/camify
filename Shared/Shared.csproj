@@ -64,9 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Material.cs" />
+    <Compile Include="Assets\MaterialConstants.cs" />
+    <Compile Include="Assets\MaterialFactory.cs" />
     <Compile Include="Attributes\DynamicProperties.cs" />
     <Compile Include="Attributes\PropertyConstants.cs" />
-    <Compile Include="Assets\Material.cs" />
     <Compile Include="Export\MeshExporter.cs" />
     <Compile Include="Geometry\CollisionCheck\AxisAlignedBoundingBox.cs" />
     <Compile Include="Geometry\CollisionCheck\BoundingVolumeHierarchy.cs" />
