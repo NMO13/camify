@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
-using GraphicsEngine.Rotation;
 using RenderEngine.Camera;
-using RenderEngine.Scene;
+using RenderEngine.Rendering.Scene;
 
 namespace RenderEngine.IO
 {

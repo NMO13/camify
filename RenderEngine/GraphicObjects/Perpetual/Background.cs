@@ -1,8 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
-using RenderEngine.Lighting;
 using RenderEngine.Rendering;
+using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
-using RenderEngine.Scene;
 
 namespace RenderEngine.GraphicObjects.Perpetual
 {

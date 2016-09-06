@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using RenderEngine.Scene;
+using RenderEngine.Rendering.Scene;
 
 namespace RenderEngine.IO
 {

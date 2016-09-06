@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using RenderEngine.Lighting;
 using RenderEngine.Rendering;
+using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
 using Shared.Assets;
 

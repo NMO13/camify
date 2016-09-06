@@ -5,8 +5,7 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using DataManagement;
 using Model;
-using RenderEngine;
-using RenderEngine.Scene;
+using RenderEngine.Rendering.Scene;
 using Message = MessageHandling.Message;
 
 namespace UserInterface
