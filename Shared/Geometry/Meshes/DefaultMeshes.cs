@@ -36,34 +36,26 @@ namespace GraphicsEngine.Geometry.Meshes
 	            4, 6, 2
 	        };
 
-            Vector3d[] defaultBoxNormals =
-            {
-                new Vector3d(1, 0, 0),
-                new Vector3d(-1, 0, 0),
-                new Vector3d(0, 1, 0),
-                new Vector3d(0, -1, 0),
-                new Vector3d(0, 0, 1),
-                new Vector3d(0, 0, -1)
-            };
-
-            int[] defaultBoxNormalIndices =
-            {
-                5, 5, 5,
-                5, 5, 5,
-                4, 4, 4,
-                4, 4, 4,
-                3, 3, 3,
-                3, 3, 3,
-                0, 0, 0,
-                0, 0, 0,
-                2, 2, 2,
-                2, 2, 2,
-                1, 1, 1,
-                1, 1, 1
-            };
-
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, defaultBoxNormals, defaultBoxNormalIndices);
+            var defaultBoxNormals = CalcNormals(defaultBoxVertices, defaultBoxCoordinates);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, defaultBoxNormals);
             return mesh;
+        }
+
+        private static Vector3d[] CalcNormals(Vector3d[] vertices, int[] indices)
+        {
+            Vector3d[] normals = new Vector3d[indices.Length];
+            for(int i = 0; i < indices.Length; i+=3)
+            {
+                var v0 = vertices[indices[i]];
+                var v1 = vertices[indices[i + 1]];
+                var v2 = vertices[indices[i + 2]];
+
+                var normal = (v1 - v0).Cross(v2 - v0);
+                normals[i] = normal;
+                normals[i + 1] = normal.Clone() as Vector3d;
+                normals[i + 2] = normal.Clone() as Vector3d;
+            }
+            return normals;
         }
 
         public static Mesh Icosphere(int granularity, int scale)
@@ -168,7 +160,8 @@ namespace GraphicsEngine.Geometry.Meshes
                     indices[i * 3 + 2] = faces[i].v3;
 
                 }
-                Mesh mesh = new Mesh(vertices.ToArray(), indices, null, null);
+                var normals = CalcNormals(vertices.ToArray(), indices);
+                Mesh mesh = new Mesh(vertices.ToArray(), indices, normals);
                 return mesh;
             }
 
@@ -231,7 +224,9 @@ namespace GraphicsEngine.Geometry.Meshes
                 4, 2, 0
   
 	        };
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null, null);
+
+            var normals = CalcNormals(defaultBoxVertices, defaultBoxCoordinates);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, normals);
             return mesh;
         }
     }

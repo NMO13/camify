@@ -43,6 +43,7 @@ namespace Model
 
         public void ClearMeshList()
         {
+            RoughParts.Clear();
             Changed(this, new MeshMessage(MessageType.ClearMeshes, _meshes));
         }
 

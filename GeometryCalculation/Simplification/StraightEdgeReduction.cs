@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using GeometryCalculation.DataStructures;
+using GeometryCalculation.Simplification;
 using GraphicsEngine.Geometry.Triangulation;
 using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
@@ -132,7 +133,7 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
             HeHalfedge mergedEdge = null;
             for (int i = 0; i < indexList.Count; i += 3)
             {
-                HeFace face = heMesh.AddFace(indexList[i], indexList[i + 1], indexList[i + 2]);
+                HeFace face = heMesh.AddFace(indexList[i], indexList[i + 1], indexList[i + 2], null);
                 manager.AddFace(contourGroupIndex, face);
                 if (face.V0.Index == i0 && face.V1.Index == i1)
                     mergedEdge = face.OuterComponent;

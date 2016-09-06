@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Geometry.Bounding_Volume_Hierarchy;
+using GeometryCalculation.Simplification;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using GraphicsEngine.HalfedgeMesh.Simplification;
@@ -241,7 +242,7 @@ namespace GeometryCalculation.DataStructures
                 normals.Add(heFace.OuterComponent.Next.Next.RenderNormal);
             }
 
-            return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray(), null);
+            return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray());
         }
     }
 

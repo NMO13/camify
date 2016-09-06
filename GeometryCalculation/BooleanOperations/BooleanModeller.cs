@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GeometryCalculation.DataStructures;
+using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Additional;
 using Shared.Geometry;
 
-namespace GraphicsEngine.Geometry.Boolean_Ops
+namespace GeometryCalculation.BooleanOperations
 {
     public static class BooleanModeller
     {
@@ -152,14 +153,16 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
                 
                 Debug.Assert(index0 != index1 && index1 != index2);
                 Debug.Assert(index0 != -1 && index1 != -1 && index2 != -1);
-                var renderNormals = SetRenderNormals(insideFaceB.OuterComponent, insideFaceB.OuterComponent.Next.Next,
-                    insideFaceB.OuterComponent.Next);
+                var renderNormals = SetRenderNormals(insideFaceB.H0, insideFaceB.H2,
+                    insideFaceB.H1);
                 objA.HeMesh.AddFace(index0, index1, index2, renderNormals);
             }
         }
 
         private static Vector3d[] SetRenderNormals(HeHalfedge h0, HeHalfedge h1, HeHalfedge h2)
         {
+            if (h0.RenderNormal == null || h1.RenderNormal == null || h2.RenderNormal == null)
+                return null;
             Vector3d[] renderNormals = new Vector3d[3];
             renderNormals[0] = h0.RenderNormal.Negated();
             renderNormals[1] = h1.RenderNormal.Negated();

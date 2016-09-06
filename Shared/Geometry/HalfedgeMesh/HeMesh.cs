@@ -57,7 +57,7 @@ namespace GraphicsEngine.HalfedgeMesh
             return vertex;
         }
 
-        public HeFace AddFace(int i0, int i1, int i2, Vector3d[] renderNormals = null)
+        public HeFace AddFace(int i0, int i1, int i2, Vector3d[] renderNormals)
         {
             if (renderNormals != null)
             {
@@ -196,7 +196,7 @@ namespace GraphicsEngine.HalfedgeMesh
             Debug.Assert(res.Next == null && res.Prev == null);
             res.IncidentFace = face;
             res.Normal = normal;
-            h0.RenderNormal = renderNormal;
+            res.RenderNormal = renderNormal;
             return res;
         }
 
@@ -307,10 +307,18 @@ namespace GraphicsEngine.HalfedgeMesh
             var h1 = heA.Next;
             var h2 = heA.Next.Next;
 
+            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
+            Vector3d n0 = face.H0.RenderNormal;
+            Vector3d n1 = face.H1.RenderNormal;
+            Vector3d n2 = face.H2.RenderNormal;
+
             RemoveFace(face, false);
 
-            var face0 = AddFace(h0.Origin.Index, heVertex.Index, h2.Origin.Index);
-            var face1 = AddFace(heVertex.Index, h1.Origin.Index, h2.Origin.Index);
+            Vector3d[] renderNormals = {n0, normalNew, n2};
+            var face0 = AddFace(h0.Origin.Index, heVertex.Index, h2.Origin.Index, renderNormals);
+
+            Vector3d[] renderNormals2 = {normalNew, n1, n2};
+            var face1 = AddFace(heVertex.Index, h1.Origin.Index, h2.Origin.Index, renderNormals2);
             faces[0] = face0;
             faces[1] = face1;
 
@@ -450,6 +458,7 @@ namespace GraphicsEngine.HalfedgeMesh
 
             // update all of the faces which had vertex u with vertex v
             var v = e.Twin.Origin;
+            Vector3d vn = e.Twin.RenderNormal;
 
             while(u.IncidentEdges.Count > 0)
             {
@@ -462,8 +471,12 @@ namespace GraphicsEngine.HalfedgeMesh
                 var w0 = incidentEdge.Next.Origin;
                 var w1 = incidentEdge.Next.Next.Origin;
 
+                Vector3d w0n = incidentEdge.Next.RenderNormal;
+                Vector3d w1n = incidentEdge.Next.Next.RenderNormal;
+
                 RemoveFace(incidentEdge.IncidentFace, false);
-                AddFace(v.Index, w0.Index, w1.Index);
+                Vector3d[] normals = {vn, w0n, w1n};
+                AddFace(v.Index, w0.Index, w1.Index, normals);
             }
             Debug.Assert(u.IncidentEdges.Count == 0);
             Debug.Assert(u.Index == -1);

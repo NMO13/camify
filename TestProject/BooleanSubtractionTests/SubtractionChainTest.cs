@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BooleanSubractorTests;
 using DataManagement;
+using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine;
-using GraphicsEngine.Geometry;
-using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.Geometry.Meshes;
-using GraphicsEngine.Math;
 using NUnit.Framework;
-using Shared;
 using Shared.Geometry;
 
-namespace BooleanOpEnv
+namespace TestProject.BooleanSubtractionTests
 {
     [TestFixture]
     class SubtractionChainTest

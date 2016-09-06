@@ -10,7 +10,7 @@ namespace Shared.Geometry
 {
     public class Mesh
     {
-        public Mesh(Vector3d[] vertices, int[] indices, Vector3d[] renderNormals, object obj)
+        public Mesh(Vector3d[] vertices, int[] indices, Vector3d[] renderNormals)
         {
             if (vertices == null || indices == null)
                 throw new ArgumentException("Vertices or indices not set");

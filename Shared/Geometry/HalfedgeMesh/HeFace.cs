@@ -70,13 +70,6 @@ namespace GraphicsEngine.HalfedgeMesh
                 OuterComponent.Next.Next.Origin != null);
             Aabb = new AxisAlignedBoundingBox(OuterComponent.Origin, OuterComponent.Next.Origin,
                 OuterComponent.Next.Next.Origin);
-
-            CalcCenterAndRadius();
-        }
-
-        private void CalcCenterAndRadius()
-        {
-            
         }
 
 
@@ -160,17 +153,32 @@ namespace GraphicsEngine.HalfedgeMesh
 
         public HeVertex V0
         {
-            get { return OuterComponent.Origin; }
+            get { return H0.Origin; }
         }
 
         public HeVertex V1
         {
-            get { return OuterComponent.Next.Origin; }
+            get { return H1.Origin; }
         }
 
         public HeVertex V2
         {
-            get { return OuterComponent.Next.Next.Origin; }
+            get { return H2.Origin; }
+        }
+
+        public HeHalfedge H0
+        {
+            get { return OuterComponent; }
+        }
+
+        public HeHalfedge H1
+        {
+            get { return OuterComponent.Next; }
+        }
+
+        public HeHalfedge H2
+        {
+            get { return OuterComponent.Next.Next; }
         }
 
         public int VboBucketId { get; set; }

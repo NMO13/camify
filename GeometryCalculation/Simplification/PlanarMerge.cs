@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Triangulation;
+using GraphicsEngine.HalfedgeMesh;
 using GraphicsEngine.HalfedgeMeshProcessing;
 using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
 
-namespace GraphicsEngine.HalfedgeMesh.Simplification
+namespace GeometryCalculation.Simplification
 {
     class PlanarMerge : IPostProcess
     {
@@ -96,7 +97,7 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
                 for (int i = 0; i < projectedContourGroup.NewFaceIndices.Count; i += 3)
                 {
                     var face = mesh.AddFace(projectedContourGroup.NewFaceIndices[i], projectedContourGroup.NewFaceIndices[i + 1],
-                    projectedContourGroup.NewFaceIndices[i + 2]);
+                    projectedContourGroup.NewFaceIndices[i + 2], null);
                     manager.AddFace(projectedContourGroup.OriginalContourGroup.Index, face);
                 }
             }
@@ -111,7 +112,6 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
                     continue;
                 ProjectedContourGroup projectedContourGroup = new ProjectedContourGroup(contourGroup);
                 projectedContours.Add(projectedContourGroup);
-                var matrix = Matrix4<Rational>.CreateInverseRotationMatrix(contourGroup.Normal);
 
                 foreach (var contour in contourGroup.Contours)
                 {
@@ -119,8 +119,7 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
                     projectedContourGroup.ProjectedContours.Add(projContour);
                     foreach (var heHalfedge in contour.HeList)
                     {
-                        var projectedVertex = Matrix4<Rational>.Multiply(matrix, heHalfedge.Origin.Vector3m);
-                        var point = new Vector3m(heHalfedge.Origin.Vector3m); //new Vector2m(projectedVertex.X, projectedVertex.Z);
+                        var point = new Vector3m(heHalfedge.Origin.Vector3m);
                         point.DynamicProperties.AddProperty(PropertyConstants.HeVertexIndex, heHalfedge.Origin.Index);
                         projContour.ProjectedVertices.Add(point);
                     }

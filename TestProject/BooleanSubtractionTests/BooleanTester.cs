@@ -1,4 +1,5 @@
-﻿using GeometryCalculation.DataStructures;
+﻿using GeometryCalculation.BooleanOperations;
+using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.HalfedgeMesh;

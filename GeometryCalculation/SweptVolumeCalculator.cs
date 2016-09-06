@@ -30,7 +30,7 @@ namespace GeometryCalculation
                     var v2 = AddTranslatedVertex(h2, direction, buddies, m);
 
                     m.RemoveFace(p, true);
-                    m.AddFace(v0.Index, v1.Index, v2.Index);
+                    m.AddFace(v0.Index, v1.Index, v2.Index, null); //TODO
                 }
                 else
                 {
@@ -106,8 +106,8 @@ namespace GeometryCalculation
             if (!buddies.TryGetValue(v1, out v1Front))
                 throw new Exception("Vertex was not found in dictionary");
 
-            m.AddFace(v0.Index, v1.Index, v1Front.Index);
-            m.AddFace(v0.Index, v1Front.Index, v0Front.Index);
+            m.AddFace(v0.Index, v1.Index, v1Front.Index, null); //TODO
+            m.AddFace(v0.Index, v1Front.Index, v0Front.Index, null);//TODO
         }
 
         private static HeHalfedge GetNextBoundaryEdge(HeHalfedge startEdge)

@@ -73,7 +73,7 @@ namespace DataManagement
                 }
             }
 
-            Mesh m = new Mesh(vertices.ToArray(), vertexIndices.ToArray(), normals, null);
+            Mesh m = new Mesh(vertices.ToArray(), vertexIndices.ToArray(), normals);
             if (!material.Name.Contains("DefaultMaterial"))
             {
                 SetMaterialProps(m, material);

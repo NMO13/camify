@@ -41,7 +41,7 @@ namespace BooleanSubractorTests
                 3, 2, 1
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 16, 84, 28);
@@ -81,7 +81,7 @@ namespace BooleanSubractorTests
                 5, 3, 1
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -113,7 +113,7 @@ namespace BooleanSubractorTests
                 7, 3, 5
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 47, 270, 90);
@@ -152,7 +152,7 @@ namespace BooleanSubractorTests
                 4, 5, 3
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -174,7 +174,7 @@ namespace BooleanSubractorTests
                 0, 2, 3
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 35, 198, 66);
@@ -219,7 +219,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -251,7 +251,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 20, 108, 36);
@@ -298,7 +298,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -354,7 +354,7 @@ namespace BooleanSubractorTests
                 4, 13, 12
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 24, 132, 44);
@@ -399,7 +399,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -455,7 +455,7 @@ namespace BooleanSubractorTests
                 12, 15, 14
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 18, 96, 32);
@@ -500,7 +500,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -532,7 +532,7 @@ namespace BooleanSubractorTests
                 6, 0, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, false, 0, 8, 36, 12);
@@ -576,7 +576,7 @@ namespace BooleanSubractorTests
                 0, 4, 6
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -602,7 +602,7 @@ namespace BooleanSubractorTests
                 3, 4, 5
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 0, 10, 48, 16);
@@ -640,7 +640,7 @@ namespace BooleanSubractorTests
                 5, 0, 3
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -675,7 +675,7 @@ namespace BooleanSubractorTests
                 8, 1, 4
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 2, 26, 156, 52);
@@ -772,7 +772,6 @@ namespace BooleanSubractorTests
             obj2.Initialize(sphere2);
             obj2.TranslateAndBuildBvh(new Vector3m(20, 20, 0));
             _bTester.Test(obj, obj2, true, 1, 10955, 65718, 21906);
-            obj.Clone(Vector3m.Zero());
 
             // try it the other way round
             obj = new DeformableObject(1);
@@ -802,7 +801,7 @@ namespace BooleanSubractorTests
                 0, 2, 3
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -820,7 +819,7 @@ namespace BooleanSubractorTests
                 2, 3, 0
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 2, 21, 114, 38);
@@ -845,7 +844,7 @@ namespace BooleanSubractorTests
                 0, 3, 2
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -865,7 +864,7 @@ namespace BooleanSubractorTests
                 0, 2, 3
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, false, 0,  4, 12, 4);
@@ -910,7 +909,7 @@ namespace BooleanSubractorTests
                 6, 7, 5
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -930,7 +929,7 @@ namespace BooleanSubractorTests
                 2, 3, 1
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 19, 102, 34);
@@ -962,7 +961,7 @@ namespace BooleanSubractorTests
                 2, 3, 1
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -995,7 +994,7 @@ namespace BooleanSubractorTests
                 6, 7, 5
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 2, 17, 78, 26);
@@ -1040,7 +1039,7 @@ namespace BooleanSubractorTests
                 6, 7, 5
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1060,7 +1059,7 @@ namespace BooleanSubractorTests
                 2, 3, 1
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 19, 102, 34);
@@ -1105,7 +1104,7 @@ namespace BooleanSubractorTests
                 6, 7, 5
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1125,7 +1124,7 @@ namespace BooleanSubractorTests
                 2, 3, 1
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 19, 102, 34);
@@ -1178,7 +1177,7 @@ namespace BooleanSubractorTests
                 10, 8, 9
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1204,7 +1203,7 @@ namespace BooleanSubractorTests
                 5, 4, 3
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 17, 90, 30);
@@ -1257,7 +1256,7 @@ namespace BooleanSubractorTests
                 10, 8, 9
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1283,7 +1282,7 @@ namespace BooleanSubractorTests
                 4, 3, 5
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
              _bTester.Test(obj, obj2, true, 1, 17, 90, 30);
@@ -1327,7 +1326,7 @@ namespace BooleanSubractorTests
                 3, 4, 0
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1347,7 +1346,7 @@ namespace BooleanSubractorTests
                 0, 3, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 15, 78, 26);
@@ -1391,7 +1390,7 @@ namespace BooleanSubractorTests
                 3, 4, 0
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1411,7 +1410,7 @@ namespace BooleanSubractorTests
                 0, 3, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 14, 72, 24);
@@ -1455,7 +1454,7 @@ namespace BooleanSubractorTests
                 3, 4, 0
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1475,7 +1474,7 @@ namespace BooleanSubractorTests
                 0, 3, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 14, 72, 24);
@@ -1519,7 +1518,7 @@ namespace BooleanSubractorTests
                 3, 4, 0
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1539,7 +1538,7 @@ namespace BooleanSubractorTests
                 0, 3, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 16, 84, 28);
@@ -1583,7 +1582,7 @@ namespace BooleanSubractorTests
                 3, 4, 0
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1606,7 +1605,7 @@ namespace BooleanSubractorTests
                 4, 3, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 15, 78, 26);
@@ -1644,7 +1643,7 @@ namespace BooleanSubractorTests
                 4, 5, 2
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
 
@@ -1670,7 +1669,7 @@ namespace BooleanSubractorTests
                 4, 5, 2
             };
 
-            Mesh mesh2 = new Mesh(verts2, coords2, null, null);
+            Mesh mesh2 = new Mesh(verts2, coords2, null);
             var obj2 = new DeformableObject(1);
             obj2.Initialize(mesh2);
             _bTester.Test(obj, obj2, true, 1, 19, 102, 34);
@@ -1702,7 +1701,7 @@ namespace BooleanSubractorTests
                 2, 0, 3
             };
 
-            Mesh mesh = new Mesh(verts1, coords1, null, null);
+            Mesh mesh = new Mesh(verts1, coords1, null);
             var obj = new DeformableObject(1);
             obj.Initialize(mesh);
         }

@@ -31,7 +31,7 @@ namespace BooleanSubtractorTests
                 6, 7, 8
             };
 
-            Mesh mesh = new Mesh(verts, coords, null, null);
+            Mesh mesh = new Mesh(verts, coords, null);
             var obj2 = new DeformableObject(1);
             obj2.LoadMesh(mesh);
         }
@@ -72,7 +72,7 @@ namespace BooleanSubtractorTests
                 12, 13, 14
             };
 
-            Mesh mesh = new Mesh(verts, coords, null, null);
+            Mesh mesh = new Mesh(verts, coords, null);
             var obj2 = new DeformableObject(1);
             obj2.LoadMesh(mesh);
         }

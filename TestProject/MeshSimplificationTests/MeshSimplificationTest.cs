@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BooleanSubractorTests;
 using DataManagement;
+using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine;
 using GraphicsEngine.Geometry;
@@ -50,7 +51,7 @@ namespace BooleanSubtractorTests
                 4, 2, 0
   
 	        };
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null, null);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null);
 
             DeformableObject obj = new DeformableObject();
             obj.Initialize(mesh);
@@ -101,7 +102,7 @@ namespace BooleanSubtractorTests
                 11, 4, 3
             };
 
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null, null);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null);
             DeformableObject obj = new DeformableObject();
             obj.Initialize(mesh);
             obj.CheckSanity();
@@ -163,7 +164,7 @@ namespace BooleanSubtractorTests
                 11, 4, 3
             };
 
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null, null);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null);
             DeformableObject obj = new DeformableObject();
             obj.Initialize(mesh);
             obj.CheckSanity();
@@ -219,7 +220,7 @@ namespace BooleanSubtractorTests
                 11, 4, 3
             };
 
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null, null);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, null);
 
             DeformableObject obj = new DeformableObject();
             obj.Initialize(mesh);
