@@ -69,6 +69,8 @@ namespace GraphicsEngine.HalfedgeMesh
             var halfedge = new HeHalfedge(new HeVertex(Origin.X, Origin.Y, Origin.Z));
             halfedge.Twin = new HeHalfedge(new HeVertex(Twin.Origin.X, Twin.Origin.Y, Twin.Origin.Z));
             halfedge.Normal = Normal.Clone() as Vector3m;
+            if(RenderNormal != null)
+                halfedge.RenderNormal = RenderNormal.Clone() as Vector3d;
             return halfedge;
         }
 

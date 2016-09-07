@@ -21,16 +21,17 @@ namespace GeometryCalculation
                 int type = LooksIntoEmptySpace(testPoint, p);
                 if (type == FRONT)
                 {
-                    var h0 = p.OuterComponent;
-                    var h1 = p.OuterComponent.Next;
-                    var h2 = p.OuterComponent.Next.Next;
+                    Vector3d n0 = p.H0.RenderNormal;
+                    Vector3d n1 = p.H1.RenderNormal;
+                    Vector3d n2 = p.H2.RenderNormal;
+                    Vector3d[] renderNormals = {n0, n1, n2};
 
-                    var v0 = AddTranslatedVertex(h0, direction, buddies, m);
-                    var v1 = AddTranslatedVertex(h1, direction, buddies, m);
-                    var v2 = AddTranslatedVertex(h2, direction, buddies, m);
+                    var v0 = AddTranslatedVertex(p.H0, direction, buddies, m);
+                    var v1 = AddTranslatedVertex(p.H1, direction, buddies, m);
+                    var v2 = AddTranslatedVertex(p.H2, direction, buddies, m);
 
                     m.RemoveFace(p, true);
-                    m.AddFace(v0.Index, v1.Index, v2.Index, null); //TODO
+                    m.AddFace(v0.Index, v1.Index, v2.Index, renderNormals);
                 }
                 else
                 {
@@ -106,8 +107,16 @@ namespace GeometryCalculation
             if (!buddies.TryGetValue(v1, out v1Front))
                 throw new Exception("Vertex was not found in dictionary");
 
-            m.AddFace(v0.Index, v1.Index, v1Front.Index, null); //TODO
-            m.AddFace(v0.Index, v1Front.Index, v0Front.Index, null);//TODO
+            CreateFace(v0, v1, v1Front, m);
+            CreateFace(v0, v1Front, v0Front, m);
+        }
+
+        private static void CreateFace(HeVertex v0, HeVertex v1, HeVertex v2, HeMesh heMesh)
+        {
+            var normal = (v1.Vector3d - v0.Vector3d).Cross(v2.Vector3d - v0.Vector3d).Unit();
+            Vector3d[] renderNormals = {normal, normal.Clone() as Vector3d, normal.Clone() as Vector3d};
+
+            heMesh.AddFace(v0.Index, v1.Index, v2.Index, renderNormals);
         }
 
         private static HeHalfedge GetNextBoundaryEdge(HeHalfedge startEdge)

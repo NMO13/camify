@@ -95,5 +95,15 @@ namespace RenderEngine.Rendering.Scene
                 return;
             _mouseKeyEvents.MouseMove(sender, e.Location);
         }
+
+        public void OpenTkControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool[] keys = new bool[1024];
+            keys[e.KeyValue] = true;
+            if (keys[(int)Keys.W])
+            {
+                SceneModel.Instance.WireframeMode = !SceneModel.Instance.WireframeMode;
+            }
+        }
     }
 }

@@ -32,12 +32,13 @@
             // 
             // OpenTkControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OpenTkControl";
             this.Load += new System.EventHandler(this.OpenTkControl_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OpenTkControl_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OpenTkControl_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseUp);

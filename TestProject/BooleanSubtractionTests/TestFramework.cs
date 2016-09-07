@@ -39,6 +39,7 @@ namespace BooleanSubractorTests
             a.CheckSanity();
             AreVerticesUnique(a);
             AreFacesUnique(a);
+            a.GetMesh();
         }
 
         internal static void IsReset(HeMesh mesh)

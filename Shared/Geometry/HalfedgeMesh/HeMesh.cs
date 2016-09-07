@@ -366,8 +366,10 @@ namespace GraphicsEngine.HalfedgeMesh
                 if (halfedge != null)
                 {
                     var halfedgeNew = new HeHalfedge(_vertexList[halfedge.Origin.Index]);
-                    halfedgeNew.Normal = halfedge.Normal;
+                    halfedgeNew.Normal = halfedge.Normal.Clone() as Vector3m;
                     halfedgeNew.Index = halfedge.Index;
+                    if(halfedge.RenderNormal != null)
+                        halfedgeNew.RenderNormal = halfedge.RenderNormal.Clone() as Vector3d;
                     _halfedgeList.Add(halfedgeNew);
                 }
                 else

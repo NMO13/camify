@@ -50,7 +50,7 @@ namespace GraphicsEngine.Geometry.Meshes
                 var v1 = vertices[indices[i + 1]];
                 var v2 = vertices[indices[i + 2]];
 
-                var normal = (v1 - v0).Cross(v2 - v0);
+                var normal = (v1 - v0).Cross(v2 - v0).Unit();
                 normals[i] = normal;
                 normals[i + 1] = normal.Clone() as Vector3d;
                 normals[i + 2] = normal.Clone() as Vector3d;

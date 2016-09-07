@@ -244,6 +244,7 @@ namespace BooleanSubtractorTests
             obj2.TranslateAndBuildBvh(new Vector3m(Single.Epsilon, 0, 0));
 
             BooleanModeller.SubtractSweptVolume(obj, obj2);
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -257,7 +258,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 9);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 14);
-            obj.GetMesh();
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -271,7 +272,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 16);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 28);
-            obj.GetMesh();
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -285,7 +286,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 22);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 40);
-            obj.GetMesh();
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -299,7 +300,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 27);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 50);
-            obj.GetMesh();
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -314,6 +315,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 5);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 6);
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -327,6 +329,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 22);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 40);
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -340,6 +343,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 24);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 44);
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -353,6 +357,7 @@ namespace BooleanSubtractorTests
             obj.ExecutePostProcesses();
             Assert.AreEqual(obj.HeMesh.VertexList.Count, 56);
             Assert.AreEqual(obj.HeMesh.FaceList.Count, 108);
+            TestFramework.CheckSanity(obj);
         }
 
         [Test]
@@ -373,6 +378,7 @@ namespace BooleanSubtractorTests
                 Assert.AreEqual(contourGroup.Contours.Count, 1);
                 Assert.AreEqual(contourGroup.Contours[0].HeList.Count, 4);
             }
+            TestFramework.CheckSanity(obj);
 
         }
 
@@ -394,6 +400,7 @@ namespace BooleanSubtractorTests
                 Assert.AreEqual(contourGroup.Contours.Count, 1);
                 Assert.AreEqual(contourGroup.Contours[0].HeList.Count, 4);
             }
+            TestFramework.CheckSanity(obj);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Shared.Geometry
         public Vertex[] RenderVertices { get; private set; }
 
         public Matrix4d ModelMatrix { get; set; }
-        public Material Material = new Material(MaterialType.Gold);
+        public Material Material = new Material(MaterialType.Silver);
 
     }
 }

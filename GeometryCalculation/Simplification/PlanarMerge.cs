@@ -127,28 +127,6 @@ namespace GeometryCalculation.Simplification
                 renderNormalDictionary.Add(insideFace.V2, insideFace.H2.RenderNormal);
         }
 
-        private Vector3d[] CollectRenderNormals(HeMesh mesh, int i0, int i1, int i2)
-        {
-            Vector3d[] renderNormals = new Vector3d[3];
-            var v0 = mesh.VertexList[i0];
-            var v1 = mesh.VertexList[i1];
-            var v2 = mesh.VertexList[i2];
-
-            HeHalfedge he = null;
-            mesh.GetFacelessHalfedge(v0, v1, out he);
-            Debug.Assert(he != null);
-            renderNormals[0] = he.RenderNormal;
-
-            mesh.GetFacelessHalfedge(v1, v2, out he);
-            Debug.Assert(he != null);
-            renderNormals[1] = he.RenderNormal;
-
-            mesh.GetFacelessHalfedge(v2, v0, out he);
-            Debug.Assert(he != null);
-            renderNormals[2] = he.RenderNormal;
-            return renderNormals;
-        }
-
         internal List<TriangulationContourGroup> CreateTriangulationContours(List<ContourGroup> contourGroups)
         {
             List<TriangulationContourGroup> triangulationContours = new List<TriangulationContourGroup>();

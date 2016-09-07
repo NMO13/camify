@@ -232,14 +232,14 @@ namespace GeometryCalculation.DataStructures
             List<Vector3d> normals = new List<Vector3d>();
             foreach (var heFace in HeMesh.FaceList)
             {
-                indices.Add(heFace.OuterComponent.Origin.Index);
-                normals.Add(heFace.OuterComponent.RenderNormal);
+                indices.Add(heFace.V0.Index);
+                normals.Add(heFace.H0.RenderNormal);
 
-                indices.Add(heFace.OuterComponent.Next.Origin.Index);
-                normals.Add(heFace.OuterComponent.Next.RenderNormal);
+                indices.Add(heFace.V1.Index);
+                normals.Add(heFace.H1.RenderNormal);
 
-                indices.Add(heFace.OuterComponent.Next.Next.Origin.Index);
-                normals.Add(heFace.OuterComponent.Next.Next.RenderNormal);
+                indices.Add(heFace.V2.Index);
+                normals.Add(heFace.H2.RenderNormal);
             }
 
             return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray());
