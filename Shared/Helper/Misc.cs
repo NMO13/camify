@@ -241,5 +241,21 @@ namespace Shared.Helper
             return -1;
         }
 
+        public static Vector3d[] CalcNormalizedFaceNormals(Vector3d[] vertices, int[] indices)
+        {
+            Vector3d[] normals = new Vector3d[indices.Length];
+            for (int i = 0; i < indices.Length; i += 3)
+            {
+                var v0 = vertices[indices[i]];
+                var v1 = vertices[indices[i + 1]];
+                var v2 = vertices[indices[i + 2]];
+
+                var normal = (v1 - v0).Cross(v2 - v0).Unit();
+                normals[i] = normal;
+                normals[i + 1] = normal.Clone() as Vector3d;
+                normals[i + 2] = normal.Clone() as Vector3d;
+            }
+            return normals;
+        }
     }
 }

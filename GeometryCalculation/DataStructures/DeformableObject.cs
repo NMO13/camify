@@ -220,7 +220,7 @@ namespace GeometryCalculation.DataStructures
             return obj;
         }
 
-        public Mesh GetMesh()
+        public Mesh GetMesh(bool useRenderNormals = true)
         {
             var vertices = new List<Vector3d>();
             HeMesh.VertexList.Compact();
@@ -233,13 +233,27 @@ namespace GeometryCalculation.DataStructures
             foreach (var heFace in HeMesh.FaceList)
             {
                 indices.Add(heFace.V0.Index);
-                normals.Add(heFace.H0.RenderNormal);
-
                 indices.Add(heFace.V1.Index);
-                normals.Add(heFace.H1.RenderNormal);
-
                 indices.Add(heFace.V2.Index);
-                normals.Add(heFace.H2.RenderNormal);
+
+                if (useRenderNormals)
+                {
+                    if (heFace.H0.RenderNormal == null || heFace.H1.RenderNormal == null ||
+                        heFace.H2.RenderNormal == null)
+                    {
+                        throw new Exception("Render normals are not valid");
+                    }
+                    normals.Add(heFace.H0.RenderNormal);
+                    normals.Add(heFace.H1.RenderNormal);
+                    normals.Add(heFace.H2.RenderNormal);
+                }
+                else // we use the exact face normals as render normals
+                {
+                    Vector3d normal = heFace.OuterComponent.Normal.Vector3d.Unit();
+                    normals.Add(normal);
+                    normals.Add(normal.Clone() as Vector3d);
+                    normals.Add(normal.Clone() as Vector3d);
+                }
             }
 
             return new Mesh(vertices.ToArray(), indices.ToArray(), normals.ToArray());

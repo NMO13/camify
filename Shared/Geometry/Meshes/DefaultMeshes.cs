@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shared.Geometry;
+using Shared.Helper;
 
 namespace GraphicsEngine.Geometry.Meshes
 {
     public class DefaultMeshes
     {
-        public static Mesh Box(float xExtend, float yExtend, float zExtend)
+        public static Mesh Box(float xExtend, float yExtend, float zExtend, bool calcRenderNormals = true)
         {
             Vector3d[] defaultBoxVertices =
             {
@@ -36,26 +37,11 @@ namespace GraphicsEngine.Geometry.Meshes
 	            4, 6, 2
 	        };
 
-            var defaultBoxNormals = CalcNormals(defaultBoxVertices, defaultBoxCoordinates);
+            Vector3d[] defaultBoxNormals = null;
+            if(calcRenderNormals)
+                defaultBoxNormals = Misc.CalcNormalizedFaceNormals(defaultBoxVertices, defaultBoxCoordinates);
             Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, defaultBoxNormals);
             return mesh;
-        }
-
-        private static Vector3d[] CalcNormals(Vector3d[] vertices, int[] indices)
-        {
-            Vector3d[] normals = new Vector3d[indices.Length];
-            for(int i = 0; i < indices.Length; i+=3)
-            {
-                var v0 = vertices[indices[i]];
-                var v1 = vertices[indices[i + 1]];
-                var v2 = vertices[indices[i + 2]];
-
-                var normal = (v1 - v0).Cross(v2 - v0).Unit();
-                normals[i] = normal;
-                normals[i + 1] = normal.Clone() as Vector3d;
-                normals[i + 2] = normal.Clone() as Vector3d;
-            }
-            return normals;
         }
 
         public static Mesh Icosphere(int granularity, int scale)
@@ -160,7 +146,7 @@ namespace GraphicsEngine.Geometry.Meshes
                     indices[i * 3 + 2] = faces[i].v3;
 
                 }
-                var normals = CalcNormals(vertices.ToArray(), indices);
+                var normals = Misc.CalcNormalizedFaceNormals(vertices.ToArray(), indices);
                 Mesh mesh = new Mesh(vertices.ToArray(), indices, normals);
                 return mesh;
             }
@@ -203,7 +189,7 @@ namespace GraphicsEngine.Geometry.Meshes
             }
         }
 
-        public static Mesh Pyramid(float baseWidth, float baseDepth, float height)
+        public static Mesh Pyramid(float baseWidth, float baseDepth, float height, bool calcRenderNormals = true)
         {
             Vector3d[] defaultBoxVertices =
             {
@@ -225,8 +211,10 @@ namespace GraphicsEngine.Geometry.Meshes
   
 	        };
 
-            var normals = CalcNormals(defaultBoxVertices, defaultBoxCoordinates);
-            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, normals);
+            Vector3d[] defaultBoxNormals = null;
+            if (calcRenderNormals)
+                defaultBoxNormals = Misc.CalcNormalizedFaceNormals(defaultBoxVertices, defaultBoxCoordinates);
+            Mesh mesh = new Mesh(defaultBoxVertices, defaultBoxCoordinates, defaultBoxNormals);
             return mesh;
         }
     }
