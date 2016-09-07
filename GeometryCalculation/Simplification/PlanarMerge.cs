@@ -15,17 +15,17 @@ namespace GeometryCalculation.Simplification
 {
     class PlanarMerge : IPostProcess
     {
-        internal void Triangulate(List<ProjectedContourGroup> projectedContourGroups)
+        internal void Triangulate(List<TriangulationContourGroup> projectedContourGroups)
         {
             foreach (var projectedContourGroup in projectedContourGroups)
             {
-                if (projectedContourGroup.ProjectedContours.Count != 1)
+                if (projectedContourGroup.Contours.Count != 1)
                     throw new Exception("Projected contour is not valid");
 
                 var holes = new List<List<Vector3m>>();
-                projectedContourGroup.Holes.ForEach(x => holes.Add(x.ProjectedVertices));
+                projectedContourGroup.Holes.ForEach(x => holes.Add(x.TriangulationVertices));
                 EarClipping earClipping = new EarClipping();
-                earClipping.SetPoints(projectedContourGroup.ProjectedContours[0].ProjectedVertices, holes, projectedContourGroup.OriginalContourGroup.Normal);
+                earClipping.SetPoints(projectedContourGroup.Contours[0].TriangulationVertices, holes, projectedContourGroup.OriginalContourGroup.Normal);
                 earClipping.Triangulate();
                 var result = earClipping.Result;
                 result.ForEach(x => projectedContourGroup.NewFaceIndices.Add((int) x.DynamicProperties.GetValue(PropertyConstants.HeVertexIndex)));
@@ -33,19 +33,19 @@ namespace GeometryCalculation.Simplification
 
         }
 
-        private bool ClassifyAsHole(ProjectedContour contour, ProjectedContourGroup contourHolder, out Vector3m he0, out Vector3m he1, out Vector3m he2)
+        private bool ClassifyAsHole(TriangulationContour contour, TriangulationContourGroup contourHolder, out Vector3m he0, out Vector3m he1, out Vector3m he2)
         {
             var index = FindConvexEdge(contour);
-            he1 = contour.ProjectedVertices[index];
+            he1 = contour.TriangulationVertices[index];
             if (index == 0)
-                he0 = contour.ProjectedVertices[contour.ProjectedVertices.Count - 1];
+                he0 = contour.TriangulationVertices[contour.TriangulationVertices.Count - 1];
             else
-                he0 = contour.ProjectedVertices[index - 1];
+                he0 = contour.TriangulationVertices[index - 1];
 
-            if (index == contour.ProjectedVertices.Count - 1)
-                he2 = contour.ProjectedVertices[0];
+            if (index == contour.TriangulationVertices.Count - 1)
+                he2 = contour.TriangulationVertices[0];
             else
-                he2 = contour.ProjectedVertices[index + 1];
+                he2 = contour.TriangulationVertices[index + 1];
 
             int orientation = Misc.GetOrientation(he0, he1, he2, contourHolder.OriginalContourGroup.Normal);
             Debug.Assert(orientation != 0);
@@ -61,12 +61,12 @@ namespace GeometryCalculation.Simplification
 
         }
 
-        private int FindConvexEdge(ProjectedContour contour)
+        private int FindConvexEdge(TriangulationContour contour)
         {
             Vector3m minimum = new Vector3m(double.MaxValue, double.MaxValue, double.MaxValue);
             int index = -1;
             int i = 0;
-            foreach (var cur in contour.ProjectedVertices)
+            foreach (var cur in contour.TriangulationVertices)
             {
                 if (cur.X < minimum.X || cur.X == minimum.X && cur.Y < minimum.Y)
                 {
@@ -78,72 +78,117 @@ namespace GeometryCalculation.Simplification
             return index;
         }
 
-        internal void ReplaceFaces(List<ProjectedContourGroup> projectedContourGroups, HeMesh mesh, ContourGroupManager manager)
+        internal void ReplaceFaces(List<TriangulationContourGroup> triangulationContourGroups, HeMesh mesh, ContourGroupManager manager)
         {
-            foreach (var projectedContourGroup in projectedContourGroups)
+            foreach (var triangulationContourGroup in triangulationContourGroups)
             {
                 // We don't have to update the contour edges since the halfedges' twin of the contour edges should never be deleted and so
                 // the halfedge itself should also exist. Therefore, the contour edges should still be valid after ReplaceFaces
 
-                var tempFaceArray = projectedContourGroup.OriginalContourGroup.InsideFaces.ToArray();
+                Dictionary<HeVertex, Vector3d> renderNormalDictionary = new Dictionary<HeVertex, Vector3d>();
+
+                var tempFaceArray = triangulationContourGroup.OriginalContourGroup.InsideFaces.ToArray();
                 foreach (var insideFace in tempFaceArray)
                 {
+                    AddToRenderNormalDictionary(insideFace, renderNormalDictionary);
                     Debug.Assert(insideFace.Index >= 0);
                     var res = manager.RemoveFace(insideFace);
                     Debug.Assert(res >= 0);
                     mesh.RemoveFace(insideFace, false);
                 }
-                Debug.Assert(projectedContourGroup.OriginalContourGroup.InsideFaces.Count == 0);
-                Debug.Assert(projectedContourGroup.NewFaceIndices.Count % 3 == 0);
-                for (int i = 0; i < projectedContourGroup.NewFaceIndices.Count; i += 3)
+                Debug.Assert(triangulationContourGroup.OriginalContourGroup.InsideFaces.Count == 0);
+                Debug.Assert(triangulationContourGroup.NewFaceIndices.Count % 3 == 0);
+                for (int i = 0; i < triangulationContourGroup.NewFaceIndices.Count; i += 3)
                 {
-                    var face = mesh.AddFace(projectedContourGroup.NewFaceIndices[i], projectedContourGroup.NewFaceIndices[i + 1],
-                    projectedContourGroup.NewFaceIndices[i + 2], null);
-                    manager.AddFace(projectedContourGroup.OriginalContourGroup.Index, face);
+                    // we are overriding the halfedge's render normals with itself
+
+                    var v0 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i]];
+                    var v1 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i + 1]];
+                    var v2 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i + 2]];
+                    Vector3d[] renderNormals = {renderNormalDictionary[v0], renderNormalDictionary[v1], renderNormalDictionary[v2]};
+
+                    // add face and render normals
+                    var face = mesh.AddFace(triangulationContourGroup.NewFaceIndices[i], triangulationContourGroup.NewFaceIndices[i + 1],
+                    triangulationContourGroup.NewFaceIndices[i + 2], renderNormals);
+                    manager.AddFace(triangulationContourGroup.OriginalContourGroup.Index, face);
                 }
             }
         }
 
-        internal List<ProjectedContourGroup> ProjectContours(List<ContourGroup> contourGroups)
+        private void AddToRenderNormalDictionary(HeFace insideFace, Dictionary<HeVertex, Vector3d> renderNormalDictionary)
         {
-            List<ProjectedContourGroup> projectedContours = new List<ProjectedContourGroup>();
+            if(!renderNormalDictionary.ContainsKey(insideFace.V0))
+                renderNormalDictionary.Add(insideFace.V0, insideFace.H0.RenderNormal);
+
+            if (!renderNormalDictionary.ContainsKey(insideFace.V1))
+                renderNormalDictionary.Add(insideFace.V1, insideFace.H1.RenderNormal);
+
+            if (!renderNormalDictionary.ContainsKey(insideFace.V2))
+                renderNormalDictionary.Add(insideFace.V2, insideFace.H2.RenderNormal);
+        }
+
+        private Vector3d[] CollectRenderNormals(HeMesh mesh, int i0, int i1, int i2)
+        {
+            Vector3d[] renderNormals = new Vector3d[3];
+            var v0 = mesh.VertexList[i0];
+            var v1 = mesh.VertexList[i1];
+            var v2 = mesh.VertexList[i2];
+
+            HeHalfedge he = null;
+            mesh.GetFacelessHalfedge(v0, v1, out he);
+            Debug.Assert(he != null);
+            renderNormals[0] = he.RenderNormal;
+
+            mesh.GetFacelessHalfedge(v1, v2, out he);
+            Debug.Assert(he != null);
+            renderNormals[1] = he.RenderNormal;
+
+            mesh.GetFacelessHalfedge(v2, v0, out he);
+            Debug.Assert(he != null);
+            renderNormals[2] = he.RenderNormal;
+            return renderNormals;
+        }
+
+        internal List<TriangulationContourGroup> CreateTriangulationContours(List<ContourGroup> contourGroups)
+        {
+            List<TriangulationContourGroup> triangulationContours = new List<TriangulationContourGroup>();
             foreach (var contourGroup in contourGroups)
             {
                 if (contourGroup.Contours.Count == 1 && contourGroup.InsideFaces.Count == 1)
                     continue;
-                ProjectedContourGroup projectedContourGroup = new ProjectedContourGroup(contourGroup);
-                projectedContours.Add(projectedContourGroup);
+                TriangulationContourGroup triangulationContourGroup = new TriangulationContourGroup(contourGroup);
+                triangulationContours.Add(triangulationContourGroup);
 
                 foreach (var contour in contourGroup.Contours)
                 {
-                    ProjectedContour projContour = new ProjectedContour();
-                    projectedContourGroup.ProjectedContours.Add(projContour);
+                    TriangulationContour triangulationContour = new TriangulationContour();
+                    triangulationContourGroup.Contours.Add(triangulationContour);
                     foreach (var heHalfedge in contour.HeList)
                     {
                         var point = new Vector3m(heHalfedge.Origin.Vector3m);
                         point.DynamicProperties.AddProperty(PropertyConstants.HeVertexIndex, heHalfedge.Origin.Index);
-                        projContour.ProjectedVertices.Add(point);
+                        triangulationContour.TriangulationVertices.Add(point);
                     }
                 }
             }
-            return projectedContours;
+            return triangulationContours;
         }
 
-        internal void FindHoles(List<ProjectedContourGroup> projectedContours)
+        internal void FindHoles(List<TriangulationContourGroup> projectedContours)
         {
             foreach (var group in projectedContours)
             {
-                for (int c = 0; c < group.ProjectedContours.Count; c++)
+                for (int c = 0; c < group.Contours.Count; c++)
                 {
                     Vector3m pV0, pV1, pV2;
-                    var contour = group.ProjectedContours[c];
+                    var contour = group.Contours[c];
                     if (ClassifyAsHole(contour, group, out pV0, out pV1, out pV2))
                     {
-                        group.ProjectedContours.RemoveAt(c);
+                        group.Contours.RemoveAt(c);
                         c--;
                     }
                 }
-                Debug.Assert(group.ProjectedContours.Count == 1); // we want exactly one "main" contour, all others are holes
+                Debug.Assert(group.Contours.Count == 1); // we want exactly one "main" contour, all others are holes
             }
         }
 
@@ -151,7 +196,7 @@ namespace GeometryCalculation.Simplification
         {
             if (obj.ContourGroupManager.ContourGroups.Count == 0)
                 return;
-            var projectedContours = ProjectContours(obj.ContourGroupManager.ContourGroups);
+            var projectedContours = CreateTriangulationContours(obj.ContourGroupManager.ContourGroups);
             if (projectedContours.Count == 0)
                 return;
             FindHoles(projectedContours);
@@ -177,22 +222,23 @@ namespace GeometryCalculation.Simplification
         }
     }
 
-    class ProjectedContourGroup
+    class TriangulationContourGroup
     {
-        internal List<ProjectedContour> Holes = new List<ProjectedContour>();
-        internal List<ProjectedContour> ProjectedContours = new List<ProjectedContour>();
+        internal List<TriangulationContour> Holes = new List<TriangulationContour>();
+        internal List<TriangulationContour> Contours = new List<TriangulationContour>();
         internal List<int> NewFaceIndices = new List<int>();
+        internal List<Vector3d> RenderNormals = new List<Vector3d>(); 
         internal ContourGroup OriginalContourGroup { get; private set; }
 
-        public ProjectedContourGroup(ContourGroup contourGroup)
+        public TriangulationContourGroup(ContourGroup contourGroup)
         {
             OriginalContourGroup = contourGroup;
         }
     }
 
-    class ProjectedContour
+    class TriangulationContour
     {
-        internal List<Vector3m> ProjectedVertices = new List<Vector3m>(); 
+        internal List<Vector3m> TriangulationVertices = new List<Vector3m>(); 
     }
 
     //TODO put that into a separate class
