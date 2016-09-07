@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using OpenTK.Graphics.OpenGL;
+using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering
@@ -14,11 +16,14 @@ namespace RenderEngine.Rendering
 
         public void Render()
         {
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             foreach (var perpetual in _perpetualMeshes)
             {
                 perpetual.Render();
             }
 
+            PolygonMode polyMode = SceneModel.Instance.WireframeMode ? PolygonMode.Line : PolygonMode.Fill;
+            GL.PolygonMode(MaterialFace.FrontAndBack, polyMode);
             foreach (var mesh in _renderMeshes)
             {
                 mesh.Render();

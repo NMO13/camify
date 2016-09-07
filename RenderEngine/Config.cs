@@ -1,8 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters;
-using Shared.Geometry;
-
-namespace RenderEngine
+﻿namespace RenderEngine
 {
     public struct Config
     {
@@ -21,6 +17,5 @@ namespace RenderEngine
         internal static readonly float PitchX = 0;
         internal static readonly float PitchY = 0f;
         internal static readonly float PitchZ = 0f;
-
     }
 }

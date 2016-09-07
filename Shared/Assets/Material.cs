@@ -28,6 +28,7 @@ namespace Shared.Assets
             {
                 case MaterialType.Silver: SetToSilver(); break;
                 case MaterialType.Gold: SetToGold(); break;
+                default: throw new Exception("Material type is not supported");
             }
         }
 
@@ -45,11 +46,23 @@ namespace Shared.Assets
             SpecularG = MaterialConstants.SilverSpecularG;
             SpecularB = MaterialConstants.SilverSpecularB;
 
-            Shininess = MaterialConstants.Shininess;
+            Shininess = MaterialConstants.SilverShininess;
         }
         private void SetToGold()
         {
-            throw new NotImplementedException();
+            AmbientR = MaterialConstants.GoldAmbientR;
+            AmbientG = MaterialConstants.GoldAmbientG;
+            AmbientB = MaterialConstants.GoldAmbientB;
+
+            DiffuseR = MaterialConstants.GoldDiffuseR;
+            DiffuseG = MaterialConstants.GoldDiffuseG;
+            DiffuseB = MaterialConstants.GoldDiffuseB;
+
+            SpecularR = MaterialConstants.GoldSpecularR;
+            SpecularG = MaterialConstants.GoldSpecularG;
+            SpecularB = MaterialConstants.GoldSpecularB;
+
+            Shininess = MaterialConstants.GoldShininess;
         }
     }
 

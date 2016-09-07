@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="Assets\Material.cs" />
     <Compile Include="Assets\MaterialConstants.cs" />
-    <Compile Include="Assets\MaterialFactory.cs" />
     <Compile Include="Attributes\DynamicProperties.cs" />
     <Compile Include="Attributes\PropertyConstants.cs" />
     <Compile Include="Export\MeshExporter.cs" />

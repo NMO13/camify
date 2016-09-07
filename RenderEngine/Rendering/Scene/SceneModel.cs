@@ -21,6 +21,8 @@ namespace RenderEngine.Rendering.Scene
             }
         }
 
+        public bool WireframeMode { get; set; }
+
         internal List<IRenderable> RenderMeshes = new List<IRenderable>();
         internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
         internal int SceneWidth { get; set; }
