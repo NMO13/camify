@@ -6,6 +6,7 @@ using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 using Shared.Helper;
 
 namespace GraphicsEngine.HalfedgeMesh
@@ -28,6 +29,20 @@ namespace GraphicsEngine.HalfedgeMesh
         public HeMesh(HeMesh other, Vector3m translate) : this()
         {            
             SetMesh(other, translate);
+        }
+
+        public HeMesh(Mesh mesh) : this()
+        {
+            if (mesh.Vertices.Length < 3)
+                throw new Exception("Mesh must have at least 3 vertices");
+            foreach (var vertex in mesh.Vertices)
+            {
+                AddVertex(new HeVertex(vertex.X, vertex.Y, vertex.Z));
+            }
+            for (int i = 0; i < mesh.Indices.Length; i += 3)
+            {
+                AddFace(mesh.Indices[i], mesh.Indices[i + 1], mesh.Indices[i + 2], null);
+            }
         }
 
         public void AddObserver(IMeshObserver obs)

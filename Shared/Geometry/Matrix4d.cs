@@ -1131,6 +1131,14 @@ namespace Shared.Geometry
             return new Vector4d(x, y, z, w);
         }
 
+        public static Vector3d operator *(Matrix4d left, Vector3d right)
+        {
+            var x = left.M11 * right.X + left.M12 * right.Y + left.M13 * right.Z + left.M14;
+            var y = left.M21 * right.X + left.M22 * right.Y + left.M23 * right.Z + left.M24;
+            var z = left.M31 * right.X + left.M32 * right.Y + left.M33 * right.Z + left.M34;
+            return new Vector3d(x, y, z);
+        }
+
         /// <summary>
         /// Compares two instances for equality.
         /// </summary>

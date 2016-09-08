@@ -7,6 +7,7 @@ using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 using Shared.Helper;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops

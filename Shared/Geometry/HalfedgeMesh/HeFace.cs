@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
-using GraphicsEngine.Geometry.CollisionCheck;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using GraphicsEngine.Geometry.CollisionCheck;
+using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
-using Shared.Geometry;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 {
     public class HeFace : ICloneable, IIndexable
     {
@@ -78,7 +78,7 @@ namespace GraphicsEngine.HalfedgeMesh
             Vector3m[] normals = new Vector3m[3];
             Vector3m normal = (v1.Vector3m - v0.Vector3m).Cross(v2.Vector3m - v0.Vector3m);
 
-            normal = normal.ShortenByLargestComponent();
+            normal = normal.ShortenByLargestComponent(); // to avoid very large numbers
 
             if(normal.X == 0 && normal.Y == 0 && normal.Z == 0)
                 throw new Exception("Normal is not valid");

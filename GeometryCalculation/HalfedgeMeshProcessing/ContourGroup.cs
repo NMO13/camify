@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.HalfedgeMeshProcessing
 {

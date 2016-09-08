@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GeometryCalculation
 {

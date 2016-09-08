@@ -5,6 +5,7 @@ using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry
 {

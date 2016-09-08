@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace Geometry.Bounding_Volume_Hierarchy
 {

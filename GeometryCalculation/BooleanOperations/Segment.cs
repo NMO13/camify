@@ -1,6 +1,7 @@
 ﻿using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops
 {

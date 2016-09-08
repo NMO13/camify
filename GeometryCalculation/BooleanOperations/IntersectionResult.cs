@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Additional;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.CollisionCheck
 {

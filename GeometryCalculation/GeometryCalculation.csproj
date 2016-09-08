@@ -71,7 +71,6 @@
     <Compile Include="BooleanOperations\SplitResult.cs" />
     <Compile Include="DataStructures\DeformableObject.cs" />
     <Compile Include="DataStructures\DeformableObjectFactory.cs" />
-    <Compile Include="DataStructures\GeometryExtensions.cs" />
     <Compile Include="HalfedgeMeshProcessing\Contour.cs" />
     <Compile Include="HalfedgeMeshProcessing\ContourCalculator.cs" />
     <Compile Include="HalfedgeMeshProcessing\ContourGroup.cs" />

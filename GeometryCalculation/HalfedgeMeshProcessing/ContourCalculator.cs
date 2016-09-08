@@ -4,6 +4,7 @@ using GeometryCalculation.DataStructures;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.HalfedgeMeshProcessing
 {

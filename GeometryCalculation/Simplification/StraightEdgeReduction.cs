@@ -7,6 +7,7 @@ using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.HalfedgeMesh.Simplification
 {
