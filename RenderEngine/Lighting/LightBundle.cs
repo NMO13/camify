@@ -30,8 +30,11 @@ namespace RenderEngine.Lighting
                 0.5f, 0.5f, 0.5f);
             DirectionalLights.Add(directionalLight);
 
-            PointLight pointLightOne = new PointLight(0, 0, -20, 0.25f, 0.25f, 0.25f, 0.3f, 0.3f, 0.3f, 0.2f, 0.2f, 0.2f);
+            PointLight pointLightOne = new PointLight(0, 200, 0, 0.3f, 0.3f, 0.3f, 0.4f, 0.4f, 0.4f, 0.2f, 0.2f, 0.2f);
             PointLights.Add(pointLightOne);
+
+            PointLight pointLightTwo = new PointLight(200, 0, 200, 0.3f, 0.3f, 0.3f, 0.4f, 0.4f, 0.4f, 0.2f, 0.2f, 0.2f);
+            PointLights.Add(pointLightTwo);
         }
         internal enum BundleType
         {

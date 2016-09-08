@@ -22,7 +22,7 @@ namespace Shared.Assets
 
         public float Shininess;
 
-        internal Material(MaterialType type)
+        public Material(MaterialType type)
         {
             switch (type)
             {
@@ -66,7 +66,7 @@ namespace Shared.Assets
         }
     }
 
-    enum MaterialType
+    public enum MaterialType
     {
         Silver,
         Gold

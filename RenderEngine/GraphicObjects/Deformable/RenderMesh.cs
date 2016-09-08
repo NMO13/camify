@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using RenderEngine.Camera;
 using RenderEngine.Lighting;
 using RenderEngine.Rendering;
 using RenderEngine.Rendering.Scene;
@@ -65,7 +66,8 @@ namespace RenderEngine.GraphicObjects.Deformable
                 Shader.SetInteger("numPointLights", LightBundle.PointLights.Count);
 
                 PointLight pLight = LightBundle.PointLights[i];
-                Shader.SetUniform3("pointLights[" + i  + "].position", pLight.PosX, pLight.PosY, pLight.PosZ);
+                float zPosition = pLight.PosZ + Objective.CurZoom;
+                Shader.SetUniform3("pointLights[" + i  + "].position", pLight.PosX, pLight.PosY, zPosition);
                 Shader.SetUniform3("pointLights[" + i + "].ambient", pLight.AmbientR, pLight.AmbientG, pLight.AmbientB);
                 Shader.SetUniform3("pointLights[" + i + "].diffuse", pLight.DiffuseR, pLight.DiffuseG, pLight.DiffuseB);
                 Shader.SetUniform3("pointLights[" + i + "].specular", pLight.SpecularR, pLight.SpecularG, pLight.SpecularB);

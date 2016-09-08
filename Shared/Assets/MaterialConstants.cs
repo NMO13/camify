@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.Assets
+﻿namespace Shared.Assets
 {
     internal class MaterialConstants
     {
         //Silver
-        internal static readonly float SilverAmbientR = 0.19225f;
-        internal static readonly float SilverAmbientG = 0.19225f;
-        internal static readonly float SilverAmbientB = 0.19225f;
+        internal static readonly float SilverAmbientR = 0.29225f;
+        internal static readonly float SilverAmbientG = 0.29225f;
+        internal static readonly float SilverAmbientB = 0.29225f;
 
         internal static readonly float SilverDiffuseR = 0.50754f;
         internal static readonly float SilverDiffuseG = 0.50754f;
@@ -21,7 +15,7 @@ namespace Shared.Assets
         internal static readonly float SilverSpecularG = 0.508273f;
         internal static readonly float SilverSpecularB = 0.508273f;
 
-        internal static readonly float SilverShininess = 0.4f;
+        internal static readonly float SilverShininess = 4f;
 
         //Gold
         internal static readonly float GoldAmbientR = 0.24725f;
@@ -36,6 +30,6 @@ namespace Shared.Assets
         internal static readonly float GoldSpecularG = 0.555802f;
         internal static readonly float GoldSpecularB = 0.366065f;
 
-        internal static readonly float GoldShininess = 0.4f;
+        internal static readonly float GoldShininess = 4f;
     }
 }

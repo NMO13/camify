@@ -54,7 +54,7 @@ namespace GeometryCalculation.DataStructures
             foreach (var vertex in mesh.Vertices)
             {
                 var tv = mesh.ModelMatrix.Multiply(vertex);
-                HeMesh.AddVertex(new HeVertex(tv.X, tv.Y, tv.Z));
+                HeMesh.AddVertex(new HeVertex(vertex.X, vertex.Y, vertex.Z));
             }
             for (int i = 0; i < mesh.Indices.Length; i += 3)
             {

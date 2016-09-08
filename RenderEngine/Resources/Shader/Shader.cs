@@ -55,6 +55,8 @@ namespace RenderEngine
             ProgramId = GL.CreateProgram();
             GL.AttachShader(ProgramId, vertexShaderIndex);
             GL.AttachShader(ProgramId, fragmentShaderIndex);
+            if(geoShader != null)
+                GL.AttachShader(ProgramId, geoShaderIndex);
             GL.LinkProgram(ProgramId);
             GL.GetProgramInfoLog(ProgramId, out programInfoLog);
             Debug.WriteLine(programInfoLog);

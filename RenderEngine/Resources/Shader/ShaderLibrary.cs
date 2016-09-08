@@ -11,14 +11,19 @@ namespace RenderEngine.Resources.Shader
     {
         private static readonly string ShaderBasePath = GetBasePath();
 
+        //Scene
         internal static string SceneVertexShader { get; set; } = Path.Combine(ShaderBasePath,
             Config.SceneVertexShaderFilename);
 
         internal static string SceneFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
             Config.SceneFragmentShaderFilename);
 
+        //Mesh
         internal static string MeshVertexShader { get; set; } = Path.Combine(ShaderBasePath,
            Config.MeshVertexShaderFilename);
+
+        internal static string MeshGeometryShader { get; set; } = Path.Combine(ShaderBasePath,
+           Config.MeshGeometryShaderFilename);
 
         internal static string MeshFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
             Config.MeshFragmentShaderFilename);
