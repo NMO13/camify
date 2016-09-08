@@ -53,8 +53,8 @@ namespace GeometryCalculation.DataStructures
             Debug.Assert(mesh.Vertices.Length >= 3);
             foreach (var vertex in mesh.Vertices)
             {
-                //var tv = mesh.ModelMatrix.Multiply(vertex);
-                HeMesh.AddVertex(new HeVertex(vertex.X, vertex.Y, vertex.Z));
+                var tv = mesh.ModelMatrix.Multiply(vertex);
+                HeMesh.AddVertex(new HeVertex(tv.X, tv.Y, tv.Z));
             }
             for (int i = 0; i < mesh.Indices.Length; i += 3)
             {

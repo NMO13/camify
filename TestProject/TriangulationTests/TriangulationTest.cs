@@ -4,7 +4,7 @@ using GraphicsEngine.Geometry.Triangulation;
 using NUnit.Framework;
 using Shared.Geometry;
 
-namespace BooleanSubtractorTests
+namespace TestProject.TriangulationTests
 {
     [TestFixture]
     class TriangulationTest

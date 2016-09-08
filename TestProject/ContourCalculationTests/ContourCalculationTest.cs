@@ -5,7 +5,7 @@ using Shared.Additional;
 using Shared.Geometry;
 using Shared.Helper;
 
-namespace BooleanSubtractorTests
+namespace TestProject.ContourCalculationTests
 {
     [TestFixture]
     class ContourCalculationTest

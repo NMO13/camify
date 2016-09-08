@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine;
-using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Meshes;
-using GraphicsEngine.Math;
 using NUnit.Framework;
 using Shared.Geometry;
 using Shared.Helper;
+using TestProject.BooleanSubtractionTests;
 
-namespace BooleanSubractorTests
+namespace TestProject.SweepingTests
 {
     [TestFixture]
     class SweptVolumeTest

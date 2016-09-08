@@ -1,12 +1,10 @@
-﻿using System;
-using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry;
+﻿using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Meshes;
 using NUnit.Framework;
 using Shared.Geometry;
 using Shared.Helper;
 
-namespace BooleanSubractorTests
+namespace TestProject.BooleanSubtractionTests
 {
     [TestFixture]
     internal class ManualSetMeshesTest

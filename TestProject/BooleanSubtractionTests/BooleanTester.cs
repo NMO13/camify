@@ -1,12 +1,11 @@
 ﻿using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry;
 using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
 using Shared.Geometry;
 
-namespace BooleanSubractorTests
+namespace TestProject.BooleanSubtractionTests
 {
     static class TestConfigurator
     {

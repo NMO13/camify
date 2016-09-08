@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using BooleanSubractorTests;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry;
 using NUnit.Framework;
 using Shared.Geometry;
 using Shared.Helper;
 
-namespace BooleanSubtractorTests
+namespace TestProject.BooleanSubtractionTests
 {
     [TestFixture]
     class EdgeEdgeIntersectionTest

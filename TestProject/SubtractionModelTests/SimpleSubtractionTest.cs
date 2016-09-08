@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CNCSpecific.Milling;
-using GraphicsEngine.Geometry.Meshes;
+﻿using CNCSpecific.Milling;
 using Model;
 using NUnit.Framework;
-using Shared;
 using Shared.Geometry;
 using Shared.Helper;
 
-namespace TestProject.SubtractionModelTest
+namespace TestProject.SubtractionModelTests
 {
     [TestFixture]
     class SimpleSubtraction

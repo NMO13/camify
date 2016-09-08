@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BooleanSubractorTests;
 using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Meshes;

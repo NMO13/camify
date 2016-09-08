@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry;
 using NUnit.Framework;
 using Shared.Geometry;
 using Shared.Helper;
 
-namespace BooleanSubractorTests
+namespace TestProject.BooleanSubtractionTests
 {
     [TestFixture]
     class LoadedMeshesTest

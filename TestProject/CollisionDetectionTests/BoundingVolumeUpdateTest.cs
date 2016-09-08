@@ -1,9 +1,8 @@
 ﻿using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry;
 using NUnit.Framework;
 using Shared.Geometry;
 
-namespace BooleanSubtractorTests
+namespace TestProject.CollisionDetectionTests
 {
     [TestFixture]
     class BoundingVolumeUpdateTest
