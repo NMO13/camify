@@ -16,7 +16,7 @@ namespace Shared.Import
             AssimpImporter importer = new AssimpImporter();
             importer.SetConfig(new RemoveComponentConfig(ExcludeComponent.Animations | ExcludeComponent.Boneweights |
                                 ExcludeComponent.Cameras | ExcludeComponent.Lights |
-                                ExcludeComponent.TexCoords | ExcludeComponent.Textures));
+                                ExcludeComponent.TexCoords | ExcludeComponent.Textures | ExcludeComponent.Normals));
 
             var scene = importer.ImportFile(path, PostProcessSteps.JoinIdenticalVertices | PostProcessSteps.RemoveComponent);
             ProcessNode(scene.RootNode, scene);

@@ -98,11 +98,13 @@ namespace RenderEngine.Rendering.Scene
 
         public void OpenTkControl_KeyDown(object sender, KeyEventArgs e)
         {
-            bool[] keys = new bool[1024];
-            keys[e.KeyValue] = true;
-            if (keys[(int)Keys.W])
+            if (e.KeyValue == (int)Keys.W)
             {
                 SceneModel.Instance.WireframeMode = !SceneModel.Instance.WireframeMode;
+            }
+            if (e.KeyValue == (int) Keys.N)
+            {
+                SceneModel.Instance.WireframeMode = !SceneModel.Instance.ShowNormals;
             }
         }
     }

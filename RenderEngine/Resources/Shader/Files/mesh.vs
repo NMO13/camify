@@ -20,5 +20,5 @@ void main()
 
     //mat3 normalMatrix = mat3(transpose(inverse(view * model)));
     //vs_out.normal = normalize(vec3(proj * vec4(normalMatrix * normal, 1.0)));
-	vs_out.Normal = mat3(view) * normal;
+	vs_out.Normal = vec3(view * vec4(normal, 0));
 } 

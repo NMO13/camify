@@ -22,6 +22,7 @@ namespace RenderEngine.Rendering.Scene
         }
 
         public bool WireframeMode { get; set; }
+        public bool ShowNormals { get; set; }
 
         internal List<IRenderable> RenderMeshes = new List<IRenderable>();
         internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
