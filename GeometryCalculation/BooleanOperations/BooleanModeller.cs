@@ -150,24 +150,12 @@ namespace GeometryCalculation.BooleanOperations
                     var vertex = objA.HeMesh.AddVertex(new HeVertex(v2.X, v2.Y, v2.Z));
                     index2 = vertex.Index;
                 }
-                
+
                 Debug.Assert(index0 != index1 && index1 != index2);
                 Debug.Assert(index0 != -1 && index1 != -1 && index2 != -1);
-                var renderNormals = SetRenderNormals(insideFaceB.H0, insideFaceB.H2,
-                    insideFaceB.H1);
-                objA.HeMesh.AddFace(index0, index1, index2, renderNormals);
-            }
-        }
+                objA.HeMesh.AddFace(index0, index1, index2);
 
-        private static Vector3d[] SetRenderNormals(HeHalfedge h0, HeHalfedge h1, HeHalfedge h2)
-        {
-            if (h0.RenderNormal == null || h1.RenderNormal == null || h2.RenderNormal == null)
-                return null;
-            Vector3d[] renderNormals = new Vector3d[3];
-            renderNormals[0] = h0.RenderNormal.Negated();
-            renderNormals[1] = h1.RenderNormal.Negated();
-            renderNormals[2] = h2.RenderNormal.Negated();
-            return renderNormals;
+            }
         }
 
         internal static void ResetState(DeformableObject obj)
@@ -220,7 +208,7 @@ namespace GeometryCalculation.BooleanOperations
                 AlignSplitLine(sharedSplitlinesA, sharedSplitlinesB, a, b, splitLinesA, splitLinesB, splitResultA, splitResultB);
             }
 
-            if(splitLinesA.Count != 0 || splitLinesB.Count != 0)
+            if (splitLinesA.Count != 0 || splitLinesB.Count != 0)
                 throw new Exception();
         }
 
@@ -253,12 +241,12 @@ namespace GeometryCalculation.BooleanOperations
 
                     if (lA > lB) // split heA
                     {
-                        SplitFaces(heA, heB.Origin, a, sharedSplitlinesA, aIndex-1, aIndex, splitLinesA, splitResultA);
+                        SplitFaces(heA, heB.Origin, a, sharedSplitlinesA, aIndex - 1, aIndex, splitLinesA, splitResultA);
                         //bIndex--;
                     }
                     else // lA < lB
                     {
-                        SplitFaces(heB, heA.Twin.Origin, b, sharedSplitlinesB, bIndex+1, bIndex+2, splitLinesB, splitResultB);
+                        SplitFaces(heB, heA.Twin.Origin, b, sharedSplitlinesB, bIndex + 1, bIndex + 2, splitLinesB, splitResultB);
                         bIndex++;
                         //aIndex++;
                     }
@@ -299,7 +287,7 @@ namespace GeometryCalculation.BooleanOperations
             List<HeHalfedge> list = new List<HeHalfedge>();
             foreach (var halfedge in splitLinesB)
             {
-                if(halfedge.Origin.Equals(heA.Origin))
+                if (halfedge.Origin.Equals(heA.Origin))
                     list.Add(halfedge);
             }
             return list;
@@ -450,7 +438,8 @@ namespace GeometryCalculation.BooleanOperations
             foreach (var splitLine in splitlines)
             {
                 Debug.Assert(splitLine.IsSplitLine);
-                if (splitLine.Twin.IsSplitLine && splitlines.Find(x => x.Index == splitLine.Twin.Index) != null)                {
+                if (splitLine.Twin.IsSplitLine && splitlines.Find(x => x.Index == splitLine.Twin.Index) != null)
+                {
                     degenerates.Add(splitLine);
                 }
             }

@@ -70,8 +70,6 @@ namespace GraphicsEngine.HalfedgeMesh
             var halfedge = new HeHalfedge(new HeVertex(Origin.X, Origin.Y, Origin.Z));
             halfedge.Twin = new HeHalfedge(new HeVertex(Twin.Origin.X, Twin.Origin.Y, Twin.Origin.Z));
             halfedge.Normal = Normal.Clone() as Vector3m;
-            if(RenderNormal != null)
-                halfedge.RenderNormal = RenderNormal.Clone() as Vector3d;
             return halfedge;
         }
 
@@ -79,8 +77,6 @@ namespace GraphicsEngine.HalfedgeMesh
         {
             get { return new Vector3m(Twin.Origin.X - this.Origin.X, Twin.Origin.Y - this.Origin.Y, Twin.Origin.Z - this.Origin.Z); }
         }
-
-        public Vector3d RenderNormal { get; internal set; }
 
         public void SetSplitline(bool value)
         {

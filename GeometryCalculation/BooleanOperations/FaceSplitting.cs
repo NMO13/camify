@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
@@ -10,7 +11,7 @@ using Shared.Geometry;
 using Shared.Geometry.HalfedgeMesh;
 using Shared.Helper;
 
-namespace GraphicsEngine.Geometry.Boolean_Ops
+namespace GeometryCalculation.BooleanOperations
 {
     internal class FaceSplitting
     {
@@ -87,7 +88,7 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
                                 }
                                 if (faces != null)
                                 {
-                                    if(!split)
+                                    if (!split)
                                         Debug.Assert(faces.Count == 1);
                                     var splitedge = GetSplitHalfedge(faces, spStart, spEnd);
                                     SetSplitedge(splitedge);
@@ -97,7 +98,7 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
                     }
                 }
             }
-                RemoveFaceListIndex(mesh);
+            RemoveFaceListIndex(mesh);
         }
 
         private void RemoveFaceListIndex(HeMesh mesh)
@@ -187,20 +188,12 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v0 = heFace.V0;
             HeVertex v1 = heFace.V1;
             HeVertex v2 = heFace.V2;
-
-            Vector3d normalNew = heFace.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = heFace.H0.RenderNormal;
-            Vector3d n1 = heFace.H1.RenderNormal;
-            Vector3d n2 = heFace.H2.RenderNormal;
-
             RemoveFaceFromMesh(heFace);
-
-
             List<HeFace> newFaces;
-            if(newVertex1 == null)
-                newFaces = CreateFaces(heVertex, newVertex0, v0, v1, v2, normalNew, n0, n1, n2);
+            if (newVertex1 == null)
+                newFaces = CreateFaces(heVertex, newVertex0, v0, v1, v2);
             else
-                newFaces = CreateFaces(heVertex, newVertex0, newVertex1, v0, v1, v2, normalNew, n0, n1, n2);
+                newFaces = CreateFaces(heVertex, newVertex0, newVertex1, v0, v1, v2);
             if (faceListA != null)
             {
                 var remainingFacesB = faceListA.FacesB.ToArray();
@@ -278,79 +271,79 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             }
         }
 
-        private List<HeFace> CreateFaces(HeVertex heVertex, HeVertex newVertex0, HeVertex newVertex1, HeVertex v0, HeVertex v1, HeVertex v2, Vector3d normalNew, Vector3d n0, Vector3d n1, Vector3d n2)
+        private List<HeFace> CreateFaces(HeVertex heVertex, HeVertex newVertex0, HeVertex newVertex1, HeVertex v0, HeVertex v1, HeVertex v2)
         {
             HeFace newFace0, newFace1, newFace2;
             List<HeFace> newFaces = new List<HeFace>();
             if (heVertex.Equals(v0))
             {
                 //throw new Exception("Jay! Branch executed!");
-                newFace0 = AddFace(v0, v1, newVertex0, n0, n1, normalNew);
+                newFace0 = AddFace(v0, v1, newVertex0);
                 newFaces.Add(newFace0);
                 CheckSanity(v0, v1, v2, newFace0);
-                newFace1 = AddFace(newVertex0, v1, newVertex1, normalNew, n1, normalNew);
+                newFace1 = AddFace(newVertex0, v1, newVertex1);
                 newFaces.Add(newFace1);
                 CheckSanity(v0, v1, v2, newFace1);
-                newFace2 = AddFace(newVertex1, v1, v2, normalNew, n1, n2);
+                newFace2 = AddFace(newVertex1, v1, v2);
                 newFaces.Add(newFace2);
                 CheckSanity(v0, v1, v2, newFace2);
             }
             else if (heVertex.Equals(v1))
             {
                 //throw new Exception("Jay! Branch executed!");
-                newFace0 = AddFace(v1, v2, newVertex0, n1, n2, normalNew);
+                newFace0 = AddFace(v1, v2, newVertex0);
                 newFaces.Add(newFace0);
                 CheckSanity(v0, v1, v2, newFace0);
-                newFace1 = AddFace(newVertex0, v2, newVertex1, normalNew, n2, normalNew);
+                newFace1 = AddFace(newVertex0, v2, newVertex1);
                 newFaces.Add(newFace1);
                 CheckSanity(v0, v1, v2, newFace1);
-                newFace2 = AddFace(newVertex1, v2, v0, normalNew, n2, n0);
+                newFace2 = AddFace(newVertex1, v2, v0);
                 newFaces.Add(newFace2);
                 CheckSanity(v0, v1, v2, newFace2);
             }
             else
             {
-                newFace0 = AddFace(v2, v0, newVertex0, n2, n0, normalNew);
+                newFace0 = AddFace(v2, v0, newVertex0);
                 newFaces.Add(newFace0);
                 CheckSanity(v0, v1, v2, newFace0);
-                newFace1 = AddFace(newVertex0, v0, newVertex1, normalNew, n0, normalNew);
+                newFace1 = AddFace(newVertex0, v0, newVertex1);
                 newFaces.Add(newFace1);
                 CheckSanity(v0, v1, v2, newFace1);
-                newFace2 = AddFace(newVertex1, v0, v1, normalNew, n0, n1);
+                newFace2 = AddFace(newVertex1, v0, v1);
                 newFaces.Add(newFace2);
                 CheckSanity(v0, v1, v2, newFace2);
             }
             return newFaces;
         }
 
-        private List<HeFace> CreateFaces(HeVertex heVertex, HeVertex newVertex, HeVertex v0, HeVertex v1, HeVertex v2, Vector3d normalNew, Vector3d n0, Vector3d n1, Vector3d n2)
+        private List<HeFace> CreateFaces(HeVertex heVertex, HeVertex newVertex, HeVertex v0, HeVertex v1, HeVertex v2)
         {
             HeFace newFace0, newFace1;
             List<HeFace> newFaces = new List<HeFace>();
             if (heVertex.Equals(v0))
             {
-                newFace0 = AddFace(v0, v1, newVertex, n0, n1, normalNew);
+                newFace0 = AddFace(v0, v1, newVertex);
                 CheckSanity(v0, v1, v2, newFace0);
                 newFaces.Add(newFace0);
-                newFace1 = AddFace(v1, v2, newVertex, n1, n2, normalNew);
+                newFace1 = AddFace(v1, v2, newVertex);
                 CheckSanity(v0, v1, v2, newFace1);
                 newFaces.Add(newFace1);
             }
             else if (heVertex.Equals(v1))
             {
-                newFace0 = AddFace(v1, v2, newVertex, n1, n2, normalNew);
+                newFace0 = AddFace(v1, v2, newVertex);
                 CheckSanity(v0, v1, v2, newFace0);
                 newFaces.Add(newFace0);
-                newFace1 = AddFace(v2, v0, newVertex, n2, n0, normalNew);
+                newFace1 = AddFace(v2, v0, newVertex);
                 CheckSanity(v0, v1, v2, newFace1);
                 newFaces.Add(newFace1);
             }
             else
             {
-                newFace0 = AddFace(v2, v0, newVertex, n2, n0, normalNew);
+                newFace0 = AddFace(v2, v0, newVertex);
                 CheckSanity(v0, v1, v2, newFace0);
                 newFaces.Add(newFace0);
-                newFace1 = AddFace(v0, v1, newVertex, n0, n1, normalNew);
+                newFace1 = AddFace(v0, v1, newVertex);
                 CheckSanity(v0, v1, v2, newFace1);
                 newFaces.Add(newFace1);
             }
@@ -421,7 +414,7 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
                 Debug.Assert(middleType == Segment.PrimitiveType.Edge || middleType == Segment.PrimitiveType.Vertex);
                 if (middleType == Segment.PrimitiveType.Edge)
                 {
-                    newFaces = new List<HeFace> {face};
+                    newFaces = new List<HeFace> { face };
                 }
                 else
                 {
@@ -580,11 +573,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
             HeFace newFace;
@@ -592,33 +580,33 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (splitEdge == 1)
             {
                 //addFace(face.v1, vertex, face.v3);
-                newFace = AddFace(v0, vertex, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex, face.v2, face.v3);
-                newFace = AddFace(vertex, v1, v2, normalNew, n1, n2);
+                newFace = AddFace(vertex, v1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (splitEdge == 2)
             {
                 //addFace(face.v2, vertex, face.v1);
-                newFace = AddFace(v1, vertex, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex, face.v3, face.v1);
-                newFace = AddFace(vertex, v2, v0, normalNew, n2, n0);
+                newFace = AddFace(vertex, v2, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, vertex, face.v2);
-                newFace = AddFace(v2, vertex, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex, face.v1, face.v2);
-                newFace = AddFace(vertex, v0, v1, normalNew, n0, n1);
+                newFace = AddFace(vertex, v0, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -631,11 +619,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
             HeFace newFace;
@@ -643,33 +626,33 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (endVertex.Equals(v0))
             {
                 //addFace(face.v1, vertex, face.v3);
-                newFace = AddFace(v0, vertex, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex, face.v2, face.v3);
-                newFace = AddFace(vertex, v1, v2, normalNew, n1, n2);
+                newFace = AddFace(vertex, v1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (endVertex.Equals(v1))
             {
                 // addFace(face.v2, vertex, face.v1);
-                newFace = AddFace(v1, vertex, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 // addFace(vertex, face.v3, face.v1);
-                newFace = AddFace(vertex, v2, v0, normalNew, n2, n0);
+                newFace = AddFace(vertex, v2, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, vertex, face.v2);
-                newFace = AddFace(v2, vertex, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex, face.v1, face.v2);
-                newFace = AddFace(vertex, v0, v1, normalNew, n0, n1);
+                newFace = AddFace(vertex, v0, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -682,11 +665,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex0 = _mesh.AddVertexUnique(new HeVertex(startPos.X, startPos.Y, startPos.Z), v0, v1, v2);
             var vertex1 = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
@@ -695,45 +673,45 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (splitEdge == 1)
             {
                 //addFace(face.v1, vertex1, face.v3);
-                newFace = AddFace(v0, vertex0, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex0, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, vertex2, face.v3);
-                newFace = AddFace(vertex0, vertex1, v2, normalNew, normalNew, n2);
+                newFace = AddFace(vertex0, vertex1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v2, face.v3);
-                newFace = AddFace(vertex1, v1, v2, normalNew, n1, n2);
+                newFace = AddFace(vertex1, v1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (splitEdge == 2)
             {
                 //addFace(face.v2, vertex1, face.v1);
-                newFace = AddFace(v1, vertex0, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex0, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, vertex2, face.v1);
-                newFace = AddFace(vertex0, vertex1, v0, normalNew, normalNew, n0);
+                newFace = AddFace(vertex0, vertex1, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v3, face.v1);
-                newFace = AddFace(vertex1, v2, v0, normalNew, n2, n0);
+                newFace = AddFace(vertex1, v2, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, vertex1, face.v2);
-                newFace = AddFace(v2, vertex0, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex0, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, vertex2, face.v2);
-                newFace = AddFace(vertex0, vertex1, v1, normalNew, normalNew, n1);
+                newFace = AddFace(vertex0, vertex1, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v1, face.v2);
-                newFace = AddFace(vertex1, v0, v1, normalNew, n0, n1);
+                newFace = AddFace(vertex1, v0, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -746,11 +724,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex = _mesh.AddVertexUnique(new HeVertex(startPos.X, startPos.Y, startPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
             HeFace newFace;
@@ -758,45 +731,45 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (endVertex.Equals(v0))
             {
                 //addFace(face.v1, face.v2, vertex);
-                newFace = AddFace(v0, v1, vertex, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, face.v3, vertex);
-                newFace = AddFace(v1, v2, vertex, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, face.v1, vertex);
-                newFace = AddFace(v2, v0, vertex, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (endVertex.Equals(v1))
             {
                 //addFace(face.v2, face.v3, vertex);
-                newFace = AddFace(v1, v2, vertex, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, face.v1, vertex);
-                newFace = AddFace(v2, v0, vertex, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, face.v2, vertex);
-                newFace = AddFace(v0, v1, vertex, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, face.v1, vertex);
-                newFace = AddFace(v2, v0, vertex, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, face.v2, vertex);
-                newFace = AddFace(v0, v1, vertex, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, face.v3, vertex);
-                newFace = AddFace(v1, v2, vertex, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -810,11 +783,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex0 = _mesh.AddVertexUnique(new HeVertex(startPos.X, startPos.Y, startPos.Z), v0, v1, v2);
             var vertex1 = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
@@ -823,90 +791,90 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (startVertex.Equals(v0) && endVertex.Equals(v1))
             {
                 //addFace(face.v1, vertex1, vertex2);
-                newFace = AddFace(v0, vertex0, vertex1, n0, normalNew, normalNew);
+                newFace = AddFace(v0, vertex0, vertex1);
                 newFaces.Add(newFace);
                 CheckSanity(v0, v1, v2, newFace);
                 //addFace(face.v1, vertex2, face.v3);
-                newFace = AddFace(v0, vertex1, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v2, vertex2);
-                newFace = AddFace(vertex0, v1, vertex1, normalNew, n1, normalNew);
+                newFace = AddFace(vertex0, v1, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (startVertex.Equals(v1) && endVertex.Equals(v0))
             {
                 //addFace(face.v1, vertex2, vertex1);
-                newFace = AddFace(v0, vertex1, vertex0, n0, normalNew, normalNew);
+                newFace = AddFace(v0, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, vertex1, face.v3);
-                newFace = AddFace(v0, vertex0, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex0, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v2, vertex1);
-                newFace = AddFace(vertex1, v1, vertex0, normalNew, n1, normalNew);
+                newFace = AddFace(vertex1, v1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (startVertex.Equals(v1) && endVertex.Equals(v2))
             {
                 //addFace(face.v2, vertex1, vertex2);
-                newFace = AddFace(v1, vertex0, vertex1, n1, normalNew, normalNew);
+                newFace = AddFace(v1, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, vertex2, face.v1)
-                newFace = AddFace(v1, vertex1, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex1, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v3, vertex2);
-                newFace = AddFace(vertex0, v2, vertex1, normalNew, n2, normalNew);
+                newFace = AddFace(vertex0, v2, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (startVertex.Equals(v2) && endVertex.Equals(v1))
             {
                 //addFace(face.v2, vertex2, vertex1);
-                newFace = AddFace(v1, vertex1, vertex0, n1, normalNew, normalNew);
+                newFace = AddFace(v1, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, vertex1, face.v1);
-                newFace = AddFace(v1, vertex0, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex0, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v3, vertex1);
-                newFace = AddFace(vertex1, v2, vertex0, normalNew, n2, normalNew);
+                newFace = AddFace(vertex1, v2, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (startVertex.Equals(v2) && endVertex.Equals(v0))
             {
                 //addFace(face.v3, vertex1, vertex2);
-                newFace = AddFace(v2, vertex0, vertex1, n2, normalNew, normalNew);
+                newFace = AddFace(v2, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, vertex2, face.v2);
-                newFace = AddFace(v2, vertex1, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex1, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v1, vertex2);
-                newFace = AddFace(vertex0, v0, vertex1, normalNew, n0, normalNew);
+                newFace = AddFace(vertex0, v0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, vertex2, vertex1);
-                newFace = AddFace(v2, vertex1, vertex0, n2, normalNew, normalNew);
+                newFace = AddFace(v2, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, vertex1, face.v2);
-                newFace = AddFace(v2, vertex0, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex0, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex2, face.v1, vertex1);
-                newFace = AddFace(vertex1, v0, vertex0, normalNew, n0, normalNew);
+                newFace = AddFace(vertex1, v0, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -919,11 +887,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex0 = _mesh.AddVertexUnique(new HeVertex(startPos.X, startPos.Y, startPos.Z), v0, v1, v2);
             var vertex1 = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
@@ -932,57 +895,57 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (endVertex.Equals(v0))
             {
                 //addFace(face.v1, vertex1, vertex2);
-                newFace = AddFace(v0, vertex0, vertex1, n0, normalNew, normalNew);
+                newFace = AddFace(v0, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v2, vertex2);
-                newFace = AddFace(vertex0, v1, vertex1, normalNew, n1, normalNew);
+                newFace = AddFace(vertex0, v1, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, face.v3, vertex2);
-                newFace = AddFace(v1, v2, vertex1, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, face.v1, vertex2);
-                newFace = AddFace(v2, v0, vertex1, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (endVertex.Equals(v1))
             {
                 //addFace(face.v2, vertex1, vertex2);
-                newFace = AddFace(v1, vertex0, vertex1, n1, normalNew, normalNew);
+                newFace = AddFace(v1, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v3, vertex2);
-                newFace = AddFace(vertex0, v2, vertex1, normalNew, n2, normalNew);
+                newFace = AddFace(vertex0, v2, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, face.v1, vertex2);
-                newFace = AddFace(v2, v0, vertex1, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, face.v2, vertex2);
-                newFace = AddFace(v0, v1, vertex1, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v3, vertex1, vertex2);
-                newFace = AddFace(v2, vertex0, vertex1, n2, normalNew, normalNew);
+                newFace = AddFace(v2, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(vertex1, face.v1, vertex2);
-                newFace = AddFace(vertex0, v0, vertex1, normalNew, n0, normalNew);
+                newFace = AddFace(vertex0, v0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, face.v2, vertex2);
-                newFace = AddFace(v0, v1, vertex1, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, face.v3, vertex2);
-                newFace = AddFace(v1, v2, vertex1, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -995,11 +958,6 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             HeVertex v1 = face.V1;
             HeVertex v2 = face.V2;
 
-            Vector3d normalNew = face.H0.Normal.Vector3d.Unit();
-            Vector3d n0 = face.H0.RenderNormal;
-            Vector3d n1 = face.H1.RenderNormal;
-            Vector3d n2 = face.H2.RenderNormal;
-
             var vertex0 = _mesh.AddVertexUnique(new HeVertex(startPos.X, startPos.Y, startPos.Z), v0, v1, v2);
             var vertex1 = _mesh.AddVertexUnique(new HeVertex(endPos.X, endPos.Y, endPos.Z), v0, v1, v2);
             RemoveFaceFromMesh(face);
@@ -1008,69 +966,69 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
             if (linedVertex == 0)
             {
                 //addFace(face.v2, face.v3, vertex1);
-                newFace = AddFace(v1, v2, vertex0, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, vertex1, vertex2);
-                newFace = AddFace(v1, vertex0, vertex1, n1, normalNew, normalNew);
+                newFace = AddFace(v1, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, vertex2, vertex1);
-                newFace = AddFace(v2, vertex1, vertex0, n2, normalNew, normalNew);
+                newFace = AddFace(v2, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, vertex2, face.v1);
-                newFace = AddFace(v1, vertex1, v0, n1, normalNew, n0);
+                newFace = AddFace(v1, vertex1, v0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, face.v1, vertex2);
-                newFace = AddFace(v2, v0, vertex1, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else if (linedVertex == 1)
             {
                 //addFace(face.v3, face.v1, vertex1);
-                newFace = AddFace(v2, v0, vertex0, n2, n0, normalNew);
+                newFace = AddFace(v2, v0, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, vertex1, vertex2);
-                newFace = AddFace(v2, vertex0, vertex1, n2, normalNew, normalNew);
+                newFace = AddFace(v2, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, vertex2, vertex1);
-                newFace = AddFace(v0, vertex1, vertex0, n0, normalNew, normalNew);
+                newFace = AddFace(v0, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v3, vertex2, face.v2);
-                newFace = AddFace(v2, vertex1, v1, n2, normalNew, n1);
+                newFace = AddFace(v2, vertex1, v1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, face.v2, vertex2);
-                newFace = AddFace(v0, v1, vertex1, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
             else
             {
                 //addFace(face.v1, face.v2, vertex1);
-                newFace = AddFace(v0, v1, vertex0, n0, n1, normalNew);
+                newFace = AddFace(v0, v1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, vertex1, vertex2);
-                newFace = AddFace(v0, vertex0, vertex1, n0, normalNew, normalNew);
+                newFace = AddFace(v0, vertex0, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, vertex2, vertex1);
-                newFace = AddFace(v1, vertex1, vertex0, n1, normalNew, normalNew);
+                newFace = AddFace(v1, vertex1, vertex0);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v1, vertex2, face.v3);
-                newFace = AddFace(v0, vertex1, v2, n0, normalNew, n2);
+                newFace = AddFace(v0, vertex1, v2);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
                 //addFace(face.v2, face.v3, vertex2);
-                newFace = AddFace(v1, v2, vertex1, n1, n2, normalNew);
+                newFace = AddFace(v1, v2, vertex1);
                 CheckSanity(v0, v1, v2, newFace);
                 newFaces.Add(newFace);
             }
@@ -1086,17 +1044,16 @@ namespace GraphicsEngine.Geometry.Boolean_Ops
 
         }
 
-        private HeFace AddFace(HeVertex v0, HeVertex v1, HeVertex v2, Vector3d n0, Vector3d n1, Vector3d n2)
+        private HeFace AddFace(HeVertex v0, HeVertex v1, HeVertex v2)
         {
-            Vector3d[] renderNormals = {n0, n1, n2};
-            var newFace = _mesh.AddFace(v0.Index, v1.Index, v2.Index, renderNormals);
+            var newFace = _mesh.AddFace(v0.Index, v1.Index, v2.Index);
             return newFace;
         }
 
 
         internal static void CheckSanity(HeVertex v0, HeVertex v1, HeVertex v2, HeFace newFace)
         {
-            
+
         }
 
         private void SetSplitedge(HeHalfedge splitedge)

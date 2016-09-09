@@ -86,12 +86,9 @@ namespace GeometryCalculation.Simplification
                 // We don't have to update the contour edges since the halfedges' twin of the contour edges should never be deleted and so
                 // the halfedge itself should also exist. Therefore, the contour edges should still be valid after ReplaceFaces
 
-                Dictionary<HeVertex, Vector3d> renderNormalDictionary = new Dictionary<HeVertex, Vector3d>();
-
                 var tempFaceArray = triangulationContourGroup.OriginalContourGroup.InsideFaces.ToArray();
                 foreach (var insideFace in tempFaceArray)
                 {
-                    AddToRenderNormalDictionary(insideFace, renderNormalDictionary);
                     Debug.Assert(insideFace.Index >= 0);
                     var res = manager.RemoveFace(insideFace);
                     Debug.Assert(res >= 0);
@@ -101,31 +98,12 @@ namespace GeometryCalculation.Simplification
                 Debug.Assert(triangulationContourGroup.NewFaceIndices.Count % 3 == 0);
                 for (int i = 0; i < triangulationContourGroup.NewFaceIndices.Count; i += 3)
                 {
-                    // we are overriding the halfedge's render normals with itself
-
-                    var v0 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i]];
-                    var v1 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i + 1]];
-                    var v2 = mesh.VertexList[triangulationContourGroup.NewFaceIndices[i + 2]];
-                    Vector3d[] renderNormals = {renderNormalDictionary[v0], renderNormalDictionary[v1], renderNormalDictionary[v2]};
-
                     // add face and render normals
                     var face = mesh.AddFace(triangulationContourGroup.NewFaceIndices[i], triangulationContourGroup.NewFaceIndices[i + 1],
-                    triangulationContourGroup.NewFaceIndices[i + 2], renderNormals);
+                    triangulationContourGroup.NewFaceIndices[i + 2]);
                     manager.AddFace(triangulationContourGroup.OriginalContourGroup.Index, face);
                 }
             }
-        }
-
-        private void AddToRenderNormalDictionary(HeFace insideFace, Dictionary<HeVertex, Vector3d> renderNormalDictionary)
-        {
-            if(!renderNormalDictionary.ContainsKey(insideFace.V0))
-                renderNormalDictionary.Add(insideFace.V0, insideFace.H0.RenderNormal);
-
-            if (!renderNormalDictionary.ContainsKey(insideFace.V1))
-                renderNormalDictionary.Add(insideFace.V1, insideFace.H1.RenderNormal);
-
-            if (!renderNormalDictionary.ContainsKey(insideFace.V2))
-                renderNormalDictionary.Add(insideFace.V2, insideFace.H2.RenderNormal);
         }
 
         internal List<TriangulationContourGroup> CreateTriangulationContours(List<ContourGroup> contourGroups)

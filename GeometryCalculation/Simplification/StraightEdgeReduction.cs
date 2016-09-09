@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using GeometryCalculation.DataStructures;
-using GeometryCalculation.Simplification;
 using GraphicsEngine.Geometry.Triangulation;
+using GraphicsEngine.HalfedgeMesh;
 using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;
 using Shared.Geometry.HalfedgeMesh;
 
-namespace GraphicsEngine.HalfedgeMesh.Simplification
+namespace GeometryCalculation.Simplification
 {
     class StraightEdgeReduction : IPostProcess
     {
@@ -103,9 +103,8 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
 
         private HeHalfedge UpdateFaces(HeMesh heMesh, List<HeFace> faces, ContourGroupManager contourGroupManager, List<int> indexList, int i0, int i1)
         {
-            Dictionary<HeVertex, Vector3d> renderNormalDictionary = new Dictionary<HeVertex, Vector3d>();
-            var groupIndex = RemoveOriginalFaces(heMesh, faces, contourGroupManager, renderNormalDictionary);
-            return AddNewFaces(heMesh, indexList, i0, i1, groupIndex, contourGroupManager, renderNormalDictionary);
+            var groupIndex = RemoveOriginalFaces(heMesh, faces, contourGroupManager);
+            return AddNewFaces(heMesh, indexList, i0, i1, groupIndex, contourGroupManager);
         }
 
         private void UpdateContour(HeHalfedge ce0, HeHalfedge ce1, HeHalfedge newEdge, ContourGroupManager contourGroupManager)
@@ -129,20 +128,13 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
             Debug.Assert(merged);
         }
 
-        private HeHalfedge AddNewFaces(HeMesh heMesh, List<int> indexList, int i0, int i1, int contourGroupIndex, ContourGroupManager manager, Dictionary<HeVertex, Vector3d> renderNormalDictionary)
+        private HeHalfedge AddNewFaces(HeMesh heMesh, List<int> indexList, int i0, int i1, int contourGroupIndex, ContourGroupManager manager)
         {
             Debug.Assert(indexList.Count % 3 == 0);
             HeHalfedge mergedEdge = null;
             for (int i = 0; i < indexList.Count; i += 3)
             {
-                // we are overriding the halfedge's render normals with itself
-
-                var v0 = heMesh.VertexList[indexList[i]];
-                var v1 = heMesh.VertexList[indexList[i + 1]];
-                var v2 = heMesh.VertexList[indexList[i + 2]];
-                Vector3d[] renderNormals = { renderNormalDictionary[v0], renderNormalDictionary[v1], renderNormalDictionary[v2] };
-
-                HeFace face = heMesh.AddFace(indexList[i], indexList[i + 1], indexList[i + 2], renderNormals);
+                HeFace face = heMesh.AddFace(indexList[i], indexList[i + 1], indexList[i + 2]);
                 manager.AddFace(contourGroupIndex, face);
                 if (face.V0.Index == i0 && face.V1.Index == i1)
                     mergedEdge = face.OuterComponent;
@@ -154,35 +146,22 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
             return mergedEdge;
         }
 
-        private int RemoveOriginalFaces(HeMesh heMesh, List<HeFace> faces, ContourGroupManager manager, Dictionary<HeVertex, Vector3d> renderNormalDictionary)
+        private int RemoveOriginalFaces(HeMesh heMesh, List<HeFace> faces, ContourGroupManager manager)
         {
             int groupIndex = -1;
             foreach (var face in faces)
             {
-                AddToRenderNormalDictionary(face, renderNormalDictionary);
                 groupIndex = manager.RemoveFace(face);
                 heMesh.RemoveFace(face, false);
             }
             return groupIndex;
         }
 
-        private void AddToRenderNormalDictionary(HeFace insideFace, Dictionary<HeVertex, Vector3d> renderNormalDictionary)
-        {
-            if (!renderNormalDictionary.ContainsKey(insideFace.V0))
-                renderNormalDictionary.Add(insideFace.V0, insideFace.H0.RenderNormal);
-
-            if (!renderNormalDictionary.ContainsKey(insideFace.V1))
-                renderNormalDictionary.Add(insideFace.V1, insideFace.H1.RenderNormal);
-
-            if (!renderNormalDictionary.ContainsKey(insideFace.V2))
-                renderNormalDictionary.Add(insideFace.V2, insideFace.H2.RenderNormal);
-        }
-
         private List<int> Triangulate(List<HeVertex> contourVertices, Vector3m normal)
         {
             var points = CreateInputGeometry(contourVertices, normal);
             EarClipping earClipping = new EarClipping();
-            earClipping.SetPoints(points, normal:normal);
+            earClipping.SetPoints(points, normal: normal);
             earClipping.Triangulate();
 
             var result = earClipping.Result;
@@ -226,6 +205,6 @@ namespace GraphicsEngine.HalfedgeMesh.Simplification
             return true;
         }
 
-       
+
     }
 }
