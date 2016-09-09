@@ -83,6 +83,10 @@ namespace RenderEngine
         {
             GL.Uniform1(GL.GetUniformLocation(ProgramId, name), x);
         }
+        public void SetUniform2(string name, int x, int y)
+        {
+            GL.Uniform2(GL.GetUniformLocation(ProgramId, name), x, y);
+        }
 
         internal void SetUniform3(string name, float x, float y, float z)
         {

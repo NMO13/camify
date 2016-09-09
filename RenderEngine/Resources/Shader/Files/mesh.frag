@@ -28,11 +28,10 @@ struct PointLight {
 
 #define MAX_POINT_LIGHTS 100
 
-in vec3 FragPos;
-
-in VS_OUT {
+in GS_OUT {
     vec3 Normal;
-} vs_in;
+	vec3 FragPos;
+} gs_in;
 
 
 out vec4 color;
@@ -50,15 +49,15 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 void main()
 {
 	// Properties
-	vec3 norm = vs_in.Normal; //Normals already normalized on cpu
-	vec3 viewDir = normalize(-FragPos);
+	vec3 norm = gs_in.Normal;
+	vec3 viewDir = normalize(-gs_in.FragPos);
     
 	// Phase 1: Directional lighting
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	// Phase 2: Point lights
 	for (int i = 0; i < numPointLights; i++) {
 		PointLight pLight = pointLights[i];
-		result += CalcPointLight(pLight, norm, FragPos, viewDir);
+		result += CalcPointLight(pLight, norm, gs_in.FragPos, viewDir);
 	}
 
 	result += texture2D(bayerTex, gl_FragCoord.xy / 8.0).r / 64.0 - (1.0 / 128.0); //Dithering

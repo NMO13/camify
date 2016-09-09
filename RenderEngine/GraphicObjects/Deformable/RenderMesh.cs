@@ -55,6 +55,7 @@ namespace RenderEngine.GraphicObjects.Deformable
 
             Shader.SetMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
             Shader.SetMatrix4("proj", SceneModel.Instance.ProjectionMatrix);
+            Shader.SetUniform2("win_scale", SceneModel.Instance.SceneWidth, SceneModel.Instance.SceneHeight);
 
             BayerTexture.Bind();
             DrawMesh();

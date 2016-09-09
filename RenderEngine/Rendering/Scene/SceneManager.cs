@@ -59,7 +59,7 @@ namespace RenderEngine.Rendering.Scene
         private void LoadShader()
         {
             ResourceManager.Instance.LoadShader(ShaderLibrary.SceneVertexShader, ShaderLibrary.SceneFragmentShader, null, ShaderLibrary.ShaderName.Scene.ToString());
-            ResourceManager.Instance.LoadShader(ShaderLibrary.MeshVertexShader, ShaderLibrary.MeshFragmentShader, null, ShaderLibrary.ShaderName.Mesh.ToString());
+            ResourceManager.Instance.LoadShader(ShaderLibrary.MeshVertexShader, ShaderLibrary.MeshFragmentShader, ShaderLibrary.MeshGeometryShader, ShaderLibrary.ShaderName.Mesh.ToString());
             ResourceManager.Instance.LoadShader(ShaderLibrary.NormalDisplayVertexShader, ShaderLibrary.NormalDisplayFragmentShader, ShaderLibrary.NormalDisplayGeometryShader, ShaderLibrary.ShaderName.ShaderVisualization.ToString());
         }
 
