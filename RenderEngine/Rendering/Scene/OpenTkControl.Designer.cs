@@ -43,6 +43,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OpenTkControl_MouseUp);
             this.Resize += new System.EventHandler(this.OpenTkControl_Resize);
+            this.Disposed += new System.EventHandler(this.OpenTKControl_Dispose);
             this.ResumeLayout(false);
 
         }

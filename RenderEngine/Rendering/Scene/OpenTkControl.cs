@@ -104,8 +104,13 @@ namespace RenderEngine.Rendering.Scene
             }
             if (e.KeyValue == (int) Keys.N)
             {
-                SceneModel.Instance.WireframeMode = !SceneModel.Instance.ShowNormals;
+                SceneModel.Instance.ShowNormals  = !SceneModel.Instance.ShowNormals;
             }
+        }
+
+        //Free resources
+        private void OpenTKControl_Dispose(object sender, EventArgs e)
+        {
         }
     }
 }

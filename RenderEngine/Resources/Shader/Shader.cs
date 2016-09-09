@@ -8,7 +8,7 @@ namespace RenderEngine
 {
     class Shader
     {
-        internal int ProgramId { get; }
+        private int ProgramId { get; }
 
         internal void Use()
         {
@@ -87,6 +87,11 @@ namespace RenderEngine
         internal void SetUniform3(string name, float x, float y, float z)
         {
             GL.Uniform3(GL.GetUniformLocation(ProgramId, name), x, y, z);
+        }
+
+        internal void Delete()
+        {
+            GL.DeleteProgram(ProgramId);
         }
     }
 }

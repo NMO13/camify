@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Resources.Shader;
+using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 
 namespace RenderEngine
 {
@@ -41,30 +45,44 @@ namespace RenderEngine
             return _textureDict[name];
         }
 
-        internal Texture LoadTexture(string path, bool alpha, string name)
+        internal Texture LoadTextureFromFile(bool alpha, string name)
         {
-            Texture tex = LoadTextureFromFile(path, alpha);
+            Texture tex;
+            if (alpha)
+            {
+                tex = new Texture(PixelInternalFormat.Rgba, PixelFormat.Rgba);
+            }
+            else
+            {
+                tex = new Texture();
+            }
+
+            Bitmap bitmap = new Bitmap(name);
+            BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            if(bmpData == null)
+                throw new Exception("Bitmap could not be loaded.");
+
+            byte[] byteArray = new byte[Math.Abs(bmpData.Stride * bmpData.Height)];
+            Marshal.Copy(bmpData.Scan0, byteArray, 0, byteArray.Length);
+
+            tex.Generate(bmpData.Width, bmpData.Height, byteArray);
+            bitmap.UnlockBits(bmpData);
+            bitmap.Dispose();
+
             _textureDict.Add(name, tex);
             return tex;
         }
 
-        internal void Clear()
+        internal Texture GetOneChannelTexture(byte[] pattern, int width, int height, string name)
         {
-            //TODO: Call this when application is destroyed
-            foreach (KeyValuePair<string, Shader> entry in _shaderDict)
-            {
-                GL.DeleteProgram(entry.Value.ProgramId);
-            }
+            Texture tex = new Texture(PixelInternalFormat.Luminance, PixelFormat.Luminance, PixelType.UnsignedByte,
+                TextureMinFilter.Nearest, TextureMagFilter.Nearest);
 
-            foreach (KeyValuePair<string, Texture> entry in _textureDict)
-            {
-                GL.DeleteTexture(entry.Value.TextureId);   
-            }
-        }
+            tex.Generate(width, height, pattern);
+            _textureDict.Add(name, tex);
 
-        private Texture LoadTextureFromFile(string path, bool alpha)
-        {
-            throw new NotImplementedException();
+            return tex;
         }
 
         private Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath, string geoShaderPath)

@@ -26,14 +26,14 @@ namespace RenderEngine.Lighting
         //4 point lights
         private void CreateStandardLight()
         {
-            DirectionalLight directionalLight = new DirectionalLight(1f, 1f, -1f, 0.3f, 0.3f, 0.3f, 0.5f, 0.5f, 0.5f,
+            DirectionalLight directionalLight = new DirectionalLight(1f, 1f, -1f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
                 0.5f, 0.5f, 0.5f);
             DirectionalLights.Add(directionalLight);
 
-            PointLight pointLightOne = new PointLight(0, 200, 0, 0.3f, 0.3f, 0.3f, 0.4f, 0.4f, 0.4f, 0.2f, 0.2f, 0.2f);
+            PointLight pointLightOne = new PointLight(0, 200, 0, 0.5f, 0.5f, 0.5f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f);
             PointLights.Add(pointLightOne);
 
-            PointLight pointLightTwo = new PointLight(200, 0, 200, 0.3f, 0.3f, 0.3f, 0.4f, 0.4f, 0.4f, 0.2f, 0.2f, 0.2f);
+            PointLight pointLightTwo = new PointLight(200, 0, 200, 0.5f, 0.5f, 0.5f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f);
             PointLights.Add(pointLightTwo);
         }
         internal enum BundleType

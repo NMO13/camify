@@ -100,7 +100,7 @@
     <Compile Include="Resources\Shader\ShaderLibrary.cs" />
     <Compile Include="Rendering\Scene\SceneModel.cs" />
     <Compile Include="Rendering\Scene\SceneManager.cs" />
-    <Compile Include="Resources\Texture.cs" />
+    <Compile Include="Resources\Texture\Texture.cs" />
     <Compile Include="BufferObjectManagement\BufferObjectContainer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +123,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\Files\normalDisplay.frag" />
+    <None Include="Resources\Shader\Files\normalDisplay.gs" />
+    <None Include="Resources\Shader\Files\normalDisplay.vs" />
     <None Include="Resources\Shader\Files\mesh.frag" />
     <None Include="Resources\Shader\Files\mesh.gs" />
     <None Include="Resources\Shader\Files\mesh.vs" />

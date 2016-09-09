@@ -54,7 +54,7 @@ namespace Shared.Import
             for (var i = 0; i < mesh.VertexCount; i++)
             {
                 Vector3d vertex = new Vector3d(mesh.Vertices[i].X, mesh.Vertices[i].Y, mesh.Vertices[i].Z); // Positions
-                vertex = modelMatrix*vertex;
+                vertex = modelMatrix * vertex;
                 vertices.Add(vertex);
             }
 

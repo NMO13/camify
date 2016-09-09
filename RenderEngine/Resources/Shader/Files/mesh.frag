@@ -41,6 +41,7 @@ uniform int numPointLights;
 uniform DirLight dirLight;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform Material material;
+uniform sampler2D bayerTex;
 
 // Function prototypes
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
@@ -49,7 +50,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 void main()
 {
 	// Properties
-	vec3 norm = normalize(vs_in.Normal);
+	vec3 norm = vs_in.Normal; //Normals already normalized on cpu
 	vec3 viewDir = normalize(-FragPos);
     
 	// Phase 1: Directional lighting
@@ -60,6 +61,7 @@ void main()
 		result += CalcPointLight(pLight, norm, FragPos, viewDir);
 	}
 
+	result += texture2D(bayerTex, gl_FragCoord.xy / 8.0).r / 64.0 - (1.0 / 128.0); //Dithering
 	color = vec4(result, 1.0);
 }
 

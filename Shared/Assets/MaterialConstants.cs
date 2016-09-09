@@ -3,9 +3,9 @@
     internal class MaterialConstants
     {
         //Silver
-        internal static readonly float SilverAmbientR = 0.29225f;
-        internal static readonly float SilverAmbientG = 0.29225f;
-        internal static readonly float SilverAmbientB = 0.29225f;
+        internal static readonly float SilverAmbientR = 0.19225f;
+        internal static readonly float SilverAmbientG = 0.19225f;
+        internal static readonly float SilverAmbientB = 0.19225f;
 
         internal static readonly float SilverDiffuseR = 0.50754f;
         internal static readonly float SilverDiffuseG = 0.50754f;

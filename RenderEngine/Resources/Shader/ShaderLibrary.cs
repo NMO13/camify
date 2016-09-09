@@ -12,21 +12,21 @@ namespace RenderEngine.Resources.Shader
         private static readonly string ShaderBasePath = GetBasePath();
 
         //Scene
-        internal static string SceneVertexShader { get; set; } = Path.Combine(ShaderBasePath,
-            Config.SceneVertexShaderFilename);
+        internal static string SceneVertexShader { get; set; } = GetFullPath(Config.SceneVertexShaderFilename);
 
-        internal static string SceneFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
-            Config.SceneFragmentShaderFilename);
+        internal static string SceneFragmentShader { get; set; } = GetFullPath(Config.SceneFragmentShaderFilename);
 
         //Mesh
-        internal static string MeshVertexShader { get; set; } = Path.Combine(ShaderBasePath,
-           Config.MeshVertexShaderFilename);
+        internal static string MeshVertexShader { get; set; } = GetFullPath(Config.MeshVertexShaderFilename);
 
-        internal static string MeshGeometryShader { get; set; } = Path.Combine(ShaderBasePath,
-           Config.MeshGeometryShaderFilename);
+        internal static string MeshGeometryShader { get; set; } = GetFullPath(Config.MeshGeometryShaderFilename);
 
-        internal static string MeshFragmentShader { get; set; } = Path.Combine(ShaderBasePath,
-            Config.MeshFragmentShaderFilename);
+        internal static string MeshFragmentShader { get; set; } = GetFullPath(Config.MeshFragmentShaderFilename);
+
+        //Normal visualization
+        internal static string NormalDisplayVertexShader { get; set; } = GetFullPath(Config.NormalVisualizationVertexShader);
+        internal static string NormalDisplayGeometryShader { get; set; } = GetFullPath(Config.NormalVisualizationGeometryShader);
+        internal static string NormalDisplayFragmentShader { get; set; } = GetFullPath(Config.NormalVisualizationFragmentShader);
 
         private static string GetBasePath()
         {
@@ -35,11 +35,17 @@ namespace RenderEngine.Resources.Shader
             string projectPath = currentDirectoryInfo.FullName;
             return Path.Combine(projectPath, "Shader", "Files");
         }
+
+        private static string GetFullPath(string shaderPath)
+        {
+            return Path.Combine(ShaderBasePath, shaderPath);
+        }
         public enum ShaderName
         {
             Scene,
             Mesh,
-            CoordinateAxis
+            CoordinateAxis,
+            ShaderVisualization
         }
     }
 }
