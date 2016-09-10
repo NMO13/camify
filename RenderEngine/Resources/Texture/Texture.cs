@@ -45,7 +45,7 @@ namespace RenderEngine
 
         internal void Bind()
         {
-            GL.BindTexture(TextureTarget.Texture2D, TextureId);
+            GLCheck.Call(() => GL.BindTexture(TextureTarget.Texture2D, TextureId));
         }
 
         internal void Delete()

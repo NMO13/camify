@@ -22,7 +22,6 @@ namespace TestProject.SubtractionModelTests
         }
 
         [Test]
-        [Ignore] //TODO
         public void Subtraction1()
         {
             var program = new NCProgram();

@@ -40,11 +40,6 @@ namespace RenderEngine
             _shaderDict.Add(name, shader);
         }
 
-        internal Texture GetTexture(string name)
-        {
-            return _textureDict[name];
-        }
-
         internal Texture LoadTextureFromFile(bool alpha, string name)
         {
             Texture tex;
@@ -74,14 +69,23 @@ namespace RenderEngine
             return tex;
         }
 
-        internal Texture GetOneChannelTexture(byte[] pattern, int width, int height, string name)
+        internal Texture GetTexture(byte[] pattern, int width, int height, string name)
+        {
+            if (!_textureDict.ContainsKey(name))
+            {
+                return CreateOneChannelTexture(pattern, width, height, name);
+            }
+
+            return _textureDict[name];
+        }
+
+        private Texture CreateOneChannelTexture(byte[] pattern, int width, int height, string name)
         {
             Texture tex = new Texture(PixelInternalFormat.Luminance, PixelFormat.Luminance, PixelType.UnsignedByte,
-                TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+                    TextureMinFilter.Nearest, TextureMagFilter.Nearest);
 
             tex.Generate(width, height, pattern);
             _textureDict.Add(name, tex);
-
             return tex;
         }
 

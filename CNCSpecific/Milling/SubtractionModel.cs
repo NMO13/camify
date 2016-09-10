@@ -1,25 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CNCSpecific.Milling;
 using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry.Boolean_Ops;
-using Shared;
+using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
+using MessageHandling.Messages;
+using Model;
 using Shared.Geometry;
 
-namespace Model
+namespace CNCSpecific.Milling
 {
     public class SubtractionModel : AbstractModel
     {
+        public static SubtractionModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SubtractionModel();
+                }
+                return _instance;
+            }
+        }
+
         private event ModelHandler<AbstractModel> Changed;
         private List<DeformableObject> _tools = new List<DeformableObject>();
         private List<DeformableObject> _roughParts = new List<DeformableObject>();
-        public List<Mesh> SnapshotList = new List<Mesh>(); 
-
+        public List<Mesh> SnapshotList = new List<Mesh>();
+        private static SubtractionModel _instance;
         public NCProgram NCProgram { get; set; }
 
         public override void AttachModelObserver(AbstractModel abstractModel)
@@ -36,14 +45,34 @@ namespace Model
         {
             if (message.MessageType == MessageType.NewRoughParts)
             {
-                var meshMessage = message as MeshMessage;
+                var meshMessage = message as HeMeshMessage;
+                if (meshMessage == null)
+                    return;
                 AddDeformableObjectsToList(meshMessage.GetMeshes, _roughParts);
             }
             else if (message.MessageType == MessageType.NewTools)
             {
-                var meshMessage = message as MeshMessage;
+                var meshMessage = message as HeMeshMessage;
+                if (meshMessage == null)
+                    return;
                 AddDeformableObjectsToList(meshMessage.GetMeshes, _tools);
             }
+            else if (message.MessageType == MessageType.ClearMeshes)
+            {
+                var meshMessage = message as HeMeshMessage;
+                if (meshMessage == null)
+                    return;
+                _tools.Clear();
+                _roughParts.Clear();
+            }
+        }
+
+        public void SingleSubtractionStep()
+        {
+            if (_tools.Count < 1 || _roughParts.Count < 1)
+                throw new Exception("Not enough tools and/or roughparts specified.");
+            BooleanModeller.SubtractSweptVolume(_roughParts[0], _tools[0]);
+            //Changed(this, new MeshMessage(messageType, augmentedMeshes));
         }
 
         public void BuildSnapshotList()
@@ -63,7 +92,7 @@ namespace Model
             SnapshotList = collector.Meshes;
         }
 
-        private void AddDeformableObjectsToList(List<Mesh> getMeshes, List<DeformableObject> deformableObjects)
+        private void AddDeformableObjectsToList(List<HeMesh> getMeshes, List<DeformableObject> deformableObjects)
         {
             foreach (var mesh in getMeshes)
             {
@@ -71,11 +100,9 @@ namespace Model
             }
         }
 
-        private DeformableObject CreateDeformableObject(Mesh mesh)
+        private DeformableObject CreateDeformableObject(HeMesh mesh)
         {
-            DeformableObject obj = new DeformableObject();
-            obj.Initialize(mesh);
-            return obj;
+            return DeformableObjectFactory.Create(mesh);
         }
     }
 }

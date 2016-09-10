@@ -14,6 +14,7 @@ namespace GeometryCalculation.BooleanOperations
 {
     public static class BooleanModeller
     {
+        //TODO merge Subtract and SubtractSweptVolume into 1 method
         public static void Subtract(DeformableObject objA, DeformableObject objB, bool invokeMulithreaded = false)
         {
             SplitResult splitResultA = new SplitResult();

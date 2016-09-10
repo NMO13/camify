@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Messages\FileMessage.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Messages\HeMeshMessage.cs" />
     <Compile Include="Messages\RemoveMeshes.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Messages\MeshMessage.cs" />

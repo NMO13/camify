@@ -31,8 +31,6 @@ namespace RenderEngine.GraphicObjects.Deformable
             15, 47,  7, 39, 13, 45,  5, 37,
             63, 31, 55, 23, 61, 29, 53, 21 };
 
-        private Texture BayerTexture { get; }
-
         internal RenderMesh(Vertex[] vertices, Material material, bool hasNormals, LightBundle lightBundle) : base(vertices, hasNormals)
         {
             Shader = ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.Mesh.ToString());
@@ -41,8 +39,6 @@ namespace RenderEngine.GraphicObjects.Deformable
 
             Vertices = vertices;
             HasNormals = hasNormals;
-
-            BayerTexture = ResourceManager.Instance.GetOneChannelTexture(bayerMatrix, 8, 8, "bayerTex");
         }
 
         public override void Render()
@@ -50,14 +46,15 @@ namespace RenderEngine.GraphicObjects.Deformable
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 
-            DeployLightConstants();
-            DeployMaterial(); 
+            GLCheck.Call(() => DeployLightConstants());
+            GLCheck.Call(() => DeployMaterial());
 
             Shader.SetMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
             Shader.SetMatrix4("proj", SceneModel.Instance.ProjectionMatrix);
             Shader.SetUniform2("win_scale", SceneModel.Instance.SceneWidth, SceneModel.Instance.SceneHeight);
 
-            BayerTexture.Bind();
+            Texture bayerTexture = ResourceManager.Instance.GetTexture(bayerMatrix, 8, 8, "bayerTex");
+            bayerTexture.Bind();
             DrawMesh();
 
             if (SceneModel.Instance.ShowNormals)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using CNCSpecific.Milling;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
@@ -13,15 +14,14 @@ namespace UserInterface
     public partial class MainWindow : KryptonForm, IObserver
     {
         private AbstractModel _meshModel;
-        private SubtractionModel _subtractionModel;
         OpenTkControl _openTkControl = new OpenTkControl();
         public MainWindow()
         {
             InitializeComponent();
             _meshModel = new MeshModel();
-            _subtractionModel = new SubtractionModel();
             _meshModel.AttachModelObserver(SceneModel.Instance);
-            _subtractionModel.AttachModelObserver(SceneModel.Instance);
+            SubtractionModel.Instance.AttachModelObserver(SceneModel.Instance);
+            _meshModel.AttachModelObserver(SubtractionModel.Instance);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace UserInterface
 
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            _subtractionModel.BuildSnapshotList();
+            SubtractionModel.Instance.BuildSnapshotList();
         }
 
         private void ImportTool_Click(object sender, EventArgs e)

@@ -36,7 +36,7 @@ namespace RenderEngine.Rendering.Scene
         internal Matrix4d ProjectionMatrix { get; set; }
         internal Matrix4d RotationMatrix { get; set; }
 
-        //Singletong
+        //Singleton
         private static SceneModel _instance;
         private event ModelHandler<AbstractModel> Changed;
 
@@ -65,13 +65,18 @@ namespace RenderEngine.Rendering.Scene
 
         public override void ModelNotified(AbstractModel sender, Message message)
         {
-            if (message.MessageType == MessageType.NewRoughParts)
+            if (message.MessageType == MessageType.NewRoughParts || message.MessageType == MessageType.NewTools)
             {
                 var meshMessage = message as MeshMessage;
+                if (meshMessage == null)
+                    return;
                 RenderMeshes.AddRange(Converter.ToRenderMeshes(meshMessage.GetMeshes));
             }
             else if (message.MessageType == MessageType.ClearMeshes)
             {
+                var meshMessage = message as MeshMessage;
+                if (meshMessage == null)
+                    return;
                 RenderMeshes.Clear();
             }
         }
