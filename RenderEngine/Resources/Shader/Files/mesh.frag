@@ -31,6 +31,9 @@ struct PointLight {
 in GS_OUT {
     vec3 Normal;
 	vec3 FragPos;
+	vec3 Dist;
+	vec3 WorldPos;
+	vec3 WorldNormal;
 } gs_in;
 
 
@@ -60,8 +63,14 @@ void main()
 		result += CalcPointLight(pLight, norm, gs_in.FragPos, viewDir);
 	}
 
-	result += texture2D(bayerTex, gl_FragCoord.xy / 8.0).r / 64.0 - (1.0 / 128.0); //Dithering
-	color = vec4(result, 1.0);
+	//Dithering
+	result += texture2D(bayerTex, gl_FragCoord.xy / 8.0).r / 64.0 - (1.0 / 128.0); 
+
+	//Edges
+	float nearD = min(min(gs_in.Dist.x,gs_in.Dist.y),gs_in.Dist.z); 
+	float edgeIntensity = exp2(-1.0*nearD*nearD);
+	color = (edgeIntensity * vec4(0.1,0.1,0.1,1.0)) + ((1.0-edgeIntensity) * vec4(result, 1.0));
+	//color = vec4(result, 1.0);
 }
 
 // Calculates the color when using a directional light.
