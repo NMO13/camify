@@ -5,6 +5,7 @@ using Assimp.Configs;
 using GraphicsEngine.HalfedgeMesh;
 using RenderEngine;
 using Shared.Assets;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace Shared.Geometry
 {
@@ -37,24 +38,33 @@ namespace Shared.Geometry
                 indices.Add(heFace.V1.Index);
                 indices.Add(heFace.V2.Index);
 
-                // current normal algorithm
-                Vector3d normal = heFace.OuterComponent.Normal.Vector3d.Unit();
-
-                var vertex = new Vertex((float)Vertices[heFace.V0.Index].X, (float)Vertices[heFace.V0.Index].Y, (float)Vertices[heFace.V0.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
-                RenderVertices[i++] = vertex;
-
-                vertex = new Vertex((float)Vertices[heFace.V1.Index].X, (float)Vertices[heFace.V1.Index].Y, (float)Vertices[heFace.V1.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
-                RenderVertices[i++] = vertex;
-
-                vertex = new Vertex((float)Vertices[heFace.V2.Index].X, (float)Vertices[heFace.V2.Index].Y, (float)Vertices[heFace.V2.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
-                RenderVertices[i++] = vertex;
+                CreateRenderVertex(heFace.H0, ref i);
+                CreateRenderVertex(heFace.H1, ref i);
+                CreateRenderVertex(heFace.H2, ref i);
             }
             Indices = indices.ToArray();
-            //TODO replace with smooth normal calculation
-            // TODO calculate contour edges and save them in list
-            //CalculateContour();
+        }
 
+        private void CreateRenderVertex(HeHalfedge h, ref int i)
+        {
+            Vector3d normal = h.Normal.Vector3d.Unit();
 
+            //TODO calculate deviation of normal and each incident edge's normal. If deviation is smaller threshold then use it for normal averaging
+            var vertex = new Vertex((float)Vertices[h.Origin.Index].X, (float)Vertices[h.Origin.Index].Y, (float)Vertices[h.Origin.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
+            if (IsSharpEdge(h))
+            {
+                vertex.IsContourEdge = true;
+            }
+            RenderVertices[i++] = vertex;
+        }
+
+        private bool IsSharpEdge(HeHalfedge h)
+        {
+            double threshold = 0.99;
+            Vector3d normal0 = h.Normal.Vector3d.Unit();
+            Vector3d normal1 = h.Twin.Normal.Vector3d.Unit();
+            var dot = normal0.Dot(normal1);
+            return dot < threshold;
         }
 
         public Mesh(Vector3d[] vertices, int[] indices, Vector3d[] renderNormals)
