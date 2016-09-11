@@ -38,7 +38,6 @@ namespace TestProject.BooleanSubtractionTests
             a.CheckSanity();
             AreVerticesUnique(a);
             AreFacesUnique(a);
-            a.GetMesh();
         }
 
         internal static void IsReset(HeMesh mesh)

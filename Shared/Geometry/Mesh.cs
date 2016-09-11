@@ -49,7 +49,7 @@ namespace Shared.Geometry
                 vertex = new Vertex((float)Vertices[heFace.V2.Index].X, (float)Vertices[heFace.V2.Index].Y, (float)Vertices[heFace.V2.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
                 RenderVertices[i++] = vertex;
             }
-
+            Indices = indices.ToArray();
             //TODO replace with smooth normal calculation
             // TODO calculate contour edges and save them in list
             //CalculateContour();

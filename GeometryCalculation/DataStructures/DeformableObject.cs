@@ -209,8 +209,7 @@ namespace GeometryCalculation.DataStructures
             obj.BuildBvh();
             return obj;
         }
-
-        public Mesh GetMesh(bool useRenderNormals = true)
+        public Mesh ToMesh()
         {
             return new Mesh(HeMesh);
         }

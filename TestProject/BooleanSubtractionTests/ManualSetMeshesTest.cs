@@ -18,38 +18,6 @@ namespace TestProject.BooleanSubtractionTests
         }
 
         [Test]
-        public void MeshWithoutRenderNormals()
-        {
-            TestConfigurator.CheckSanity = false;
-            var mesh = DefaultMeshes.Box(1f, 1f, 1f, false);
-            var obj = new DeformableObject(1);
-            obj.Initialize(mesh);
-            obj.TranslateAndBuildBvh(new Vector3m(0, 0, -1));
-
-            Vector3d[] verts2 =
-            {
-                new Vector3d(0, 0.5f, -0.5f),
-                new Vector3d(-0.5f, 0.8f, 0.5f),
-                new Vector3d(0.5f, -0.5f, 0.5f),
-                new Vector3d(-0.5f, 0, 0.5f),
-            };
-
-            int[] coords2 =
-            {
-                0, 1, 2,
-                2, 3, 0,
-                0, 3, 1,
-                3, 2, 1
-            };
-
-            Mesh mesh2 = new Mesh(verts2, coords2, null);
-            var obj2 = new DeformableObject(1);
-            obj2.Initialize(mesh2);
-            _bTester.Test(obj, obj2, true, 1, 16, 84, 28);
-            obj.GetMesh(false);
-        }
-
-        [Test]
         public void Mesh1()
         {
             var mesh = DefaultMeshes.Box(1f, 1f, 1f);
