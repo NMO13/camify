@@ -33,11 +33,19 @@ namespace UserInterface
 
             // Add initial docking pages
             kryptonDockingManager1.AddToWorkspace("Workspace", new KryptonPage[] { NewDocument()});
+            kryptonDockingManager1.AddDockspace("Control", DockingEdge.Right, new KryptonPage[] { NewInput("G-Code"), NewInput("Hints"), NewInput("Errors"), NewInput("Tools"), NewInput("Macros"), NewInput("Info")});
+
+            kryptonDockingManager1.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { NewInput("G-Code Info") });
         }
 
+        private KryptonPage NewInput(String text)
+        {
+            return NewPage(text, new NCCodeEditor());
+        }
+        
         private KryptonPage NewDocument()
         {
-            KryptonPage page = NewPage("Document ", 0, _openTkControl);
+            KryptonPage page = NewPage("Document ", _openTkControl);
 
             // Document pages cannot be docked or auto hidden
             page.ClearFlags(KryptonPageFlags.DockingAllowAutoHidden | KryptonPageFlags.DockingAllowDocked);
@@ -45,7 +53,7 @@ namespace UserInterface
             return page;
         }
 
-        private KryptonPage NewPage(string name, int image, Control content)
+        private KryptonPage NewPage(string name, Control content)
         {
             // Create new page with title and image
             KryptonPage p = new KryptonPage();
