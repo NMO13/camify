@@ -20,6 +20,11 @@ namespace CNCSpecific.Milling
             _paths.Add(path);
         }
 
+        public void AddPath(double x, double y, double z)
+        {
+            AddPath(new Vector3m(x, y, z), 0);
+        }
+
         public List<NCPath> PathList { get { return _paths; } }  
     }
 }

@@ -7,7 +7,7 @@ namespace GraphicsEngine.Geometry.Meshes
 {
     public class DefaultMeshes
     {
-        public static Mesh Box(float xExtend, float yExtend, float zExtend, bool calcRenderNormals = true)
+        public static Mesh Box(double xExtend, double yExtend, double zExtend, bool calcRenderNormals = true)
         {
             Vector3d[] defaultBoxVertices =
             {

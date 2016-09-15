@@ -15,6 +15,5 @@ namespace Model
         public abstract void ModelNotified(AbstractModel sender, Message message);
 
         event ModelHandler<AbstractModel> Changed;
-
     }
 }

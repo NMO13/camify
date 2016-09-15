@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
 using MessageHandling.Messages;
@@ -70,6 +71,12 @@ namespace Model
                 augmentedMeshes.Add(new Mesh(heMesh));
             }
             Changed(this, new MeshMessage(messageType, augmentedMeshes));
+        }
+
+        public void GenerateBox(double x, double y, double z)
+        {
+            Mesh m = DefaultMeshes.Box(x, y, z);
+            AddRoughPart(m);
         }
     }
 }

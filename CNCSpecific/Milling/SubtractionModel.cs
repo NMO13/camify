@@ -79,20 +79,20 @@ namespace CNCSpecific.Milling
         }
 
         public void BuildSnapshotList()
-        { 
-            //DeformableObject tsv = new DeformableObject();
-            //SnapshotCollector collector = new SnapshotCollector();
-            //foreach (var path in NCProgram.PathList)
-            //{
-            //    //TODO var tool = _tools.Find(x => x.Id == path.ActiveTool);
-            //    tsv.SweepVolume(_tools[0], path.RelativePosition);
-            //    BooleanModeller.SubtractSweptVolume(_roughParts[0], tsv, false);
-            //    collector.AddNextMesh(_roughParts[0].GetMesh());
-            //    _tools[0].Translate(path.RelativePosition);
-            //}
-            //if(Changed != null)
-            //    Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
-            //SnapshotList = collector.Meshes;
+        {
+            DeformableObject tsv = new DeformableObject();
+            SnapshotCollector collector = new SnapshotCollector();
+            foreach (var path in NCProgram.PathList)
+            {
+                //TODO var tool = _tools.Find(x => x.Id == path.ActiveTool);
+                tsv.SweepVolume(_tools[0], path.RelativePosition);
+                BooleanModeller.SubtractSweptVolume(_roughParts[0], tsv, false);
+                collector.AddNextMesh(_roughParts[0].ToMesh());
+                _tools[0].Translate(path.RelativePosition);
+            }
+            if (Changed != null)
+                Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
+            SnapshotList = collector.Meshes;
         }
 
         private void AddDeformableObjectsToList(List<HeMesh> getMeshes, List<DeformableObject> deformableObjects)
