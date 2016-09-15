@@ -1,4 +1,7 @@
-﻿namespace RenderEngine
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace RenderEngine
 {
     public struct Vertex
     {
@@ -6,21 +9,19 @@
         public double X;
         public double Y;
         public double Z;
+        //ContourEdge
+        public float IsContourEdge;
         //Normals
         public double NX;
         public double NY;
         public double NZ;
-
-        public bool IsContourEdge;
-
         public Vertex(float x, float y, float z) : this()
         {
             X = x;
             Y = y;
             Z = z;
-            IsContourEdge = false;
+            IsContourEdge = 0f;
         }
-
         public Vertex(float x, float y, float z, float nX, float nY, float nZ) : this()
         {
             X = x;
@@ -29,12 +30,15 @@
             NX = nX;
             NY = nY;
             NZ = nZ;
-            IsContourEdge = false;
+            IsContourEdge = 0f;
         }
-
+        public static int IsContourEdgeOffset()
+        {
+            return sizeof (double) * 3;
+        }
         public static int NormalOffset()
         {
-            return sizeof(double)*3;
+            return (int)Marshal.OffsetOf(typeof (Vertex), "NX");
         }
     }
 }

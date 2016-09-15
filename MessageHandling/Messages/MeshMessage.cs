@@ -11,6 +11,6 @@ namespace MessageHandling
             Meshes = meshes;
         }
 
-        public List<Mesh> GetMeshes { get { return Meshes;} } 
+        public List<Mesh> GetMeshes => Meshes;
     }
 }

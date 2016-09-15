@@ -45,7 +45,7 @@ namespace RenderEngine.Resources.Shader
             Scene,
             Mesh,
             CoordinateAxis,
-            ShaderVisualization
+            NormalVisualization
         }
     }
 }

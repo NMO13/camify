@@ -45,11 +45,14 @@ namespace RenderEngine.Rendering
             // Vertex Positions
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Double, false, Marshal.SizeOf(typeof(Vertex)), IntPtr.Zero);
+            // Is Contour Edge
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 1, VertexAttribPointerType.Float, false, Marshal.SizeOf(typeof(Vertex)), Vertex.IsContourEdgeOffset());
             // Vertex Normals
             if (hasNormals)
             {
-                GL.EnableVertexAttribArray(1);
-                GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Double, false, Marshal.SizeOf(typeof(Vertex)), Vertex.NormalOffset());
+                GL.EnableVertexAttribArray(2);
+                GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Double, false, Marshal.SizeOf(typeof(Vertex)), Vertex.NormalOffset());
             }
 
             //Unlink buffers

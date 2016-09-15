@@ -13,7 +13,7 @@ namespace RenderEngine.Conversion
             var renderMeshes = new List<IRenderable>();
             foreach (var mesh in meshes)
             {
-                bool hasNormals = mesh.RenderNormals.Length > 0;
+                var hasNormals = mesh.RenderNormals.Length > 0;
                 renderMeshes.Add(RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, mesh.RenderVertices, mesh.Material, hasNormals));
             }
             return renderMeshes;

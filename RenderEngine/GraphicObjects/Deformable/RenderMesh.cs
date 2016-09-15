@@ -19,7 +19,7 @@ namespace RenderEngine.GraphicObjects.Deformable
         private Material Material { get;  }
 
         private Shader NormalVisualizationShader { get; } =
-            ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.ShaderVisualization.ToString());
+            ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.NormalVisualization.ToString());
 
         private byte[] bayerMatrix =  {
             0, 32,  8, 40,  2, 34, 10, 42,   /* 8x8 Bayer ordered dithering  */
@@ -46,8 +46,8 @@ namespace RenderEngine.GraphicObjects.Deformable
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 
-            GLCheck.Call(() => DeployLightConstants());
-            GLCheck.Call(() => DeployMaterial());
+            GLCheck.Call(DeployLightConstants);
+            GLCheck.Call(DeployMaterial);
 
             Shader.SetMatrix4("view", SceneModel.Instance.WorldTransformationMatrix);
             Shader.SetMatrix4("proj", SceneModel.Instance.ProjectionMatrix);

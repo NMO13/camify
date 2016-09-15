@@ -53,7 +53,7 @@ namespace Shared.Geometry
             var vertex = new Vertex((float)Vertices[h.Origin.Index].X, (float)Vertices[h.Origin.Index].Y, (float)Vertices[h.Origin.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
             if (IsSharpEdge(h))
             {
-                vertex.IsContourEdge = true;
+                vertex.IsContourEdge = 1f;
             }
             RenderVertices[i++] = vertex;
         }
