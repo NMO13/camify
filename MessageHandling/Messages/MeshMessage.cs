@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Shared.Geometry;
 
-namespace MessageHandling
+namespace MessageHandling.Messages
 {
     public class MeshMessage : Message
     {

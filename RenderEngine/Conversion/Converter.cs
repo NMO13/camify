@@ -8,9 +8,9 @@ namespace RenderEngine.Conversion
 {
     internal static class Converter
     {
-        internal static List<IRenderable> ToRenderMeshes(List<Mesh> meshes)
+        internal static List<RenderObject> ToRenderMeshes(List<Mesh> meshes)
         {
-            var renderMeshes = new List<IRenderable>();
+            var renderMeshes = new List<RenderObject>();
             foreach (var mesh in meshes)
             {
                 var hasNormals = mesh.RenderNormals.Length > 0;

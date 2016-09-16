@@ -8,7 +8,7 @@ using Shared.Geometry;
 
 namespace CNCSpecific.Milling
 {
-    public class NCPath
+    public class NcPath
     {
         public Vector3m RelativePosition;
 

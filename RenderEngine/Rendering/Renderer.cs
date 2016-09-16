@@ -7,8 +7,9 @@ namespace RenderEngine.Rendering
 {
     class Renderer
     {
-        private readonly List<IRenderable> _renderMeshes, _perpetualMeshes;
-        public Renderer(List<IRenderable> renderMeshes, List<IRenderable> perpetualMeshes)
+        private readonly List<RenderObject> _renderMeshes; 
+        private readonly List<IRenderable>  _perpetualMeshes;
+        public Renderer(List<RenderObject> renderMeshes, List<IRenderable> perpetualMeshes)
         {
             _renderMeshes = renderMeshes;
             _perpetualMeshes = perpetualMeshes;

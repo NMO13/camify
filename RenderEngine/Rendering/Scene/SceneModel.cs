@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessageHandling;
+using MessageHandling.Messages;
 using Model;
 using RenderEngine.Conversion;
 using Shared.Geometry;
@@ -24,7 +25,7 @@ namespace RenderEngine.Rendering.Scene
         public bool WireframeMode { get; set; }
         public bool ShowNormals { get; set; }
 
-        internal List<IRenderable> RenderMeshes = new List<IRenderable>();
+        internal List<RenderObject> RenderMeshes = new List<RenderObject>();
         internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
         internal int SceneWidth { get; set; }
         internal int SceneHeight { get; set; }
@@ -43,7 +44,7 @@ namespace RenderEngine.Rendering.Scene
         //Constructor
         private SceneModel() { }
 
-        internal void AddRenderObject(IRenderable renderObject)
+        internal void AddRenderObject(RenderObject renderObject)
         {
             RenderMeshes.Add(renderObject);
         }
@@ -78,6 +79,13 @@ namespace RenderEngine.Rendering.Scene
                 if (meshMessage == null)
                     return;
                 RenderMeshes.Clear();
+            }
+            else if (message.MessageType == MessageType.MoveObject)
+            {
+                var transformationMessage = message as TransformationMessage;
+                if (transformationMessage == null)
+                    return;
+                RenderMeshes[transformationMessage.ToolId].Translate(transformationMessage.Transformation);
             }
         }
     }

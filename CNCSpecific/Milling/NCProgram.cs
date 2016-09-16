@@ -10,11 +10,11 @@ namespace CNCSpecific.Milling
 {
     public class NCProgram
     {
-        private List<NCPath> _paths = new List<NCPath>();
+        private List<NcPath> _paths = new List<NcPath>();
 
         public void AddPath(Vector3m relativeAmount, int toolId)
         {
-            var path = new NCPath();
+            var path = new NcPath();
             path.RelativePosition = relativeAmount;
             path.ActiveTool = toolId;
             _paths.Add(path);
@@ -25,6 +25,6 @@ namespace CNCSpecific.Milling
             AddPath(new Vector3m(x, y, z), 0);
         }
 
-        public List<NCPath> PathList { get { return _paths; } }  
+        public List<NcPath> PathList { get { return _paths; } }  
     }
 }

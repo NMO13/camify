@@ -4,6 +4,7 @@ using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
 using MessageHandling.Messages;
+using Microsoft.SolverFoundation.Common;
 using Shared.Geometry;
 
 namespace Model
@@ -77,6 +78,11 @@ namespace Model
         {
             Mesh m = DefaultMeshes.Box(x, y, z);
             AddRoughPart(m);
+        }
+
+        public void TranslateTool(int toolId, Rational x, Rational y, Rational z)
+        {
+            Changed(this, new TransformationMessage(MessageType.MoveObject, toolId, new Vector3m(x, y, z)));
         }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="Message.cs" />
     <Compile Include="Messages\HeMeshMessage.cs" />
     <Compile Include="Messages\RemoveMeshes.cs" />
+    <Compile Include="Messages\TransformationMessage.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Messages\MeshMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,7 +15,6 @@ namespace RenderEngine.Rendering
         protected abstract BufferUsageHint BufferUsage { get;}
         internal abstract Vertex[] Vertices { get; set; }
         internal abstract bool HasNormals { get; set; }
-        public Mesh Mesh { get; internal set; }
 
         protected BufferObjectContainer bufferObject = new BufferObjectContainer();
         public abstract void Render();
@@ -66,6 +65,21 @@ namespace RenderEngine.Rendering
             GL.BindVertexArray(bufferObject.Vao);
             GLCheck.Call(() => GL.DrawArrays(primitiveType, 0, Vertices.Length));
             GL.BindVertexArray(0);
+        }
+
+        internal void Translate(Vector3m transformation)
+        {
+            var dX = transformation.X.ToDouble();
+            var dY = transformation.Y.ToDouble();
+            var dZ = transformation.Z.ToDouble();
+
+            for(int i = 0; i < Vertices.Length; i++)
+            {
+                Vertices[i].X += dX;
+                Vertices[i].Y += dY;
+                Vertices[i].Z += dZ;
+            }
+            Setup(Vertices, true);
         }
     }
 }

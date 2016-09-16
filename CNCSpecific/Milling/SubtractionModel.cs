@@ -65,6 +65,13 @@ namespace CNCSpecific.Milling
                 _tools.Clear();
                 _roughParts.Clear();
             }
+            else if (message.MessageType == MessageType.MoveObject)
+            {
+                var transformationMessage = message as TransformationMessage;
+                if (transformationMessage == null)
+                    return;
+                _tools[transformationMessage.ToolId].Translate(transformationMessage.Transformation);
+            }
         }
 
         public void SingleSubtractionStep(bool reversed = false)

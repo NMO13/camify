@@ -12,6 +12,7 @@ namespace MessageHandling
         NewTools,
         SnapshotList,
         LoadFile,
-        ClearMeshes
+        ClearMeshes,
+        MoveObject
     }
 }
