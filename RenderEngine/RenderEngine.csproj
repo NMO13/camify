@@ -86,6 +86,7 @@
     <Compile Include="Lighting\DirectionalLight.cs" />
     <Compile Include="Lighting\LightBundle.cs" />
     <Compile Include="Lighting\PointLight.cs" />
+    <Compile Include="Rendering\AnimationManager.cs" />
     <Compile Include="Rendering\Scene\OpenTkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

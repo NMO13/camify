@@ -19,6 +19,8 @@ namespace RenderEngine.Rendering
         protected BufferObjectContainer bufferObject = new BufferObjectContainer();
         public abstract void Render();
 
+        
+
         internal RenderObject()
         {
             Setup(Vertices, HasNormals);
@@ -67,11 +69,12 @@ namespace RenderEngine.Rendering
             GL.BindVertexArray(0);
         }
 
-        internal void Translate(Vector3m transformation)
+        //TODO alter modelmatrix rather than changing vertices
+        internal void Translate(Shared.Geometry.Vector3d transformation)
         {
-            var dX = transformation.X.ToDouble();
-            var dY = transformation.Y.ToDouble();
-            var dZ = transformation.Z.ToDouble();
+            var dX = transformation.X;
+            var dY = transformation.Y;
+            var dZ = transformation.Z;
 
             for(int i = 0; i < Vertices.Length; i++)
             {

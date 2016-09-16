@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenTK.Graphics.OpenGL;
+using RenderEngine.GraphicObjects.Deformable;
 using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
 
@@ -7,9 +8,9 @@ namespace RenderEngine.Rendering
 {
     class Renderer
     {
-        private readonly List<RenderObject> _renderMeshes; 
+        private readonly List<RenderMesh> _renderMeshes; 
         private readonly List<IRenderable>  _perpetualMeshes;
-        public Renderer(List<RenderObject> renderMeshes, List<IRenderable> perpetualMeshes)
+        public Renderer(List<RenderMesh> renderMeshes, List<IRenderable> perpetualMeshes)
         {
             _renderMeshes = renderMeshes;
             _perpetualMeshes = perpetualMeshes;

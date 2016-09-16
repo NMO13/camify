@@ -4,6 +4,7 @@ using MessageHandling;
 using MessageHandling.Messages;
 using Model;
 using RenderEngine.Conversion;
+using RenderEngine.GraphicObjects.Deformable;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering.Scene
@@ -25,7 +26,7 @@ namespace RenderEngine.Rendering.Scene
         public bool WireframeMode { get; set; }
         public bool ShowNormals { get; set; }
 
-        internal List<RenderObject> RenderMeshes = new List<RenderObject>();
+        internal List<RenderMesh> RenderMeshes = new List<RenderMesh>();
         internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
         internal int SceneWidth { get; set; }
         internal int SceneHeight { get; set; }
@@ -44,9 +45,9 @@ namespace RenderEngine.Rendering.Scene
         //Constructor
         private SceneModel() { }
 
-        internal void AddRenderObject(RenderObject renderObject)
+        internal void AddRenderObject(RenderMesh renderMesh)
         {
-            RenderMeshes.Add(renderObject);
+            RenderMeshes.Add(renderMesh);
         }
 
         internal void AddPerpetualObject(IRenderable perpetual)
@@ -85,8 +86,14 @@ namespace RenderEngine.Rendering.Scene
                 var transformationMessage = message as TransformationMessage;
                 if (transformationMessage == null)
                     return;
-                RenderMeshes[transformationMessage.ToolId].Translate(transformationMessage.Transformation);
+                RenderMeshes[transformationMessage.ToolId].Translate(transformationMessage.Transformation.Vector3d);
             }
+        }
+
+        public void DebugAnimation(int id, List<Vector3d> paths, long stopInterval)
+        {
+            RenderMeshes[id].AnimationManager.Paths = paths;
+            RenderMeshes[id].AnimationManager.StopInterval = stopInterval;
         }
     }
 }

@@ -5,6 +5,7 @@ using RenderEngine.Rendering;
 using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
 using Shared.Assets;
+using Shared.Geometry;
 
 
 namespace RenderEngine.GraphicObjects.Deformable
@@ -17,6 +18,8 @@ namespace RenderEngine.GraphicObjects.Deformable
         internal override bool HasNormals { get; set; }
         private LightBundle LightBundle { get; }
         private Material Material { get;  }
+
+        internal AnimationManager AnimationManager;
 
         private Shader NormalVisualizationShader { get; } =
             ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.NormalVisualization.ToString());
@@ -39,10 +42,12 @@ namespace RenderEngine.GraphicObjects.Deformable
 
             Vertices = vertices;
             HasNormals = hasNormals;
+            AnimationManager = new AnimationManager(this, AnimationType.Interval);
         }
 
         public override void Render()
         {
+            AnimationManager.NextStep();
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 
