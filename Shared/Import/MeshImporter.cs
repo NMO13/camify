@@ -10,18 +10,26 @@ namespace Shared.Import
 {
     public class MeshImporter
     {
-        private List<Mesh> meshes = new List<Mesh>();
-        public List<Mesh> GenerateMeshes(String path)
+        public enum ComponentExclusion
+        {
+            Standard = ExcludeComponent.Animations | ExcludeComponent.Boneweights |
+                                ExcludeComponent.Cameras | ExcludeComponent.Lights |
+                                ExcludeComponent.TexCoords | ExcludeComponent.Textures | ExcludeComponent.Normals,
+            LeaveNormals = ExcludeComponent.Animations | ExcludeComponent.Boneweights |
+                                ExcludeComponent.Cameras | ExcludeComponent.Lights |
+                                ExcludeComponent.TexCoords | ExcludeComponent.Textures
+
+        }
+        private readonly List<Mesh> _meshes = new List<Mesh>();
+        public List<Mesh> GenerateMeshes(string path, ComponentExclusion exclusion = ComponentExclusion.Standard)
         {
             AssimpImporter importer = new AssimpImporter();
-            importer.SetConfig(new RemoveComponentConfig(ExcludeComponent.Animations | ExcludeComponent.Boneweights |
-                                ExcludeComponent.Cameras | ExcludeComponent.Lights |
-                                ExcludeComponent.TexCoords | ExcludeComponent.Textures | ExcludeComponent.Normals));
+            importer.SetConfig(new RemoveComponentConfig((ExcludeComponent)exclusion));
 
             var scene = importer.ImportFile(path, PostProcessSteps.JoinIdenticalVertices | PostProcessSteps.RemoveComponent);
             ProcessNode(scene.RootNode, scene);
             importer.Dispose();
-            return meshes;
+            return _meshes;
         }
 
         private void ProcessNode(Node node, Assimp.Scene scene)
@@ -31,10 +39,10 @@ namespace Shared.Import
                 // The node object only contains indices to index the actual objects in the scene. 
                 // The scene contains all the data, node is just to keep stuff organized (like relations between nodes).
                 Assimp.Mesh m = scene.Meshes[node.MeshIndices[i]];
-                meshes.Add(ProcessMesh(m, node, scene.Materials[m.MaterialIndex]));
+                _meshes.Add(ProcessMesh(m, node, scene.Materials[m.MaterialIndex]));
             }
 
-            // After we've processed all of the meshes (if any) we then recursively process each of the children nodes
+            // After we've processed all of the _meshes (if any) we then recursively process each of the children nodes
             if (node.HasChildren)
             {
                 for (int i = 0; i < node.Children.Length; i++)

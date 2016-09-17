@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Shared.Geometry;
 using Shared.Import;
 
@@ -24,6 +25,13 @@ namespace Shared.Helper
                 importer.GenerateMeshes(GetDropboxFolderPath() +
                                         filepath);
             return meshes;
+        }
+
+        public static string GetProjectDirectory()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(currentDirectory);
+            return currentDirectoryInfo.FullName;
         }
     }
 }

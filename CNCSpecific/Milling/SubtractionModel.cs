@@ -4,8 +4,8 @@ using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
-using MessageHandling.Datatypes;
 using MessageHandling.Messages;
+using MessageHandling.SnapshotFormat;
 using Model;
 using Shared.Geometry;
 

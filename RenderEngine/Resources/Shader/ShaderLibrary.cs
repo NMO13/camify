@@ -37,6 +37,7 @@ namespace RenderEngine.Resources.Shader
         {
             return Path.Combine(ShaderBasePath, shaderPath);
         }
+
         public enum ShaderName
         {
             Scene,

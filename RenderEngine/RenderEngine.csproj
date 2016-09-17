@@ -74,13 +74,14 @@
     <Compile Include="Camera\ArcBall.cs" />
     <Compile Include="Camera\Objective.cs" />
     <Compile Include="Camera\WorldRotator.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Resources\Config.cs" />
     <Compile Include="Conversion\Extensions.cs" />
     <Compile Include="Conversion\Converter.cs" />
     <Compile Include="ErrorHandling\GLCheck.cs" />
     <Compile Include="GraphicObjects\Perpetual\Background.cs" />
     <Compile Include="GraphicObjects\ObjectType.cs" />
     <Compile Include="GraphicObjects\Deformable\RenderMesh.cs" />
+    <Compile Include="GraphicObjects\Perpetual\CoordinateAxis.cs" />
     <Compile Include="IO\MouseHandler.cs" />
     <Compile Include="IO\MouseKeyEvents.cs" />
     <Compile Include="Lighting\DirectionalLight.cs" />
@@ -138,6 +139,9 @@
     <None Include="Resources\Shader\Files\mesh.vs" />
     <None Include="Resources\Shader\Files\sceneShader.frag" />
     <None Include="Resources\Shader\Files\sceneShader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Mesh\Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

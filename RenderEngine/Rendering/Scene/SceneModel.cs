@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessageHandling;
-using MessageHandling.Datatypes;
 using MessageHandling.Messages;
+using MessageHandling.SnapshotFormat;
 using Model;
 using RenderEngine.Conversion;
 using RenderEngine.GraphicObjects.Deformable;

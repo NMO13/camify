@@ -14,6 +14,7 @@ namespace RenderEngine.Rendering
             switch (type)
             {
                 case ObjectType.Background: return new Background();
+                case ObjectType.CoordinateAxis: return new CoordinateAxis();
                 case ObjectType.RenderMesh: return new RenderMesh(vertices, material, hasNormals, new LightBundle(bundleType));
                 default: throw new ArgumentException("Object type is not supported");
             }

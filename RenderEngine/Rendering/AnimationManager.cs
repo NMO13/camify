@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using MessageHandling.Datatypes;
-using OpenTK.Graphics.OpenGL;
+using MessageHandling.SnapshotFormat;
 using RenderEngine.GraphicObjects;
 using RenderEngine.GraphicObjects.Deformable;
 using RenderEngine.Rendering.Scene;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Shared.Geometry;
 
-namespace MessageHandling.Datatypes
+namespace MessageHandling.SnapshotFormat
 {
     public class SnapshotCollector
     {

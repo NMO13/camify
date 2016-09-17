@@ -18,8 +18,14 @@ namespace RenderEngine.Lighting
             switch (bundleType)
             {
                 case BundleType.Standard: CreateStandardLight(); break;
+                case BundleType.CoordinateAxis: CreateCoordinateAxisLight(); break;
                 default: throw new ArgumentException("Lighttype is not supported.");
             }
+        }
+
+        private void CreateCoordinateAxisLight()
+        {
+            throw new NotImplementedException();
         }
 
         //1 directional light
@@ -38,7 +44,8 @@ namespace RenderEngine.Lighting
         }
         internal enum BundleType
         {
-            Standard
+            Standard,
+            CoordinateAxis
         }
     }
 }
