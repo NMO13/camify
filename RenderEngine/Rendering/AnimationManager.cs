@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using MessageHandling.Datatypes;
 using OpenTK.Graphics.OpenGL;
+using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.Deformable;
 using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
 
@@ -42,6 +44,12 @@ namespace RenderEngine.Rendering
                     AnimateFrame(snapshot);
                 }
             }
+            else
+            {
+                SceneModel.Instance.CurrentAnimationState = AnimationState.Stop;
+                SceneModel.Instance.LastAnimationState = AnimationState.Stop;
+                Counter = 0;
+            }
         }
 
         private void AnimateFrame(Snapshot snapshot)
@@ -51,6 +59,12 @@ namespace RenderEngine.Rendering
 
             var mesh = SceneModel.Instance.RenderMeshes[snapshot.ToolId];
             mesh.Translate(amount);
+
+            SceneModel.Instance.RenderMeshes[1] =
+                RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, snapshot.RoughpartSnapshot.RenderVertices,
+                    snapshot.RoughpartSnapshot.Material, true) as RenderMesh;
+
+
             Timer.Restart();
             Counter++;
            
@@ -66,7 +80,7 @@ namespace RenderEngine.Rendering
                 // if we just started the animation
                 if (SceneModel.Instance.LastAnimationState == AnimationState.Stop)
                 {
-                    SceneModel.Instance.CurrentAnimationState = AnimationState.Play;
+                    SceneModel.Instance.LastAnimationState = AnimationState.Play;
                     Timer.Restart();
                 }
                 NextFrame();

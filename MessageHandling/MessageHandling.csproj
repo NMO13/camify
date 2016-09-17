@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datatypes\SnapshotCollector.cs" />
+    <Compile Include="SnapshotFormat\SnapshotCollector.cs" />
     <Compile Include="Messages\FileMessage.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Messages\HeMeshMessage.cs" />
