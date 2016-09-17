@@ -14,6 +14,9 @@
         internal static readonly string NormalVisualizationGeometryShader = "normalDisplay.gs";
         internal static readonly string NormalVisualizationFragmentShader = "normalDisplay.frag";
 
+        internal static readonly string CoordinateAxisVertexShader = "coordinateAxis.vs";
+        internal static readonly string CoordinateAxisFragmentShader = "coordinateAxis.frag";
+
         ///############# Camera ###########///
         internal static readonly float GranularityZoom = 10f;
         internal static readonly float MinZoom = -1800f;

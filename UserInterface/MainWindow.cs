@@ -5,6 +5,7 @@ using CNCSpecific.Milling;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
+using GraphicsEngine.Geometry.Meshes;
 using Model;
 using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
@@ -36,8 +37,9 @@ namespace UserInterface
 
         private void CreateBasicTool()
         {
-            var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
-            _meshModel.AddTool(meshes[0]);
+            // var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
+            var meshes = DefaultMeshes.Pyramid(2.5f, 2.5f, 2.5f);
+            _meshModel.AddTool(meshes);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)

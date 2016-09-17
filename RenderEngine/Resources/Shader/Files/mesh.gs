@@ -33,7 +33,7 @@ void main() {
 	float area = abs(v1.x * v2.y - v1.y * v2.x);
 
 	gl_Position = gl_in[0].gl_Position; 
-	gs_out.Dist = vec3(area/length(v0), gs_in[1].IncludeEdge*MEW, gs_in[2].IncludeEdge*MEW);
+	gs_out.Dist = vec3(area/length(v0), gs_in[2].IncludeEdge*MEW, gs_in[0].IncludeEdge*MEW); //Always take opposite edge of vertex
 	gs_out.Normal = gs_in[0].Normal;
 	gs_out.FragPos = gs_in[0].FragPos;
 	gs_out.WorldPos = gs_in[0].VertWorldPos;
@@ -41,7 +41,7 @@ void main() {
 	EmitVertex();
 
 	gl_Position = gl_in[1].gl_Position; 
-	gs_out.Dist = vec3(gs_in[0].IncludeEdge*MEW, area/length(v1),gs_in[2].IncludeEdge*MEW);
+	gs_out.Dist = vec3(gs_in[1].IncludeEdge*MEW, area/length(v1),gs_in[0].IncludeEdge*MEW); //Always take opposite edge of vertex
 	gs_out.Normal = gs_in[1].Normal;
 	gs_out.FragPos = gs_in[1].FragPos;
 	gs_out.WorldPos = gs_in[1].VertWorldPos;
@@ -49,7 +49,7 @@ void main() {
 	EmitVertex();
 
 	gl_Position = gl_in[2].gl_Position; 
-	gs_out.Dist = vec3(gs_in[0].IncludeEdge*MEW, gs_in[1].IncludeEdge*MEW, area/length(v2));
+	gs_out.Dist = vec3(gs_in[1].IncludeEdge*MEW, gs_in[2].IncludeEdge*MEW, area/length(v2)); //Always take opposite edge of vertex
 	gs_out.Normal = gs_in[2].Normal;
 	gs_out.FragPos = gs_in[2].FragPos;
 	gs_out.WorldPos = gs_in[2].VertWorldPos;

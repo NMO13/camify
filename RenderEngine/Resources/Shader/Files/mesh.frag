@@ -70,7 +70,6 @@ void main()
 	float nearD = min(min(gs_in.Dist.x,gs_in.Dist.y),gs_in.Dist.z); 
 	float edgeIntensity = exp2(-1.0*nearD*nearD);
 	color = (edgeIntensity * vec4(0.1,0.1,0.1,1.0)) + ((1.0-edgeIntensity) * vec4(result, 1.0));
-	//color = vec4(result, 1.0);
 }
 
 // Calculates the color when using a directional light.

@@ -19,8 +19,6 @@ namespace RenderEngine.Rendering
         protected BufferObjectContainer bufferObject = new BufferObjectContainer();
         public abstract void Render();
 
-        
-
         internal RenderObject()
         {
             Setup(Vertices, HasNormals);

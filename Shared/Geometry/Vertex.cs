@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace RenderEngine
 {
@@ -20,7 +19,7 @@ namespace RenderEngine
             X = x;
             Y = y;
             Z = z;
-            IsContourEdge = 0f;
+            IsContourEdge = 1f;
         }
         public Vertex(float x, float y, float z, float nX, float nY, float nZ) : this()
         {
@@ -30,7 +29,7 @@ namespace RenderEngine
             NX = nX;
             NY = nY;
             NZ = nZ;
-            IsContourEdge = 0f;
+            IsContourEdge = 1f;
         }
         public static int IsContourEdgeOffset()
         {

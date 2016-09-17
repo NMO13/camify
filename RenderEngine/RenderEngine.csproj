@@ -128,6 +128,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\Files\coordinateAxis.frag" />
+    <None Include="Resources\Shader\Files\coordinateAxis.vs" />
     <None Include="Resources\Shader\Files\normalDisplay.frag" />
     <None Include="Resources\Shader\Files\normalDisplay.gs" />
     <None Include="Resources\Shader\Files\normalDisplay.vs" />

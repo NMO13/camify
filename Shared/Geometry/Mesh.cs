@@ -53,14 +53,14 @@ namespace Shared.Geometry
             var vertex = new Vertex((float)Vertices[h.Origin.Index].X, (float)Vertices[h.Origin.Index].Y, (float)Vertices[h.Origin.Index].Z, (float)normal.X, (float)normal.Y, (float)normal.Z);
             if (IsSharpEdge(h))
             {
-                vertex.IsContourEdge = 1f;
+                vertex.IsContourEdge = 0f;
             }
             RenderVertices[i++] = vertex;
         }
 
         private bool IsSharpEdge(HeHalfedge h)
         {
-            double threshold = 0.99;
+            double threshold = 0.95;
             Vector3d normal0 = h.Normal.Vector3d.Unit();
             Vector3d normal1 = h.Twin.Normal.Vector3d.Unit();
             var dot = normal0.Dot(normal1);
