@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.SolverFoundation.Common;
-using Shared.Geometry;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 {
     public class IncidentEdgesList : IEnumerable<HeHalfedge>
     {

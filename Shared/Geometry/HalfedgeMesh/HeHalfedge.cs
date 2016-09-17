@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared;
-using Shared.Geometry;
-using Shared.Geometry.HalfedgeMesh;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 { 
     public class HeHalfedge : ICloneable, IIndexable
     {

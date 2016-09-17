@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry.Meshes;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Geometry.Meshes;
 using Shared.Helper;
 using TestProject.BooleanSubtractionTests;
 

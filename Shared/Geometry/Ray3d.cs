@@ -1,5 +1,4 @@
-﻿using GraphicsEngine.Math;
-using Shared;
+﻿using Shared;
 
 namespace Shared.Geometry
 {

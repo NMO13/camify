@@ -1,9 +1,7 @@
-﻿using Geometry.Bounding_Volume_Hierarchy;
-using GraphicsEngine.HalfedgeMesh;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Shared.Geometry.HalfedgeMesh;
 
-namespace MeshStructuresLib.Bounding_Volume_Hierarchy
+namespace Shared.Geometry.CollisionCheck
 {
     abstract class PartitionStrategy
     {

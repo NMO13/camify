@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assimp.Configs;
-using GraphicsEngine.HalfedgeMesh;
-using RenderEngine;
 using Shared.Assets;
 using Shared.Geometry.HalfedgeMesh;
 

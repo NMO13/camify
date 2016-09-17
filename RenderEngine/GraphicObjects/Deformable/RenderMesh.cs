@@ -5,6 +5,7 @@ using RenderEngine.Rendering;
 using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
 using Shared.Assets;
+using Shared.Geometry;
 
 
 namespace RenderEngine.GraphicObjects.Deformable

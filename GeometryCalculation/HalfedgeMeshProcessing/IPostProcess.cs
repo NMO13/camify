@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry;
 using GraphicsEngine.HalfedgeMesh;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.HalfedgeMeshProcessing
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops

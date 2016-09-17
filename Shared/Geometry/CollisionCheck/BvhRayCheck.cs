@@ -1,9 +1,4 @@
-﻿using Geometry.Bounding_Volume_Hierarchy;
-using GraphicsEngine.Math;
-using GraphicsEngine.Selection;
-using Shared.Geometry;
-
-namespace GraphicsEngine.Geometry.CollisionCheck
+﻿namespace Shared.Geometry.CollisionCheck
 {
     class BvhRayCheck
     {

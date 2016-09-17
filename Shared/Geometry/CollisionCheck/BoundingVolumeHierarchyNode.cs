@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using GraphicsEngine.Geometry.CollisionCheck;
-using GraphicsEngine.HalfedgeMesh;
+﻿using System.Diagnostics;
 using Shared.Geometry.HalfedgeMesh;
 
-namespace Geometry.Bounding_Volume_Hierarchy
+namespace Shared.Geometry.CollisionCheck
 {
     public class BoundingVolumeHierarchyNode
     {

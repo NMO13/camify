@@ -9,6 +9,7 @@ using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Additional;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GeometryCalculation.BooleanOperations
 {

@@ -2,6 +2,7 @@
 using RenderEngine.Rendering;
 using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
+using Shared.Geometry;
 
 namespace RenderEngine.GraphicObjects.Perpetual
 {

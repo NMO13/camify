@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
-using GraphicsEngine.Geometry.Meshes;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
+using Shared.Geometry.Meshes;
 using Shared.Helper;
 using TestProject.BooleanSubtractionTests;
 

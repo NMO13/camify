@@ -5,7 +5,6 @@ using GeometryCalculation.DataStructures;
 using GraphicsEngine.Geometry.Triangulation;
 using GraphicsEngine.HalfedgeMesh;
 using GraphicsEngine.HalfedgeMeshProcessing;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry;

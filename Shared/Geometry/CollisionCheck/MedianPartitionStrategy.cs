@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Geometry.Bounding_Volume_Hierarchy;
-using GraphicsEngine.Geometry.CollisionCheck;
-using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 using Shared.Geometry.HalfedgeMesh;
 
-namespace GraphicsEngine.Geometry
+namespace Shared.Geometry.CollisionCheck
 {
     class MedianPartitionStrategy
     {

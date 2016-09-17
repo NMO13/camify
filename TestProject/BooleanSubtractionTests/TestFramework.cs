@@ -4,6 +4,7 @@ using GeometryCalculation.DataStructures;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 using Shared.Import;
 
 namespace TestProject.BooleanSubtractionTests

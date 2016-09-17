@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Geometry;
 using Shared.Geometry.HalfedgeMesh;

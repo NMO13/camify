@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using GraphicsEngine;
-using Microsoft.SolverFoundation.Common;
+﻿using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
 
 namespace Shared.Geometry

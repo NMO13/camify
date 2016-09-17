@@ -74,7 +74,7 @@
     <Compile Include="Camera\ArcBall.cs" />
     <Compile Include="Camera\Objective.cs" />
     <Compile Include="Camera\WorldRotator.cs" />
-    <Compile Include="Resources\Config.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Conversion\Extensions.cs" />
     <Compile Include="Conversion\Converter.cs" />
     <Compile Include="ErrorHandling\GLCheck.cs" />

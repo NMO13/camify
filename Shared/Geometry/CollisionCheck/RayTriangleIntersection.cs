@@ -1,6 +1,4 @@
-﻿using Shared.Geometry;
-
-namespace GraphicsEngine.Math
+﻿namespace Shared.Geometry.CollisionCheck
 {
     class RayTriangleIntersection
     {

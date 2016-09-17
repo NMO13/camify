@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared.Geometry;
 using Shared.Helper;
 
-namespace GraphicsEngine.Geometry.Meshes
+namespace Shared.Geometry.Meshes
 {
     public class DefaultMeshes
     {

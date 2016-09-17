@@ -1,9 +1,8 @@
 ﻿using System;
-using GraphicsEngine.HalfedgeMesh;
-using GraphicsEngine.Math;
 using Microsoft.SolverFoundation.Common;
+using Shared.Geometry.HalfedgeMesh;
 
-namespace GraphicsEngine.Geometry.CollisionCheck
+namespace Shared.Geometry.CollisionCheck
 {
     public class AxisAlignedBoundingBox : IBoundingBox
     {

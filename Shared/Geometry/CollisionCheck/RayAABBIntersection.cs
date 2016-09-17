@@ -1,8 +1,6 @@
 ﻿using System;
-using GraphicsEngine.Geometry.CollisionCheck;
-using Shared.Geometry;
 
-namespace GraphicsEngine.Math
+namespace Shared.Geometry.CollisionCheck
 {
     class RayAABBIntersection
     {

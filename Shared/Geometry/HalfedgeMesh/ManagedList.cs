@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 {
     public class ManagedList<T> : IEnumerable where T : class, IIndexable
     {

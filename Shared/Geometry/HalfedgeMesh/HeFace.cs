@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GraphicsEngine.Geometry.CollisionCheck;
-using GraphicsEngine.HalfedgeMesh;
 using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
+using Shared.Geometry.CollisionCheck;
 
 namespace Shared.Geometry.HalfedgeMesh
 {

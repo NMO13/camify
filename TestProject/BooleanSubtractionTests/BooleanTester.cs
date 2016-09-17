@@ -4,6 +4,7 @@ using GraphicsEngine.Geometry.Boolean_Ops;
 using GraphicsEngine.HalfedgeMesh;
 using NUnit.Framework;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace TestProject.BooleanSubtractionTests
 {

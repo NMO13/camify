@@ -4,6 +4,7 @@ using RenderEngine.GraphicObjects.Deformable;
 using RenderEngine.GraphicObjects.Perpetual;
 using RenderEngine.Lighting;
 using Shared.Assets;
+using Shared.Geometry;
 
 namespace RenderEngine.Rendering
 {

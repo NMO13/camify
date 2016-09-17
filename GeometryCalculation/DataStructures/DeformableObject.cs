@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Geometry.Bounding_Volume_Hierarchy;
 using GeometryCalculation.Simplification;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
@@ -10,6 +9,8 @@ using GraphicsEngine.HalfedgeMeshProcessing;
 using Microsoft.SolverFoundation.Common;
 using Shared;
 using Shared.Geometry;
+using Shared.Geometry.CollisionCheck;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace GeometryCalculation.DataStructures
 {

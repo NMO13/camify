@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace RenderEngine
+namespace Shared.Geometry
 {
     public struct Vertex
     {

@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GraphicsEngine.Math;
-using Microsoft.SolverFoundation.Common;
 using Shared.Additional;
-using Shared.Geometry;
-using Shared.Geometry.HalfedgeMesh;
 using Shared.Helper;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 {
     public class HeMesh
     {

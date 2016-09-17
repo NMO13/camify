@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.Geometry.HalfedgeMesh;
+﻿using System.Collections.Generic;
 
-namespace GraphicsEngine.HalfedgeMesh
+namespace Shared.Geometry.HalfedgeMesh
 {
     class FaceMerge : IMeshObserver
     {

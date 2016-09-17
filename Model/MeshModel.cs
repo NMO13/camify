@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using GraphicsEngine.Geometry.Meshes;
-using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
 using MessageHandling.Messages;
 using Microsoft.SolverFoundation.Common;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
+using Shared.Geometry.Meshes;
 
 namespace Model
 {    

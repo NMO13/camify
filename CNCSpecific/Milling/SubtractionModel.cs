@@ -8,6 +8,7 @@ using MessageHandling.Messages;
 using MessageHandling.SnapshotFormat;
 using Model;
 using Shared.Geometry;
+using Shared.Geometry.HalfedgeMesh;
 
 namespace CNCSpecific.Milling
 {

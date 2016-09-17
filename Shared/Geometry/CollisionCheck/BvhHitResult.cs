@@ -1,9 +1,6 @@
-﻿using Geometry.Bounding_Volume_Hierarchy;
-using Shared.Geometry;
-using GraphicsEngine.HalfedgeMesh;
-using Shared.Geometry.HalfedgeMesh;
+﻿using Shared.Geometry.HalfedgeMesh;
 
-namespace GraphicsEngine.Selection
+namespace Shared.Geometry.CollisionCheck
 {
     class BvhHitResult
     {

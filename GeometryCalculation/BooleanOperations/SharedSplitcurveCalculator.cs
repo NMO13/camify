@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GraphicsEngine.Geometry.CollisionCheck;
 using GraphicsEngine.HalfedgeMesh;
 using Shared.Geometry;
+using Shared.Geometry.CollisionCheck;
 using Shared.Geometry.HalfedgeMesh;
 
 namespace GraphicsEngine.Geometry.Boolean_Ops
