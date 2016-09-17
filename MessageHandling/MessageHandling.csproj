@@ -58,10 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datatypes\SnapshotCollector.cs" />
     <Compile Include="Messages\FileMessage.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Messages\HeMeshMessage.cs" />
     <Compile Include="Messages\RemoveMeshes.cs" />
+    <Compile Include="Messages\SnapshotMessage.cs" />
     <Compile Include="Messages\TransformationMessage.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Messages\MeshMessage.cs" />

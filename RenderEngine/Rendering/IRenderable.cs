@@ -8,6 +8,6 @@ namespace RenderEngine.Rendering
 {
     interface IRenderable
     {
-        void Render();
+        void Render(bool wireframe);
     }
 }

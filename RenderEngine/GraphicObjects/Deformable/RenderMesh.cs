@@ -19,8 +19,6 @@ namespace RenderEngine.GraphicObjects.Deformable
         private LightBundle LightBundle { get; }
         private Material Material { get;  }
 
-        internal AnimationManager AnimationManager;
-
         private Shader NormalVisualizationShader { get; } =
             ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.NormalVisualization.ToString());
 
@@ -42,12 +40,12 @@ namespace RenderEngine.GraphicObjects.Deformable
 
             Vertices = vertices;
             HasNormals = hasNormals;
-            AnimationManager = new AnimationManager(this, AnimationType.Interval);
         }
 
-        public override void Render()
+        public override void Render(bool wireframe)
         {
-            AnimationManager.NextStep();
+            PolygonMode polyMode = wireframe ? PolygonMode.Line : PolygonMode.Fill;
+            GL.PolygonMode(MaterialFace.FrontAndBack, polyMode);
             GL.Enable(EnableCap.DepthTest);
             Shader.Use();
 

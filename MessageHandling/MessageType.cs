@@ -10,7 +10,7 @@ namespace MessageHandling
     {
         NewRoughParts,
         NewTools,
-        SnapshotList,
+        NewSnapshotList,
         LoadFile,
         ClearMeshes,
         MoveObject

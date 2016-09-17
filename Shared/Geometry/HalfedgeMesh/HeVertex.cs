@@ -109,10 +109,8 @@ namespace GraphicsEngine.HalfedgeMesh
 
         private Vector3m vector3m;
 
-        private bool IsContourVertex = false;
 
         public IncidentEdgesList IncidentEdges;
-        //internal List<HeHalfedge> EqualIncidentEdgeList = new List<HeHalfedge>(); 
         public bool IsOnSweptVolumeSurface;
 
         public int Index { get; set; }

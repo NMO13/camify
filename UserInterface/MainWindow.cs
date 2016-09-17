@@ -129,7 +129,7 @@ namespace UserInterface
 
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            SubtractionModel.Instance.BuildSnapshotList();
+            SubtractionModel.Instance.BuildSnapshotList(false);
         }
 
         private void ImportTool_Click(object sender, EventArgs e)
@@ -191,6 +191,11 @@ namespace UserInterface
                 //_meshModel.GenerateBox(d.X, d.Y, d.Z);
                 _meshModel.GenerateBox(200, 40, 200);
             }
+        }
+
+        private void kryptonRibbonGroupButton3_Click(object sender, EventArgs e)
+        {
+            SceneModel.Instance.PlayAnimation();
         }
     }
 }

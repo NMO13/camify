@@ -4,6 +4,7 @@ using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.HalfedgeMesh;
 using MessageHandling;
+using MessageHandling.Datatypes;
 using MessageHandling.Messages;
 using Model;
 using Shared.Geometry;
@@ -27,7 +28,6 @@ namespace CNCSpecific.Milling
         private event ModelHandler<AbstractModel> Changed;
         private List<DeformableObject> _tools = new List<DeformableObject>();
         private List<DeformableObject> _roughParts = new List<DeformableObject>();
-        public List<Mesh> SnapshotList = new List<Mesh>();
         private static SubtractionModel _instance;
         public NCProgram NCProgram { get; set; }
 
@@ -85,21 +85,26 @@ namespace CNCSpecific.Milling
             //Changed(this, new MeshMessage(MessageType.ReplaceParts, new List<Mesh>() {_roughParts[0].ToMesh()}));
         }
 
-        public void BuildSnapshotList()
+        public void BuildSnapshotList(bool collectTsv)
         {
             DeformableObject tsv = new DeformableObject();
-            SnapshotCollector collector = new SnapshotCollector();
+            SnapshotCollector collector = new SnapshotCollector(collectTsv);
             foreach (var path in NCProgram.PathList)
             {
                 //TODO var tool = _tools.Find(x => x.Id == path.ActiveTool);
                 tsv.SweepVolume(_tools[0], path.RelativePosition);
                 BooleanModeller.SubtractSweptVolume(_roughParts[0], tsv, false);
-                collector.AddNextMesh(_roughParts[0].ToMesh());
+
+                if(collectTsv)
+                    collector.AddNextSnapshot(_roughParts[0].ToMesh(), tsv.ToMesh(), path.RelativePosition.Vector3d, path.ActiveTool);
+                else
+                {
+                    collector.AddNextSnapshot(_roughParts[0].ToMesh(), null, path.RelativePosition.Vector3d, path.ActiveTool);
+                }
                 _tools[0].Translate(path.RelativePosition);
             }
             if (Changed != null)
-                Changed(this, new MeshMessage(MessageType.SnapshotList, collector.Meshes));
-            SnapshotList = collector.Meshes;
+                Changed(this, new SnapshotMessage(MessageType.NewSnapshotList, collector));
         }
 
         private void AddDeformableObjectsToList(List<HeMesh> getMeshes, List<DeformableObject> deformableObjects)

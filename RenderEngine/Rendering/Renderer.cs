@@ -10,6 +10,7 @@ namespace RenderEngine.Rendering
     {
         private readonly List<RenderMesh> _renderMeshes; 
         private readonly List<IRenderable>  _perpetualMeshes;
+        internal AnimationManager AnimationManager = new AnimationManager();
         public Renderer(List<RenderMesh> renderMeshes, List<IRenderable> perpetualMeshes)
         {
             _renderMeshes = renderMeshes;
@@ -21,14 +22,15 @@ namespace RenderEngine.Rendering
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             foreach (var perpetual in _perpetualMeshes)
             {
-                perpetual.Render();
+                perpetual.Render(false);
             }
 
-            PolygonMode polyMode = SceneModel.Instance.WireframeMode ? PolygonMode.Line : PolygonMode.Fill;
-            GL.PolygonMode(MaterialFace.FrontAndBack, polyMode);
-            foreach (var mesh in _renderMeshes)
+            AnimationManager.Animate();
+
+            var renderMeshes = SceneModel.Instance.RenderMeshes;
+            foreach (var mesh in renderMeshes)
             {
-                mesh.Render();
+                mesh.Render(SceneModel.Instance.WireframeMode);
             }
         }
     }

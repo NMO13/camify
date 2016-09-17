@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessageHandling;
+using MessageHandling.Datatypes;
 using MessageHandling.Messages;
 using Model;
 using RenderEngine.Conversion;
@@ -32,6 +33,11 @@ namespace RenderEngine.Rendering.Scene
         internal int SceneHeight { get; set; }
         internal bool MeshUpdated { get; set; } //TODO: declare which mesh has been modified! Only mesh that has been changed must be modified.
 
+        public SnapshotCollector CurrentCollector;
+
+        public AnimationState CurrentAnimationState = AnimationState.Stop;
+        public AnimationState LastAnimationState = AnimationState.Stop;
+
         //Matrices
         internal Matrix4d LookAtMatrix { get; set; }
         internal Matrix4d WorldTransformationMatrix { get; set; }
@@ -40,7 +46,6 @@ namespace RenderEngine.Rendering.Scene
 
         //Singleton
         private static SceneModel _instance;
-        private event ModelHandler<AbstractModel> Changed;
 
         //Constructor
         private SceneModel() { }
@@ -57,7 +62,6 @@ namespace RenderEngine.Rendering.Scene
 
         public override void AttachObserver(IObserver observer)
         {
-            Changed += observer.Notified;
         }
 
         public override void AttachModelObserver(AbstractModel abstractModel)
@@ -88,12 +92,25 @@ namespace RenderEngine.Rendering.Scene
                     return;
                 RenderMeshes[transformationMessage.ToolId].Translate(transformationMessage.Transformation.Vector3d);
             }
+            else if (message.MessageType == MessageType.NewSnapshotList)
+            {
+                var snapshotMessage = message as SnapshotMessage;
+                if (snapshotMessage == null)
+                    return;
+                CurrentCollector = snapshotMessage.SnapshotCollector;
+               // DebugAnimation();
+            }
         }
 
         public void DebugAnimation(int id, List<Vector3d> paths, long stopInterval)
         {
-            RenderMeshes[id].AnimationManager.Paths = paths;
-            RenderMeshes[id].AnimationManager.StopInterval = stopInterval;
+            //RenderMeshes[id].AnimationManager.Paths = paths;
+            //RenderMeshes[id].AnimationManager.StopInterval = stopInterval;
+        }
+
+        public void PlayAnimation()
+        {
+            CurrentAnimationState = AnimationState.Play;
         }
     }
 }

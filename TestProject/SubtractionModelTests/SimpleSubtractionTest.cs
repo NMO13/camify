@@ -52,8 +52,7 @@ namespace TestProject.SubtractionModelTests
             var rps = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Roughpart1.dae");
             _meshModel.AddRoughPart(rps[0]);
 
-            _subtractionModel.BuildSnapshotList();
-            var snapshotList = _subtractionModel.SnapshotList;
+            _subtractionModel.BuildSnapshotList(false);
         }
     }
 }

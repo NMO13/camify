@@ -65,7 +65,6 @@
     <Compile Include="GCodeParser.cs" />
     <Compile Include="Milling\NCPath.cs" />
     <Compile Include="Milling\NCProgram.cs" />
-    <Compile Include="Milling\SnapshotCollector.cs" />
     <Compile Include="Milling\SubtractionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

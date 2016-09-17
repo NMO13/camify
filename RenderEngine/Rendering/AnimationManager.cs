@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MessageHandling.Datatypes;
+using OpenTK.Graphics.OpenGL;
+using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering
@@ -14,41 +14,70 @@ namespace RenderEngine.Rendering
         Smooth
     };
 
+    public enum AnimationState
+    {
+        Stop, Pause, Play
+    }
+
     class AnimationManager
     {
         private RenderObject _parent;
         private AnimationType _animationType;
-        internal AnimationManager(RenderObject parent, AnimationType animType)
+
+        internal AnimationState AnimationState = AnimationState.Stop;
+        internal AnimationManager()
         {
             Timer.Start();
-            _parent = parent;
-            _animationType = animType;
         }
-        internal List<Vector3d> Paths { get; set; }
-        internal long StopInterval { get; set; }
         private Stopwatch Timer = new Stopwatch();
         private int Counter = 0;
 
-        internal void NextStep()
+        internal void NextFrame()
         {
-            if (Timer.ElapsedMilliseconds > StopInterval)
+            if (Counter < SceneModel.Instance.CurrentCollector.Snapshots.Count)
             {
-                if (Paths != null && Counter < Paths.Count)
+                var snapshot = SceneModel.Instance.CurrentCollector.Snapshots[Counter];
+                if (Timer.ElapsedMilliseconds > snapshot.StopIntervalMillis)
                 {
-                    var amount = CalcTranslationAmount();
-                    _parent.Translate(amount);
-
-                    Timer.Restart();
-                    Counter++;
+                    AnimateFrame(snapshot);
                 }
             }
         }
 
-        private Vector3d CalcTranslationAmount()
+        private void AnimateFrame(Snapshot snapshot)
+        { 
+            
+            var amount = CalcTranslationAmount(snapshot);
+
+            var mesh = SceneModel.Instance.RenderMeshes[snapshot.ToolId];
+            mesh.Translate(amount);
+            Timer.Restart();
+            Counter++;
+           
+        }
+
+        internal void Animate()
+        {
+            if (SceneModel.Instance.CurrentAnimationState == AnimationState.Stop)
+            {
+            }
+            else if (SceneModel.Instance.CurrentAnimationState == AnimationState.Play)
+            {
+                // if we just started the animation
+                if (SceneModel.Instance.LastAnimationState == AnimationState.Stop)
+                {
+                    SceneModel.Instance.CurrentAnimationState = AnimationState.Play;
+                    Timer.Restart();
+                }
+                NextFrame();
+            }
+        }
+
+        private Vector3d CalcTranslationAmount(Snapshot snapshot)
         {
             if (_animationType == AnimationType.Interval)
             {
-                return Paths[Counter];
+                return snapshot.Path;
             }
             else // Smooth
             {

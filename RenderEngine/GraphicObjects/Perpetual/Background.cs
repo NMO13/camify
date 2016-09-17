@@ -24,7 +24,7 @@ namespace RenderEngine.GraphicObjects.Perpetual
             Shader = ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.Scene.ToString());
         }
 
-        public override void Render()
+        public override void Render(bool wireframe)
         {
             GL.Disable(EnableCap.DepthTest);
             Shader.Use();
