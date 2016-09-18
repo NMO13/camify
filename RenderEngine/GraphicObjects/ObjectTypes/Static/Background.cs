@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using RenderEngine.Rendering.Scene;
+using RenderEngine.Resources;
 using RenderEngine.Resources.Shader;
 using Shared.Geometry;
 
@@ -12,11 +8,6 @@ namespace RenderEngine.GraphicObjects.ObjectTypes.Static
 {
     internal sealed class Background : StaticRenderObject
     {
-        protected override Shader Shader { get; set; }
-        protected override BufferUsageHint BufferUsage => BufferUsageHint.StaticDraw;
-        internal override Vertex[] Vertices { get; set; }
-        internal override bool HasNormals { get; set; }
-
         internal Background()
         {
             Vertices = LoadVertices();
@@ -34,7 +25,7 @@ namespace RenderEngine.GraphicObjects.ObjectTypes.Static
             DrawMesh(PrimitiveType.Quads);
         }
 
-        public override Vertex[] LoadVertices()
+        private Vertex[] LoadVertices()
         {
             return new[] {
                 new Vertex(-1, -1, -1),

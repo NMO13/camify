@@ -3,7 +3,7 @@ using System.Drawing;
 using RenderEngine.Conversion;
 using Shared.Geometry;
 
-namespace GraphicsEngine.Rotation
+namespace RenderEngine.Camera
 {
     class WorldRotator
     {

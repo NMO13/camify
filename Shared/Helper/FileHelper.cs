@@ -20,10 +20,7 @@ namespace Shared.Helper
 
         public static List<Mesh> LoadFileFromDropbox(String filepath)
         {
-            MeshImporter importer = new MeshImporter();
-            List<Mesh> meshes =
-                importer.GenerateMeshes(GetDropboxFolderPath() +
-                                        filepath);
+            List<Mesh> meshes =  MeshImporter.Instance.GenerateMeshes(GetDropboxFolderPath() + filepath);
             return meshes;
         }
 
@@ -41,7 +38,7 @@ namespace Shared.Helper
 
         public static string GetMeshModelPath(string filename)
         {
-            return Path.Combine(GetProjectDirectory(), "Meshmodel", "Files", filename);
+            return Path.Combine(GetProjectDirectory(), "Resources", "StaticObjects", "Files", filename);
         }
     }
 }

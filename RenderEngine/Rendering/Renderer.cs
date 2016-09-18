@@ -11,6 +11,7 @@ namespace RenderEngine.Rendering
         public void Render()
         {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+   
             foreach (var staticObject in SceneModel.Instance.StaticRenderObjects)
             {
                 staticObject.Render(false);

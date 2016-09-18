@@ -118,10 +118,9 @@ namespace UserInterface
             {
                 try
                 {
-                    MeshImporter m = new MeshImporter();
-                    var meshes = m.GenerateMeshes(openFileDialog1.FileName);
-                    ((MeshModel) _meshModel).ClearMeshList();
-                    ((MeshModel)_meshModel).AddRoughParts(meshes);
+                    var meshes = MeshImporter.Instance.GenerateMeshes(openFileDialog1.FileName);
+                    _meshModel.ClearMeshList();
+                    _meshModel.AddRoughParts(meshes);
                 }
                 catch (Exception ex)
                 {

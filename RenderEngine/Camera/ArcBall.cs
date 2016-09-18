@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Shared.Geometry;
 
-namespace GraphicsEngine.Rotation
+namespace RenderEngine.Camera
 {
     /*
      * This code is a part of NeHe tutorials and was converted from C++ into C#. 

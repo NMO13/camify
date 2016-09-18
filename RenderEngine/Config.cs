@@ -14,8 +14,8 @@
         internal static readonly string NormalVisualizationGeometryShader = "normalDisplay.gs";
         internal static readonly string NormalVisualizationFragmentShader = "normalDisplay.frag";
 
-        internal static readonly string CoordinateAxisVertexShader = "coordinateAxis.vs";
-        internal static readonly string CoordinateAxisFragmentShader = "coordinateAxis.frag";
+        internal static readonly string CoordinateSystemVertexShader = "coordinateAxis.vs";
+        internal static readonly string CoordinateSystemFragmentShader = "coordinateAxis.frag";
 
         ///############# Camera ###########///
         internal static readonly float GranularityZoom = 10f;
@@ -30,6 +30,6 @@
         internal static readonly float Magnitude = 0.4f;
 
         ///############# CoordinateAxis ###########///
-        internal static readonly string CoordinateAxisMesh = "coordinate-system.dae";
+        internal static readonly string CoordinateSystemMesh = "coordinate-system.dae";
     }
 }

@@ -16,7 +16,8 @@ namespace RenderEngine.Resources.Shader
         internal static string NormalDisplayGeometryShader { get; set; } = FileHelper.GetShaderPath(Config.NormalVisualizationGeometryShader);
         internal static string NormalDisplayFragmentShader { get; set; } = FileHelper.GetShaderPath(Config.NormalVisualizationFragmentShader);
         //Coordinate Axis
-        internal static string CoordinateAxisVertexShader { get; set;  }
+        internal static string CoordinateAxisVertexShader { get; set; } = FileHelper.GetShaderPath(Config.CoordinateSystemVertexShader);
+        internal static string CoordinateAxisFragmentShader { get; set; } = FileHelper.GetShaderPath(Config.CoordinateSystemFragmentShader);
 
         //private static string GetBasePath()
         //{

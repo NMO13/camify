@@ -14,14 +14,14 @@ namespace Shared.Geometry
         public double NX;
         public double NY;
         public double NZ;
-        public Vertex(float x, float y, float z) : this()
+        public Vertex(double x, double y, double z) : this()
         {
             X = x;
             Y = y;
             Z = z;
             IsContourEdge = 1f;
         }
-        public Vertex(float x, float y, float z, float nX, float nY, float nZ) : this()
+        public Vertex(double x, double y, double z, double nX, double nY, double nZ) : this()
         {
             X = x;
             Y = y;

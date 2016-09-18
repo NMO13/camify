@@ -10,21 +10,29 @@ namespace Shared.Import
 {
     public class MeshImporter
     {
-        public enum ComponentExclusion
+        private static MeshImporter _instance;
+        public static MeshImporter Instance
         {
-            Standard = ExcludeComponent.Animations | ExcludeComponent.Boneweights |
-                                ExcludeComponent.Cameras | ExcludeComponent.Lights |
-                                ExcludeComponent.TexCoords | ExcludeComponent.Textures | ExcludeComponent.Normals,
-            LeaveNormals = ExcludeComponent.Animations | ExcludeComponent.Boneweights |
-                                ExcludeComponent.Cameras | ExcludeComponent.Lights |
-                                ExcludeComponent.TexCoords | ExcludeComponent.Textures
-
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new MeshImporter();
+                }
+                return _instance;
+            }
         }
-        private readonly List<Mesh> _meshes = new List<Mesh>();
-        public List<Mesh> GenerateMeshes(string path, ComponentExclusion exclusion = ComponentExclusion.Standard)
+
+        private List<Mesh> _meshes;
+        public List<Mesh> GenerateMeshes(string path)
         {
+            _meshes = new List<Mesh>();
             AssimpImporter importer = new AssimpImporter();
-            importer.SetConfig(new RemoveComponentConfig((ExcludeComponent)exclusion));
+            ExcludeComponent exclusion = ExcludeComponent.Animations | ExcludeComponent.Boneweights |
+                                         ExcludeComponent.Cameras | ExcludeComponent.Lights |
+                                         ExcludeComponent.TexCoords | ExcludeComponent.Textures |
+                                         ExcludeComponent.Normals;
+            importer.SetConfig(new RemoveComponentConfig(exclusion));
 
             var scene = importer.ImportFile(path, PostProcessSteps.JoinIdenticalVertices | PostProcessSteps.RemoveComponent);
             ProcessNode(scene.RootNode, scene);

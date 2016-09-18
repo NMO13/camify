@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
-using GraphicsEngine.Rotation;
+﻿using System;
+using System.Collections.Generic;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Camera;
 using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.Factories;
 using RenderEngine.GraphicObjects.ObjectTypes;
+using RenderEngine.GraphicObjects.ObjectTypes.Static;
+using RenderEngine.Resources;
 using RenderEngine.Resources.Shader;
+using RenderEngine.Resources.StaticObjects;
+using Shared.Assets;
 using Shared.Geometry;
+using Shared.Import;
 using Matrix4d = Shared.Geometry.Matrix4d;
 
 namespace RenderEngine.Rendering.Scene
@@ -51,8 +57,10 @@ namespace RenderEngine.Rendering.Scene
             SceneModel.Instance.WorldTransformationMatrix = Matrix4d.Mult(SceneModel.Instance.LookAtMatrix, zoom);
 
             //Rotate camera
-            Matrix4d test = WorldRotator.GetRotationMatrix();
-            Matrix4d rotation = Matrix4d.Mult(Objective.InitialPitch, test);
+            Matrix4d rotationMatrix = WorldRotator.GetRotationMatrix();
+            SceneModel.Instance.RotationMatrix = rotationMatrix;
+
+            Matrix4d rotation = Matrix4d.Mult(Objective.InitialPitch, rotationMatrix);
             SceneModel.Instance.WorldTransformationMatrix = Matrix4d.Mult(rotation,
                 SceneModel.Instance.WorldTransformationMatrix);
         }
@@ -62,15 +70,30 @@ namespace RenderEngine.Rendering.Scene
             ResourceManager.Instance.LoadShader(ShaderLibrary.SceneVertexShader, ShaderLibrary.SceneFragmentShader, null, ShaderLibrary.ShaderName.Scene.ToString());
             ResourceManager.Instance.LoadShader(ShaderLibrary.MeshVertexShader, ShaderLibrary.MeshFragmentShader, ShaderLibrary.MeshGeometryShader, ShaderLibrary.ShaderName.Mesh.ToString());
             ResourceManager.Instance.LoadShader(ShaderLibrary.NormalDisplayVertexShader, ShaderLibrary.NormalDisplayFragmentShader, ShaderLibrary.NormalDisplayGeometryShader, ShaderLibrary.ShaderName.NormalVisualization.ToString());
+            ResourceManager.Instance.LoadShader(ShaderLibrary.CoordinateAxisVertexShader, ShaderLibrary.CoordinateAxisFragmentShader, null, ShaderLibrary.ShaderName.CoordinateAxis.ToString());
         }
 
         private void LoadStaticObjects()
-        {
+        {     
             StaticRenderObject background = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.Background);
             SceneModel.Instance.AddStaticObject(background);
 
-            //RenderObject coordinateAxis = RenderObjectFactory.CreateRenderObject(ObjectType.);
-            //SceneModel.Instance.AddPerpetualObject(coordinateAxis);
+            //Coordinate system
+            var meshes = MeshImporter.Instance.GenerateMeshes(StaticRenderObjectLibrary.CoordinateSystemMesh);
+            if(meshes.Count != 4)
+                throw new Exception("Coordinate system must consist of four parts.");
+
+            StaticRenderObject coordinateSystemSphere = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.CoordinateSystem, new Material(MaterialType.Gold), meshes[0]);
+            SceneModel.Instance.AddStaticObject(coordinateSystemSphere);
+
+            StaticRenderObject coordinateAxis = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.CoordinateSystem, new Material(MaterialType.Red), meshes[1]);
+            SceneModel.Instance.AddStaticObject(coordinateAxis);
+
+            coordinateAxis = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.CoordinateSystem, new Material(MaterialType.Green), meshes[2]);
+            SceneModel.Instance.AddStaticObject(coordinateAxis);
+
+            coordinateAxis = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.CoordinateSystem, new Material(MaterialType.Blue), meshes[3]);
+            SceneModel.Instance.AddStaticObject(coordinateAxis);
         }
 
         private void InitializeGl()

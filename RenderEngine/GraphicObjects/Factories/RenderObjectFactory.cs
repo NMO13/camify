@@ -2,8 +2,10 @@
 using RenderEngine.GraphicObjects.ObjectTypes;
 using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
 using RenderEngine.GraphicObjects.ObjectTypes.Static;
+using Shared.Assets;
+using Shared.Geometry;
 
-namespace RenderEngine.GraphicObjects
+namespace RenderEngine.GraphicObjects.Factories
 {
     class RenderObjectFactory
     {
@@ -19,12 +21,12 @@ namespace RenderEngine.GraphicObjects
                 return _instance;
             }
         }
-        public StaticRenderObject BuildStaticRenderObject(ObjectType objectType)
+        public StaticRenderObject BuildStaticRenderObject(ObjectType objectType, Material material = null, Mesh mesh = null)
         {
             switch (objectType)
             {
                 case ObjectType.Background: return new Background();
-                case ObjectType.CoordinateSystem: return new CoordinateSystem();
+                case ObjectType.CoordinateSystem: return new CoordinateSystemPart(mesh, material);
                 default: throw  new ArgumentException("Object type not supported");
             }
         }

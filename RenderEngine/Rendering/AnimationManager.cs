@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using MessageHandling.SnapshotFormat;
-using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.Factories;
 using RenderEngine.GraphicObjects.ObjectTypes;
 using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
 using RenderEngine.Rendering.Scene;

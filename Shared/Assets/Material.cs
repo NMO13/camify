@@ -28,6 +28,9 @@ namespace Shared.Assets
             {
                 case MaterialType.Silver: SetToSilver(); break;
                 case MaterialType.Gold: SetToGold(); break;
+                case MaterialType.Red: SetToRed(); break;
+                case MaterialType.Green: SetToGreen(); break;
+                case MaterialType.Blue: SetToBlue(); break;
                 default: throw new Exception("Material type is not supported");
             }
         }
@@ -64,11 +67,65 @@ namespace Shared.Assets
 
             Shininess = MaterialConstants.GoldShininess;
         }
+
+        private void SetToRed()
+        {
+            AmbientR = MaterialConstants.RedAmbientR;
+            AmbientG = MaterialConstants.RedAmbientG;
+            AmbientB = MaterialConstants.RedAmbientB;
+
+            DiffuseR = MaterialConstants.RedDiffuseR;
+            DiffuseG = MaterialConstants.RedDiffuseG;
+            DiffuseB = MaterialConstants.RedDiffuseB;
+
+            SpecularR = MaterialConstants.RedSpecularR;
+            SpecularG = MaterialConstants.RedSpecularG;
+            SpecularB = MaterialConstants.RedSpecularB;
+
+            Shininess = MaterialConstants.RedShininess;
+        }
+
+        private void SetToGreen()
+        {
+            AmbientR = MaterialConstants.GreenAmbientR;
+            AmbientG = MaterialConstants.GreenAmbientG;
+            AmbientB = MaterialConstants.GreenAmbientB;
+
+            DiffuseR = MaterialConstants.GreenDiffuseR;
+            DiffuseG = MaterialConstants.GreenDiffuseG;
+            DiffuseB = MaterialConstants.GreenDiffuseB;
+
+            SpecularR = MaterialConstants.GreenSpecularR;
+            SpecularG = MaterialConstants.GreenSpecularG;
+            SpecularB = MaterialConstants.GreenSpecularB;
+
+            Shininess = MaterialConstants.GreenShininess;
+        }
+
+        private void SetToBlue()
+        {
+            AmbientR = MaterialConstants.BlueAmbientR;
+            AmbientG = MaterialConstants.BlueAmbientG;
+            AmbientB = MaterialConstants.BlueAmbientB;
+
+            DiffuseR = MaterialConstants.BlueDiffuseR;
+            DiffuseG = MaterialConstants.BlueDiffuseG;
+            DiffuseB = MaterialConstants.BlueDiffuseB;
+
+            SpecularR = MaterialConstants.BlueSpecularR;
+            SpecularG = MaterialConstants.BlueSpecularG;
+            SpecularB = MaterialConstants.BlueSpecularB;
+
+            Shininess = MaterialConstants.BlueShininess;
+        }
     }
 
     public enum MaterialType
     {
         Silver,
-        Gold
+        Gold,
+        Red, 
+        Green,
+        Blue
     }
 }

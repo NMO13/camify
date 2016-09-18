@@ -6,6 +6,8 @@ using MessageHandling.SnapshotFormat;
 using Model;
 using RenderEngine.Conversion;
 using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
+using RenderEngine.GraphicObjects.ObjectTypes.Static;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering.Scene
@@ -41,10 +43,10 @@ namespace RenderEngine.Rendering.Scene
         public AnimationState LastAnimationState = AnimationState.Stop;
 
         //Matrices
-        internal Matrix4d LookAtMatrix { get; set; }
-        internal Matrix4d WorldTransformationMatrix { get; set; }
-        internal Matrix4d ProjectionMatrix { get; set; }
-        internal Matrix4d RotationMatrix { get; set; }
+        internal Matrix4d LookAtMatrix { get; set; } = Matrix4d.Identity;
+        internal Matrix4d WorldTransformationMatrix { get; set; } = Matrix4d.Identity;
+        internal Matrix4d ProjectionMatrix { get; set; } = Matrix4d.Identity;
+        internal Matrix4d RotationMatrix { get; set; } = Matrix4d.Identity;
 
         public bool IsSnapshotCollectionValid
         {

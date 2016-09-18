@@ -1,9 +1,9 @@
 ﻿using Shared.Helper;
 
-namespace RenderEngine.Resources.Meshmodel
+namespace RenderEngine.Resources.StaticObjects
 {
     class StaticRenderObjectLibrary
     {
-        internal static string CoordinateAxisMesh { get; set; } = FileHelper.GetMeshModelPath(Config.SceneVertexShaderFilename);
+        internal static string CoordinateSystemMesh { get; set; } = FileHelper.GetMeshModelPath(Config.CoordinateSystemMesh);
     }
 }

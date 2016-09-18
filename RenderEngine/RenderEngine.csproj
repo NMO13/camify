@@ -80,9 +80,8 @@
     <Compile Include="ErrorHandling\GLCheck.cs" />
     <Compile Include="GraphicObjects\ObjectTypes\Dynamic\DynamicRenderObject.cs" />
     <Compile Include="GraphicObjects\ObjectTypes\Dynamic\DynamicObjectDataContainer.cs" />
-    <Compile Include="GraphicObjects\ObjectTypes\Static\IVertexLoading.cs" />
     <Compile Include="GraphicObjects\ObjectTypes\Static\Background.cs" />
-    <Compile Include="GraphicObjects\ObjectTypes\Static\CoordinateSystem.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Static\CoordinateSystemPart.cs" />
     <Compile Include="GraphicObjects\ObjectTypes\Static\StaticRenderObject.cs" />
     <Compile Include="GraphicObjects\ObjectTypes\ObjectType.cs" />
     <Compile Include="IO\MouseHandler.cs" />
@@ -133,7 +132,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\StaticObjects\Files\coordinate-system.dae" />
+    <None Include="Resources\StaticObjects\Files\coordinate-system.dae">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Shader\Files\coordinateAxis.frag" />
     <None Include="Resources\Shader\Files\coordinateAxis.vs" />
     <None Include="Resources\Shader\Files\normalDisplay.frag" />

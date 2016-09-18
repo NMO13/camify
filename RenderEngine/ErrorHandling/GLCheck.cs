@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using OpenTK.Graphics.OpenGL;
 
-namespace RenderEngine
+namespace RenderEngine.ErrorHandling
 {
     public static class GLCheck
     {

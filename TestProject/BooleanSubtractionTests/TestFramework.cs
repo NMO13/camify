@@ -23,8 +23,7 @@ namespace TestProject.BooleanSubtractionTests
 
         internal static List<Mesh> LoadFile(String file)
         {
-            MeshImporter importer = new MeshImporter();
-            List<Mesh> meshes = importer.GenerateMeshes(file);
+            List<Mesh> meshes = MeshImporter.Instance.GenerateMeshes(file);
             return meshes;
         }
 

@@ -4,7 +4,7 @@ using OpenTK.Graphics.OpenGL;
 using RenderEngine.Conversion;
 using Shared.Geometry;
 
-namespace RenderEngine
+namespace RenderEngine.Resources.Shader
 {
     class Shader
     {

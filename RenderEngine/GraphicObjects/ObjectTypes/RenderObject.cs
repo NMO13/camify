@@ -2,7 +2,9 @@
 using System.Runtime.InteropServices;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.BufferObjectManagement;
+using RenderEngine.ErrorHandling;
 using RenderEngine.Rendering;
+using RenderEngine.Resources.Shader;
 using Shared.Geometry;
 
 namespace RenderEngine.GraphicObjects.ObjectTypes
@@ -23,7 +25,7 @@ namespace RenderEngine.GraphicObjects.ObjectTypes
                 throw new ArgumentNullException("Vertices must not be null.");
 
             //Bind vao, vbo and ebo
-            GL.BindVertexArray(_bufferObject.Vao);
+            GLCheck.Call(() => GL.BindVertexArray(_bufferObject.Vao));
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, _bufferObject.Vbo);
             GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(Vertices.Length * Marshal.SizeOf(typeof(Vertex))), Vertices, BufferUsage);
@@ -42,9 +44,9 @@ namespace RenderEngine.GraphicObjects.ObjectTypes
             }
 
             //Unlink buffers
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.BindVertexArray(0);
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+            GLCheck.Call(() => GL.BindBuffer(BufferTarget.ArrayBuffer, 0));
+            GLCheck.Call(() => GL.BindVertexArray(0));
+            GLCheck.Call(() => GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0));
         }
         protected void DrawMesh(PrimitiveType primitiveType = PrimitiveType.Triangles)
         {

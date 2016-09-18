@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using RenderEngine.Camera;
-using RenderEngine.GraphicObjects.ObjectTypes;
-using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
+using RenderEngine.ErrorHandling;
 using RenderEngine.Lighting;
 using RenderEngine.Rendering.Scene;
+using RenderEngine.Resources;
 using RenderEngine.Resources.Shader;
+using RenderEngine.Resources.Texture;
 using Shared.Assets;
 using Shared.Geometry;
 
-namespace RenderEngine.GraphicObjects
+namespace RenderEngine.GraphicObjects.ObjectTypes.Dynamic
 {
     internal sealed class DynamicRenderObject : RenderObject
     {
@@ -67,6 +63,7 @@ namespace RenderEngine.GraphicObjects
 
         public override void Render(bool wireframe)
         {
+            GL.Viewport(0, 0, SceneModel.Instance.SceneWidth, SceneModel.Instance.SceneHeight);
             PolygonMode polyMode = wireframe ? PolygonMode.Line : PolygonMode.Fill;
             GL.PolygonMode(MaterialFace.FrontAndBack, polyMode);
             GL.Enable(EnableCap.DepthTest);

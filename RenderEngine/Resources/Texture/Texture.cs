@@ -1,7 +1,7 @@
-﻿using System;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
+using RenderEngine.ErrorHandling;
 
-namespace RenderEngine
+namespace RenderEngine.Resources.Texture
 {
     class Texture
     {

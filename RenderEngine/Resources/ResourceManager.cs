@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
-using RenderEngine.Resources.Shader;
 using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 
-namespace RenderEngine
+namespace RenderEngine.Resources
 {
     class ResourceManager
     {
-        private readonly Dictionary<string, Shader> _shaderDict = new Dictionary<string, Shader>(); 
-        private readonly Dictionary<string, Texture> _textureDict = new Dictionary<string, Texture>();
+        private readonly Dictionary<string, Shader.Shader> _shaderDict = new Dictionary<string, Shader.Shader>(); 
+        private readonly Dictionary<string, Texture.Texture> _textureDict = new Dictionary<string, Texture.Texture>();
         private static ResourceManager _instance;
 
         internal static ResourceManager Instance
@@ -29,27 +26,27 @@ namespace RenderEngine
             }
         }
         private ResourceManager() { }
-        internal Shader GetShader(string name)
+        internal Shader.Shader GetShader(string name)
         {
             return _shaderDict[name];
         }
 
         internal void LoadShader(string vertexShaderPath, string fragShaderPath, string geoShaderPath, string name)
         {
-            Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath, geoShaderPath);
+            Shader.Shader shader = LoadShaderFromFile(vertexShaderPath, fragShaderPath, geoShaderPath);
             _shaderDict.Add(name, shader);
         }
 
-        internal Texture LoadTextureFromFile(bool alpha, string name)
+        internal Texture.Texture LoadTextureFromFile(bool alpha, string name)
         {
-            Texture tex;
+            Texture.Texture tex;
             if (alpha)
             {
-                tex = new Texture(PixelInternalFormat.Rgba, PixelFormat.Rgba);
+                tex = new Texture.Texture(PixelInternalFormat.Rgba, PixelFormat.Rgba);
             }
             else
             {
-                tex = new Texture();
+                tex = new Texture.Texture();
             }
 
             Bitmap bitmap = new Bitmap(name);
@@ -69,7 +66,7 @@ namespace RenderEngine
             return tex;
         }
 
-        internal Texture GetTexture(byte[] pattern, int width, int height, string name)
+        internal Texture.Texture GetTexture(byte[] pattern, int width, int height, string name)
         {
             if (!_textureDict.ContainsKey(name))
             {
@@ -79,9 +76,9 @@ namespace RenderEngine
             return _textureDict[name];
         }
 
-        private Texture CreateOneChannelTexture(byte[] pattern, int width, int height, string name)
+        private Texture.Texture CreateOneChannelTexture(byte[] pattern, int width, int height, string name)
         {
-            Texture tex = new Texture(PixelInternalFormat.Luminance, PixelFormat.Luminance, PixelType.UnsignedByte,
+            Texture.Texture tex = new Texture.Texture(PixelInternalFormat.Luminance, PixelFormat.Luminance, PixelType.UnsignedByte,
                     TextureMinFilter.Nearest, TextureMagFilter.Nearest);
 
             tex.Generate(width, height, pattern);
@@ -89,7 +86,7 @@ namespace RenderEngine
             return tex;
         }
 
-        private Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath, string geoShaderPath)
+        private Shader.Shader LoadShaderFromFile(string vertexShaderPath, string fragShaderPath, string geoShaderPath)
         {
             string strVertexShader = null, strFragmentShader = null, strGeoShader = null;
             using (var streamReader = new StreamReader(vertexShaderPath, Encoding.UTF8))
@@ -110,7 +107,7 @@ namespace RenderEngine
                 }
             }
 
-            return new Shader(strVertexShader, strFragmentShader, strGeoShader);
+            return new Shader.Shader(strVertexShader, strFragmentShader, strGeoShader);
         }
     }
 }
