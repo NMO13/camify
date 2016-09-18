@@ -7,6 +7,7 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using Model;
 using RenderEngine.Rendering.Scene;
+using Shared.Assets;
 using Shared.Geometry;
 using Shared.Geometry.Meshes;
 using Shared.Helper;
@@ -37,7 +38,8 @@ namespace UserInterface
 
         private void CreateBasicTool()
         {
-             var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
+            var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder3.dae");
+            meshes[0].Material = new Material(MaterialType.Gold);
             _meshModel.AddTool(meshes[0]);
         }
 
@@ -55,7 +57,7 @@ namespace UserInterface
 
             kryptonDockingManager1.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { NewInput("G-Code Info", _gCodeOutput), NewInput("Output", new GCodeOutput()) });
             CreateBasicTool();
-            _meshModel.TranslateTool(0, 0, 200, 0);
+            _meshModel.TranslateTool(0, 0, 40, 0);
 
         }
 
@@ -130,7 +132,12 @@ namespace UserInterface
         private void BuildButton_Click(object sender, EventArgs e)
         {
             if (SubtractionModel.Instance.IsValidForBuilding)
+            {
+                ProgressBar b = new ProgressBar();
+                _openTkControl.Controls.Add(b);
                 SubtractionModel.Instance.BuildSnapshotList(false);
+                _openTkControl.Controls.Remove(b);
+            }
             else
                 MessageBox.Show("Building is not possible in this state.");
         }
@@ -164,25 +171,34 @@ namespace UserInterface
         private NCProgram TestProgram()
         {
             var program = new NCProgram();
-            program.AddPath(250, 0, 180);
-            program.AddPath(0, -150, 0);
-            program.AddPath(-450, 0, 0);
-            program.AddPath(0, 0, -400);
-            program.AddPath(380, 0, 0);
-            program.AddPath(0, 0, 400);
-            program.AddPath(-200, 0, -200);
-            program.AddPath(200, 0, -200);
-            program.AddPath(-200, 0, 2000);
-            program.AddPath(0, -30, 0);
-            program.AddPath(0, 60, 0);
-            program.AddPath(30, 0, 30);
-            program.AddPath(0, -60, 0);
-            program.AddPath(0, 60, 0);
-            program.AddPath(-100, 0, -100);
-            program.AddPath(0, -60, 0);
-            program.AddPath(0, 60, 0);
+            program.AddPath(70, 0, 0);
+            program.AddPath(0, -30, 50);
+
+            program.AddPath(-120, 0, 0);
+            program.AddPath(0, 0, -100);
+            program.AddPath(100, 0, 0);
             program.AddPath(0, 0, 100);
-            program.AddPath(0, -60, 0);
+
+            program.AddPath(0, 0, -5);
+
+            program.AddPath(-95, 0, 0);
+            program.AddPath(0, 0, -90);
+            program.AddPath(88, 0, 0);
+            program.AddPath(0, 0, 90);
+
+            program.AddPath(0, 0, -5);
+
+            program.AddPath(-80, 0, 0);
+            program.AddPath(0, 0, -80);
+            program.AddPath(5, 0, 0);
+            program.AddPath(0, 0, 70);
+            program.AddPath(0, 0, -70);
+            program.AddPath(75, 0, 0);
+
+            program.AddPath(-50, 0, 50);
+            program.AddPath(-30, 0, 0);
+            program.AddPath(0, 5, 0);
+
             return program;
         }
 
@@ -192,7 +208,7 @@ namespace UserInterface
             if (d.ShowDialog() == DialogResult.OK)
             {
                 //_meshModel.GenerateBox(d.X, d.Y, d.Z);
-                _meshModel.GenerateBox(200, 40, 200);
+                _meshModel.GenerateBox(50, 8, 50);
             }
         }
 

@@ -21,7 +21,7 @@
         internal static readonly float GranularityZoom = 10f;
         internal static readonly float MinZoom = -1800f;
         internal static readonly float MaxZoom = 700f;
-        internal static readonly float InitialZoom = -10f;
+        internal static readonly float InitialZoom = -800f;
         internal static readonly float PitchX = 0;
         internal static readonly float PitchY = 0f;
         internal static readonly float PitchZ = 0f;

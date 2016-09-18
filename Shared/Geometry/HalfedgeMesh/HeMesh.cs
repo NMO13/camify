@@ -14,6 +14,7 @@ namespace Shared.Geometry.HalfedgeMesh
         private readonly ManagedList<HeVertex> _vertexList;
 
         private readonly List<IMeshObserver> _observerList = new List<IMeshObserver>();
+        public DynamicProperties MeshProperties = new DynamicProperties();
 
         public HeMesh()
         {
@@ -39,6 +40,7 @@ namespace Shared.Geometry.HalfedgeMesh
             {
                 AddFace(mesh.Indices[i], mesh.Indices[i + 1], mesh.Indices[i + 2]);
             }
+            MeshProperties.AddProperty(PropertyConstants.Material, mesh.Material);
         }
 
         public void AddObserver(IMeshObserver obs)

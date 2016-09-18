@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assimp.Configs;
+using Shared.Additional;
 using Shared.Assets;
 using Shared.Geometry.HalfedgeMesh;
 
@@ -41,6 +42,9 @@ namespace Shared.Geometry
                 CreateRenderVertex(heFace.H2, ref i);
             }
             Indices = indices.ToArray();
+
+            if(heMesh.MeshProperties.ExistsKey(PropertyConstants.Material))
+                Material = heMesh.MeshProperties.GetValue(PropertyConstants.Material) as Material;
         }
 
         private void CreateRenderVertex(HeHalfedge h, ref int i)

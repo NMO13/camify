@@ -49,8 +49,22 @@ namespace TestProject.SweepingTests
             TestFramework.CheckSanity(o);
         }
 
+        [Test]
+        public void MovedCylinder3()
+        {
+            List<Mesh> meshes = FileHelper.LoadFileFromDropbox("\\BooleanOpEnv\\Blender\\Collada_Files\\CNC_Milling\\Cylinder2.dae");
+            Mesh mesh = meshes[0];
+            DeformableObject o = new DeformableObject();
+            o.Initialize(mesh);
+            o.Translate(new Vector3m(0, 40, 0));
+
+            var cl = o.Clone(Vector3m.Zero());
+            o.SweepVolume(cl, new Vector3m(70, 0, 0));
+            TestFramework.CheckSanity(o);
+        }
 
 
-      
+
+
     }
 }

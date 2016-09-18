@@ -8,6 +8,6 @@ namespace Shared.Additional
 {
     public enum PropertyConstants
     {
-        Marked, FaceListIndex, Median, IncidentEdges, HeVertexIndex
+        Marked, FaceListIndex, Median, IncidentEdges, HeVertexIndex, Material
     }
 }
