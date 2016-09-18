@@ -22,6 +22,7 @@ namespace UserInterface
         OpenTkControl _openTkControl = new OpenTkControl();
         private GCodeEditor _gCodeEditor;
         private GCodeOutput _gCodeOutput;
+        private ProgressBar b = new ProgressBar();
 
         public MainWindow()
         {
@@ -34,6 +35,11 @@ namespace UserInterface
             _meshModel.AttachModelObserver(SceneModel.Instance);
             SubtractionModel.Instance.AttachModelObserver(SceneModel.Instance);
             _meshModel.AttachModelObserver(SubtractionModel.Instance);
+
+            backgroundWorker1.WorkerReportsProgress = true;
+            SubtractionModel.Instance.Worker = backgroundWorker1;
+            kryptonRibbonGroupButton3.Enabled = false;
+
         }
 
         private void CreateBasicTool()
@@ -133,10 +139,12 @@ namespace UserInterface
         {
             if (SubtractionModel.Instance.IsValidForBuilding)
             {
-                ProgressBar b = new ProgressBar();
+                
                 _openTkControl.Controls.Add(b);
-                SubtractionModel.Instance.BuildSnapshotList(false);
-                _openTkControl.Controls.Remove(b);
+
+                backgroundWorker1.RunWorkerAsync();
+                
+                
             }
             else
                 MessageBox.Show("Building is not possible in this state.");
@@ -218,6 +226,22 @@ namespace UserInterface
                 SceneModel.Instance.PlayAnimation();
             else
                 MessageBox.Show("No valid program found. Have you already built?");
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            SubtractionModel.Instance.BuildSnapshotList(false);
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            b.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            _openTkControl.Controls.Remove(b);
+            kryptonRibbonGroupButton3.Enabled = true;
         }
     }
 }

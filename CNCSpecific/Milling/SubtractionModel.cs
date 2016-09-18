@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using GeometryCalculation.BooleanOperations;
 using GeometryCalculation.DataStructures;
 using GraphicsEngine.HalfedgeMesh;
@@ -30,6 +31,7 @@ namespace CNCSpecific.Milling
         private List<DeformableObject> _tools = new List<DeformableObject>();
         private List<DeformableObject> _roughParts = new List<DeformableObject>();
         private static SubtractionModel _instance;
+        public BackgroundWorker Worker { get; set; }
         public NCProgram NCProgram { get; set; }
 
         public override void AttachModelObserver(AbstractModel abstractModel)
@@ -110,6 +112,7 @@ namespace CNCSpecific.Milling
         {
             DeformableObject tsv = new DeformableObject();
             SnapshotCollector collector = new SnapshotCollector(collectTsv);
+            int counter = 0;
             foreach (var path in NCProgram.PathList)
             {
                 //TODO var tool = _tools.Find(x => x.Id == path.ActiveTool);
@@ -123,6 +126,12 @@ namespace CNCSpecific.Milling
                     collector.AddNextSnapshot(_roughParts[0].ToMesh(), null, path.RelativePosition.Vector3d, path.ActiveTool);
                 }
                 _tools[0].Translate(path.RelativePosition);
+                counter++;
+                if (Worker != null)
+                {
+                    var progress = ((float) counter/NCProgram.PathList.Count)*100;
+                    Worker.ReportProgress((int) progress);
+                }
             }
             if (Changed != null)
                 Changed(this, new SnapshotMessage(MessageType.NewSnapshotList, collector));
