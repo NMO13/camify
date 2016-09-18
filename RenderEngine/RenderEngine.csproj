@@ -101,6 +101,7 @@
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\RenderObject.cs" />
     <Compile Include="Rendering\RenderObjectFactory.cs" />
+    <Compile Include="Resources\Meshmodel\PerpetualMeshLibrary.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Resources\Shader\Shader.cs" />
     <Compile Include="Resources\Shader\ShaderLibrary.cs" />
@@ -129,6 +130,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Meshmodel\Files\coordinate-system.dae" />
     <None Include="Resources\Shader\Files\coordinateAxis.frag" />
     <None Include="Resources\Shader\Files\coordinateAxis.vs" />
     <None Include="Resources\Shader\Files\normalDisplay.frag" />
@@ -140,9 +142,7 @@
     <None Include="Resources\Shader\Files\sceneShader.frag" />
     <None Include="Resources\Shader\Files\sceneShader.vs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Mesh\Files\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(SolutionDir)\RenderEngine\Resources\Shader\Files" "$(SolutionDir)\UserInterface\$(OutDir)\Shader\Files" /s /i /y</PostBuildEvent>

@@ -2,9 +2,6 @@
 {
     public struct Config
     {
-        ///############# Base Paths ###########///
-       // internal static readonly string VertexBasePath = 
-
         ///############# Shader ###########///
         internal static readonly string SceneVertexShaderFilename = "sceneShader.vs";
         internal static readonly string SceneFragmentShaderFilename = "sceneShader.frag";
@@ -33,6 +30,6 @@
         internal static readonly float Magnitude = 0.4f;
 
         ///############# CoordinateAxis ###########///
-       // internal static readonly string CoordinateAxisMesh = ""
+        internal static readonly string CoordinateAxisMesh = "coordinate-system.dae";
     }
 }

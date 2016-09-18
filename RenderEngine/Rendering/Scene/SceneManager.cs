@@ -68,8 +68,8 @@ namespace RenderEngine.Rendering.Scene
             RenderObject background = RenderObjectFactory.CreateRenderObject(ObjectType.Background);
             SceneModel.Instance.AddPerpetualObject(background);
 
-            //RenderObject coordinateAxis = RenderObjectFactory.CreateRenderObject(ObjectType.CoordinateAxis);
-            //SceneModel.Instance.AddPerpetualObject(coordinateAxis);
+            RenderObject coordinateAxis = RenderObjectFactory.CreateRenderObject(ObjectType.CoordinateAxis);
+            SceneModel.Instance.AddPerpetualObject(coordinateAxis);
         }
 
         private void InitializeGl()

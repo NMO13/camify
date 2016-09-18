@@ -33,5 +33,15 @@ namespace Shared.Helper
             DirectoryInfo currentDirectoryInfo = new DirectoryInfo(currentDirectory);
             return currentDirectoryInfo.FullName;
         }
+
+        public static string GetShaderPath(string filename)
+        {
+            return Path.Combine(GetProjectDirectory(), "Shader", "Files", filename);
+        }
+
+        public static string GetMeshModelPath(string filename)
+        {
+            return Path.Combine(GetProjectDirectory(), "Meshmodel", "Files", filename);
+        }
     }
 }
