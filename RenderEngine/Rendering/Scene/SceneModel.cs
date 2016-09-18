@@ -44,6 +44,11 @@ namespace RenderEngine.Rendering.Scene
         internal Matrix4d ProjectionMatrix { get; set; }
         internal Matrix4d RotationMatrix { get; set; }
 
+        public bool IsSnapshotCollectionValid
+        {
+            get { return CurrentCollector != null && CurrentCollector.Snapshots.Count > 0; }
+        }
+
         //Singleton
         private static SceneModel _instance;
 

@@ -37,9 +37,8 @@ namespace UserInterface
 
         private void CreateBasicTool()
         {
-            // var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
-            var meshes = DefaultMeshes.Pyramid(2.5f, 2.5f, 2.5f);
-            _meshModel.AddTool(meshes);
+             var meshes = FileHelper.LoadFileFromDropbox(@"\BooleanOpEnv\Blender\Collada_Files\CNC_Milling\Cylinder1.dae");
+            _meshModel.AddTool(meshes[0]);
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -56,6 +55,7 @@ namespace UserInterface
 
             kryptonDockingManager1.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { NewInput("G-Code Info", _gCodeOutput), NewInput("Output", new GCodeOutput()) });
             CreateBasicTool();
+            _meshModel.TranslateTool(0, 0, 200, 0);
 
         }
 
@@ -129,7 +129,10 @@ namespace UserInterface
 
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            SubtractionModel.Instance.BuildSnapshotList(false);
+            if (SubtractionModel.Instance.IsValidForBuilding)
+                SubtractionModel.Instance.BuildSnapshotList(false);
+            else
+                MessageBox.Show("Building is not possible in this state.");
         }
 
         private void ImportTool_Click(object sender, EventArgs e)
@@ -195,7 +198,10 @@ namespace UserInterface
 
         private void kryptonRibbonGroupButton3_Click(object sender, EventArgs e)
         {
-            SceneModel.Instance.PlayAnimation();
+            if(SceneModel.Instance.IsSnapshotCollectionValid)
+                SceneModel.Instance.PlayAnimation();
+            else
+                MessageBox.Show("No valid program found. Have you already built?");
         }
     }
 }

@@ -49,14 +49,14 @@ namespace CNCSpecific.Milling
                 var meshMessage = message as HeMeshMessage;
                 if (meshMessage == null)
                     return;
-                AddDeformableObjectsToList(meshMessage.GetMeshes, _roughParts);
+                AddRoughParts(meshMessage.GetMeshes);
             }
             else if (message.MessageType == MessageType.NewTools)
             {
                 var meshMessage = message as HeMeshMessage;
                 if (meshMessage == null)
                     return;
-                AddDeformableObjectsToList(meshMessage.GetMeshes, _tools);
+                AddTools(meshMessage.GetMeshes);
             }
             else if (message.MessageType == MessageType.ClearMeshes)
             {
@@ -72,6 +72,26 @@ namespace CNCSpecific.Milling
                 if (transformationMessage == null)
                     return;
                 _tools[transformationMessage.ToolId].Translate(transformationMessage.Transformation);
+            }
+        }
+
+        private void AddTools(List<HeMesh> getMeshes)
+        {
+            foreach (var mesh in getMeshes)
+            {
+                var tool = CreateDeformableObject(mesh);
+                _tools.Add(tool);
+            }
+        }
+
+        private void AddRoughParts(List<HeMesh> getMeshes)
+        {
+            foreach (var mesh in getMeshes)
+            {
+                var roughPart = CreateDeformableObject(mesh);
+                roughPart.AddPostProcessStep(DeformableObject.PostprocessAlgorithm.StraightEdgeReduction);
+                roughPart.AddPostProcessStep(DeformableObject.PostprocessAlgorithm.PlanarMerge);
+                _roughParts.Add(roughPart);
             }
         }
 
@@ -108,14 +128,6 @@ namespace CNCSpecific.Milling
                 Changed(this, new SnapshotMessage(MessageType.NewSnapshotList, collector));
         }
 
-        private void AddDeformableObjectsToList(List<HeMesh> getMeshes, List<DeformableObject> deformableObjects)
-        {
-            foreach (var mesh in getMeshes)
-            {
-                deformableObjects.Add(CreateDeformableObject(mesh));
-            }
-        }
-
         private DeformableObject CreateDeformableObject(HeMesh mesh)
         {
             return DeformableObjectFactory.Create(mesh);
@@ -124,5 +136,10 @@ namespace CNCSpecific.Milling
         public List<DeformableObject> RoughParts { get { return _roughParts;} }
 
         public List<DeformableObject> Tools { get { return _tools; } }
+
+        public bool IsValidForBuilding
+        {
+            get { return NCProgram != null && NCProgram.PathList.Count > 0 && _tools.Count > 0 && _roughParts.Count > 0; }
+        }
     }
 }
