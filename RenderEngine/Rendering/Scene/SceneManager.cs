@@ -3,6 +3,7 @@ using GraphicsEngine.Rotation;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Camera;
 using RenderEngine.GraphicObjects;
+using RenderEngine.GraphicObjects.ObjectTypes;
 using RenderEngine.Resources.Shader;
 using Shared.Geometry;
 using Matrix4d = Shared.Geometry.Matrix4d;
@@ -11,7 +12,7 @@ namespace RenderEngine.Rendering.Scene
 {
     class SceneManager
     {
-        private readonly Renderer _renderer = new Renderer(SceneModel.Instance.RenderMeshes, SceneModel.Instance.PerpetualMeshes);
+        private readonly Renderer _renderer = new Renderer();
         internal WorldRotator WorldRotator = new WorldRotator();
 
         internal void Load(int width, int height)
@@ -19,7 +20,7 @@ namespace RenderEngine.Rendering.Scene
             InitializeGl();
             Resized(width, height);
             LoadShader();
-            LoadPerpetualObjects();
+            LoadStaticObjects();
         }
 
         internal void Paint()
@@ -63,12 +64,12 @@ namespace RenderEngine.Rendering.Scene
             ResourceManager.Instance.LoadShader(ShaderLibrary.NormalDisplayVertexShader, ShaderLibrary.NormalDisplayFragmentShader, ShaderLibrary.NormalDisplayGeometryShader, ShaderLibrary.ShaderName.NormalVisualization.ToString());
         }
 
-        private void LoadPerpetualObjects()
+        private void LoadStaticObjects()
         {
-            RenderObject background = RenderObjectFactory.CreateRenderObject(ObjectType.Background);
-            SceneModel.Instance.AddPerpetualObject(background);
+            StaticRenderObject background = RenderObjectFactory.Instance.BuildStaticRenderObject(ObjectType.Background);
+            SceneModel.Instance.AddStaticObject(background);
 
-            //RenderObject coordinateAxis = RenderObjectFactory.CreateRenderObject(ObjectType.CoordinateAxis);
+            //RenderObject coordinateAxis = RenderObjectFactory.CreateRenderObject(ObjectType.);
             //SceneModel.Instance.AddPerpetualObject(coordinateAxis);
         }
 

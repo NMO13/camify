@@ -2,7 +2,8 @@
 using System.Diagnostics;
 using MessageHandling.SnapshotFormat;
 using RenderEngine.GraphicObjects;
-using RenderEngine.GraphicObjects.Deformable;
+using RenderEngine.GraphicObjects.ObjectTypes;
+using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
 using RenderEngine.Rendering.Scene;
 using Shared.Geometry;
 
@@ -55,12 +56,18 @@ namespace RenderEngine.Rendering
             
             var amount = CalcTranslationAmount(snapshot);
 
-            var mesh = SceneModel.Instance.RenderMeshes[snapshot.ToolId];
+            var mesh = SceneModel.Instance.DynamicRenderObjects[snapshot.ToolId];
             mesh.Translate(amount);
 
-            SceneModel.Instance.RenderMeshes[1] =
-                RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, snapshot.RoughpartSnapshot.RenderVertices,
-                    snapshot.RoughpartSnapshot.Material, true) as RenderMesh;
+            var container = new DynamicObjectDataContainer
+            {
+                Vertices = snapshot.RoughpartSnapshot.RenderVertices,
+                Material = snapshot.RoughpartSnapshot.Material,
+                HasNormals = true
+            };
+
+            SceneModel.Instance.DynamicRenderObjects[1] =
+                RenderObjectFactory.Instance.BuildDynamicRenderObject(container) as DynamicRenderObject;
 
 
             Timer.Restart();

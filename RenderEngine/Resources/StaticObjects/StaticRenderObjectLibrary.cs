@@ -2,7 +2,7 @@
 
 namespace RenderEngine.Resources.Meshmodel
 {
-    class PerpetualMeshLibrary
+    class StaticRenderObjectLibrary
     {
         internal static string CoordinateAxisMesh { get; set; } = FileHelper.GetMeshModelPath(Config.SceneVertexShaderFilename);
     }

@@ -8,6 +8,11 @@ namespace RenderEngine.Lighting
         internal List<DirectionalLight> DirectionalLights { get; } = new List<DirectionalLight>();
         internal List<PointLight> PointLights { get; } = new List<PointLight>();
 
+        internal LightBundle()
+        {
+            SetLights(BundleType.Standard);
+        }
+
         internal LightBundle(BundleType bundleType)
         { 
             SetLights(bundleType);

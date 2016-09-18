@@ -1,26 +1,28 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenTK.Graphics.OpenGL;
 using RenderEngine.Camera;
+using RenderEngine.GraphicObjects.ObjectTypes;
+using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
 using RenderEngine.Lighting;
-using RenderEngine.Rendering;
 using RenderEngine.Rendering.Scene;
 using RenderEngine.Resources.Shader;
 using Shared.Assets;
 using Shared.Geometry;
 
-
-namespace RenderEngine.GraphicObjects.Deformable
+namespace RenderEngine.GraphicObjects
 {
-    sealed class RenderMesh : RenderObject
+    internal sealed class DynamicRenderObject : RenderObject
     {
         protected override Shader Shader { get; set; }
         protected override BufferUsageHint BufferUsage => BufferUsageHint.DynamicDraw;
         internal override Vertex[] Vertices { get; set; }
         internal override bool HasNormals { get; set; }
+        private Material Material { get; }
         private LightBundle LightBundle { get; }
-        private Material Material { get;  }
-
-        private Shader NormalVisualizationShader { get; } =
-            ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.NormalVisualization.ToString());
 
         private byte[] bayerMatrix =  {
             0, 32,  8, 40,  2, 34, 10, 42,   /* 8x8 Bayer ordered dithering  */
@@ -32,14 +34,35 @@ namespace RenderEngine.GraphicObjects.Deformable
             15, 47,  7, 39, 13, 45,  5, 37,
             63, 31, 55, 23, 61, 29, 53, 21 };
 
-        internal RenderMesh(Vertex[] vertices, Material material, bool hasNormals, LightBundle lightBundle) : base(vertices, hasNormals)
+        private Shader NormalVisualizationShader { get; } =
+           ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.NormalVisualization.ToString());
+
+        //Constructor
+        internal DynamicRenderObject(DynamicObjectDataContainer container)
         {
             Shader = ResourceManager.Instance.GetShader(ShaderLibrary.ShaderName.Mesh.ToString());
-            LightBundle = lightBundle;
-            Material = material;
+            Vertices = container.Vertices;
+            LightBundle = container.LightBundle;
+            Material = container.Material;
+            HasNormals = container.HasNormals;
 
-            Vertices = vertices;
-            HasNormals = hasNormals;
+            Setup();
+        }
+
+        ////TODO alter modelmatrix rather than changing vertices
+        internal void Translate(Shared.Geometry.Vector3d transformation)
+        {
+            var dX = transformation.X;
+            var dY = transformation.Y;
+            var dZ = transformation.Z;
+
+            for (int i = 0; i < Vertices.Length; i++)
+            {
+                Vertices[i].X += dX;
+                Vertices[i].Y += dY;
+                Vertices[i].Z += dZ;
+            }
+            Setup();
         }
 
         public override void Render(bool wireframe)
@@ -76,7 +99,7 @@ namespace RenderEngine.GraphicObjects.Deformable
             Shader.SetUniform3("material.ambient", Material.AmbientR, Material.AmbientG, Material.AmbientB);
             Shader.SetUniform3("material.diffuse", Material.DiffuseR, Material.DiffuseG, Material.DiffuseB);
             Shader.SetUniform3("material.specular", Material.SpecularR, Material.SpecularG, Material.SpecularB);
-            
+
         }
 
         private void DeployLightConstants()
@@ -95,7 +118,7 @@ namespace RenderEngine.GraphicObjects.Deformable
 
                 PointLight pLight = LightBundle.PointLights[i];
                 float zPosition = pLight.PosZ + Objective.CurZoom;
-                Shader.SetUniform3("pointLights[" + i  + "].position", pLight.PosX, pLight.PosY, zPosition);
+                Shader.SetUniform3("pointLights[" + i + "].position", pLight.PosX, pLight.PosY, zPosition);
                 Shader.SetUniform3("pointLights[" + i + "].ambient", pLight.AmbientR, pLight.AmbientG, pLight.AmbientB);
                 Shader.SetUniform3("pointLights[" + i + "].diffuse", pLight.DiffuseR, pLight.DiffuseG, pLight.DiffuseB);
                 Shader.SetUniform3("pointLights[" + i + "].specular", pLight.SpecularR, pLight.SpecularG, pLight.SpecularB);

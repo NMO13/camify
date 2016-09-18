@@ -13,7 +13,7 @@ namespace RenderEngine.BufferObjectManagement
         internal int Vbo { get; set; }
         internal int Ebo { get; set; } //Actually not needed since we draw everything with vertices
         internal int Vao { get; set; }
-        internal void InitializeBuffers()
+        internal BufferObjectContainer()
         {
             Vao = GL.GenVertexArray();
             Vbo = GL.GenBuffer();

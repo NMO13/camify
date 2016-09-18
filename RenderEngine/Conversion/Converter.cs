@@ -1,23 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 using RenderEngine.GraphicObjects;
-using RenderEngine.GraphicObjects.Deformable;
-using RenderEngine.Rendering;
+using RenderEngine.GraphicObjects.ObjectTypes;
+using RenderEngine.GraphicObjects.ObjectTypes.Dynamic;
 using Shared.Geometry;
 
 namespace RenderEngine.Conversion
 {
     internal static class Converter
     {
-        internal static List<RenderMesh> ToRenderMeshes(List<Mesh> meshes)
+        internal static List<DynamicRenderObject> ToDynamicRenderObjects(List<Mesh> meshes)
         {
-            var renderMeshes = new List<RenderMesh>();
+            var dynamicRenderObjects = new List<DynamicRenderObject>();
             foreach (var mesh in meshes)
             {
-                var hasNormals = mesh.RenderNormals.Length > 0;
-                renderMeshes.Add(RenderObjectFactory.CreateRenderObject(ObjectType.RenderMesh, mesh.RenderVertices, mesh.Material, hasNormals) as RenderMesh);
+                var container = new DynamicObjectDataContainer();
+                container.Vertices = mesh.RenderVertices;
+                container.Material = mesh.Material;
+                container.HasNormals = mesh.RenderNormals.Length > 0;
+                dynamicRenderObjects.Add(RenderObjectFactory.Instance.BuildDynamicRenderObject(container));
             }
-            return renderMeshes;
+            return dynamicRenderObjects;
         }
     }
 }

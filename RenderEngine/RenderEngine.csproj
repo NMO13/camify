@@ -78,10 +78,13 @@
     <Compile Include="Conversion\Extensions.cs" />
     <Compile Include="Conversion\Converter.cs" />
     <Compile Include="ErrorHandling\GLCheck.cs" />
-    <Compile Include="GraphicObjects\Perpetual\Background.cs" />
-    <Compile Include="GraphicObjects\ObjectType.cs" />
-    <Compile Include="GraphicObjects\Deformable\RenderMesh.cs" />
-    <Compile Include="GraphicObjects\Perpetual\CoordinateAxis.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Dynamic\DynamicRenderObject.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Dynamic\DynamicObjectDataContainer.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Static\IVertexLoading.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Static\Background.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Static\CoordinateSystem.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\Static\StaticRenderObject.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\ObjectType.cs" />
     <Compile Include="IO\MouseHandler.cs" />
     <Compile Include="IO\MouseKeyEvents.cs" />
     <Compile Include="Lighting\DirectionalLight.cs" />
@@ -99,9 +102,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\IRenderable.cs" />
     <Compile Include="Rendering\Renderer.cs" />
-    <Compile Include="Rendering\RenderObject.cs" />
-    <Compile Include="Rendering\RenderObjectFactory.cs" />
-    <Compile Include="Resources\Meshmodel\PerpetualMeshLibrary.cs" />
+    <Compile Include="GraphicObjects\ObjectTypes\RenderObject.cs" />
+    <Compile Include="GraphicObjects\Factories\RenderObjectFactory.cs" />
+    <Compile Include="Resources\StaticObjects\StaticRenderObjectLibrary.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Resources\Shader\Shader.cs" />
     <Compile Include="Resources\Shader\ShaderLibrary.cs" />
@@ -130,7 +133,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Meshmodel\Files\coordinate-system.dae" />
+    <None Include="Resources\StaticObjects\Files\coordinate-system.dae" />
     <None Include="Resources\Shader\Files\coordinateAxis.frag" />
     <None Include="Resources\Shader\Files\coordinateAxis.vs" />
     <None Include="Resources\Shader\Files\normalDisplay.frag" />

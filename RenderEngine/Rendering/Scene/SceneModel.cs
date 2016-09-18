@@ -5,13 +5,15 @@ using MessageHandling.Messages;
 using MessageHandling.SnapshotFormat;
 using Model;
 using RenderEngine.Conversion;
-using RenderEngine.GraphicObjects.Deformable;
+using RenderEngine.GraphicObjects;
 using Shared.Geometry;
 
 namespace RenderEngine.Rendering.Scene
 {
     public class SceneModel : AbstractModel
     {
+        //Singleton
+        private static SceneModel _instance;
         public static SceneModel Instance
         {
             get
@@ -27,8 +29,8 @@ namespace RenderEngine.Rendering.Scene
         public bool WireframeMode { get; set; }
         public bool ShowNormals { get; set; }
 
-        internal List<RenderMesh> RenderMeshes = new List<RenderMesh>();
-        internal List<IRenderable> PerpetualMeshes = new List<IRenderable>();
+        internal List<DynamicRenderObject> DynamicRenderObjects = new List<DynamicRenderObject>();
+        internal List<StaticRenderObject> StaticRenderObjects = new List<StaticRenderObject>();
         internal int SceneWidth { get; set; }
         internal int SceneHeight { get; set; }
         internal bool MeshUpdated { get; set; } //TODO: declare which mesh has been modified! Only mesh that has been changed must be modified.
@@ -49,20 +51,17 @@ namespace RenderEngine.Rendering.Scene
             get { return CurrentCollector != null && CurrentCollector.Snapshots.Count > 0; }
         }
 
-        //Singleton
-        private static SceneModel _instance;
-
         //Constructor
         private SceneModel() { }
 
-        internal void AddRenderObject(RenderMesh renderMesh)
+        internal void AddDynamicRenderObject(DynamicRenderObject dynamicObject)
         {
-            RenderMeshes.Add(renderMesh);
+            DynamicRenderObjects.Add(dynamicObject);
         }
 
-        internal void AddPerpetualObject(IRenderable perpetual)
+        internal void AddStaticObject(StaticRenderObject staticObject)
         {
-            PerpetualMeshes.Add(perpetual);
+            StaticRenderObjects.Add(staticObject);
         }
 
         public override void AttachObserver(IObserver observer)
@@ -81,21 +80,21 @@ namespace RenderEngine.Rendering.Scene
                 var meshMessage = message as MeshMessage;
                 if (meshMessage == null)
                     return;
-                RenderMeshes.AddRange(Converter.ToRenderMeshes(meshMessage.GetMeshes));
+                DynamicRenderObjects.AddRange(Converter.ToDynamicRenderObjects(meshMessage.GetMeshes));
             }
             else if (message.MessageType == MessageType.ClearMeshes)
             {
                 var meshMessage = message as MeshMessage;
                 if (meshMessage == null)
                     return;
-                RenderMeshes.Clear();
+                DynamicRenderObjects.Clear();
             }
             else if (message.MessageType == MessageType.MoveObject)
             {
                 var transformationMessage = message as TransformationMessage;
                 if (transformationMessage == null)
                     return;
-                RenderMeshes[transformationMessage.ToolId].Translate(transformationMessage.Transformation.Vector3d);
+                DynamicRenderObjects[transformationMessage.ToolId].Translate(transformationMessage.Transformation.Vector3d);
             }
             else if (message.MessageType == MessageType.NewSnapshotList)
             {
