@@ -185,6 +185,13 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\finder_toolbar_eject.png" />
+    <Content Include="Resources\Images\player_play.png" />
+    <Content Include="Resources\Images\text_x_generic.png" />
+    <Content Include="Resources\Images\the_customize_toolbar_icon.png" />
+    <Content Include="Resources\Images\toolbar_customize.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>XCOPY "$(SolutionDir)\third_party\Assimp\*.dll" "$(ProjectDir)\$(OutDir)" /s /i /y</PreBuildEvent>

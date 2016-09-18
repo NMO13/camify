@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonDockingManager1 = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonDockableWorkspace1 = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
@@ -114,16 +115,22 @@
             // 
             // ImportButton
             // 
+            this.ImportButton.ImageLarge = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageLarge")));
+            this.ImportButton.ImageSmall = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageSmall")));
             this.ImportButton.TextLine1 = "Import";
             this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // BuildButton
             // 
+            this.BuildButton.ImageLarge = ((System.Drawing.Image)(resources.GetObject("BuildButton.ImageLarge")));
+            this.BuildButton.ImageSmall = ((System.Drawing.Image)(resources.GetObject("BuildButton.ImageSmall")));
             this.BuildButton.TextLine1 = "Build";
             this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
             // ImportTool
             // 
+            this.ImportTool.ImageLarge = ((System.Drawing.Image)(resources.GetObject("ImportTool.ImageLarge")));
+            this.ImportTool.ImageSmall = ((System.Drawing.Image)(resources.GetObject("ImportTool.ImageSmall")));
             this.ImportTool.TextLine1 = "Import Tool";
             this.ImportTool.Click += new System.EventHandler(this.ImportTool_Click);
             // 
@@ -136,6 +143,8 @@
             // 
             // kryptonRibbonGroupButton1
             // 
+            this.kryptonRibbonGroupButton1.ImageLarge = ((System.Drawing.Image)(resources.GetObject("kryptonRibbonGroupButton1.ImageLarge")));
+            this.kryptonRibbonGroupButton1.ImageSmall = ((System.Drawing.Image)(resources.GetObject("kryptonRibbonGroupButton1.ImageSmall")));
             this.kryptonRibbonGroupButton1.TextLine1 = "Import G-Code";
             this.kryptonRibbonGroupButton1.Click += new System.EventHandler(this.kryptonRibbonGroupButton1_Click);
             // 
@@ -146,6 +155,8 @@
             // 
             // kryptonRibbonGroupButton3
             // 
+            this.kryptonRibbonGroupButton3.ImageLarge = ((System.Drawing.Image)(resources.GetObject("kryptonRibbonGroupButton3.ImageLarge")));
+            this.kryptonRibbonGroupButton3.ImageSmall = ((System.Drawing.Image)(resources.GetObject("kryptonRibbonGroupButton3.ImageSmall")));
             this.kryptonRibbonGroupButton3.TextLine1 = "Play";
             this.kryptonRibbonGroupButton3.Click += new System.EventHandler(this.kryptonRibbonGroupButton3_Click);
             // 
