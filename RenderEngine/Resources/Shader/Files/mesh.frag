@@ -26,7 +26,7 @@ struct PointLight {
 	vec3 specular;
 };
 
-#define MAX_POINT_LIGHTS 100
+//#define MAX_POINT_LIGHTS 100
 
 in GS_OUT {
     vec3 Normal;
@@ -36,12 +36,11 @@ in GS_OUT {
 	vec3 WorldNormal;
 } gs_in;
 
-
 out vec4 color;
 
 uniform int numPointLights;
 uniform DirLight dirLight;
-uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform PointLight pointLights[2];
 uniform Material material;
 uniform sampler2D bayerTex;
 
@@ -58,7 +57,7 @@ void main()
 	// Phase 1: Directional lighting
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);
 	// Phase 2: Point lights
-	for (int i = 0; i < numPointLights; i++) {
+	for (int i = 0; i < 2; i++) {
 		PointLight pLight = pointLights[i];
 		result += CalcPointLight(pLight, norm, gs_in.FragPos, viewDir);
 	}

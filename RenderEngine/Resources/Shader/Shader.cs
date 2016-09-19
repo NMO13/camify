@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using OpenTK.Graphics.OpenGL;
 using RenderEngine.Conversion;
+using RenderEngine.ErrorHandling;
 using Shared.Geometry;
 
 namespace RenderEngine.Resources.Shader
@@ -12,7 +13,7 @@ namespace RenderEngine.Resources.Shader
 
         internal void Use()
         {
-            GL.UseProgram(ProgramId);
+            GLCheck.Call(()=>GL.UseProgram(ProgramId));
         }
         internal Shader(string vertexShader, string fragmentShader, string geoShader)
         {
@@ -81,16 +82,16 @@ namespace RenderEngine.Resources.Shader
 
         internal void SetUniform1(string name, float x)
         {
-            GL.Uniform1(GL.GetUniformLocation(ProgramId, name), x);
+            GLCheck.Call(() => GL.Uniform1(GL.GetUniformLocation(ProgramId, name), x));
         }
         public void SetUniform2(string name, float x, float y)
         {
-            GL.Uniform2(GL.GetUniformLocation(ProgramId, name), x, y);
+            GLCheck.Call(() => GL.Uniform2(GL.GetUniformLocation(ProgramId, name), x, y));
         }
 
         internal void SetUniform3(string name, float x, float y, float z)
         {
-            GL.Uniform3(GL.GetUniformLocation(ProgramId, name), x, y, z);
+            GLCheck.Call(() => GL.Uniform3(GL.GetUniformLocation(ProgramId, name), x, y, z));
         }
 
         internal void Delete()

@@ -37,7 +37,7 @@ namespace RenderEngine.Lighting
         //4 point lights
         private void CreateStandardLight()
         {
-            DirectionalLight directionalLight = new DirectionalLight(1f, 1f, -1f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
+            DirectionalLight directionalLight = new DirectionalLight(1.0f, 1.0f, -1.0f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
                 0.5f, 0.5f, 0.5f);
             DirectionalLights.Add(directionalLight);
 
