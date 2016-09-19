@@ -10,3 +10,7 @@ Camify is a CNC machine simulation which can be used for 3 axis milling machines
 - Visual presented machine simulation
 
 ## Example Images
+
+![alt tag](https://github.com/NMO13/camify/blob/master/img/image1.png)
+![alt tag](https://github.com/NMO13/camify/blob/master/img/image2.png)
+![alt tag](https://github.com/NMO13/camify/blob/master/img/image3.png)
