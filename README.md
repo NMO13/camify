@@ -22,7 +22,7 @@ Camify is a CNC machine simulation which can be used for 3 axis milling machines
 ### Finished simulation
 ![alt tag](https://github.com/NMO13/camify/blob/master/img/image3.png)
 
--- Boolean operations
+## Boolean operations
 
 If you don't need a CNC simulation but only boolean subtraction on polyhedral meshes then you just need the **GeometryCalculation** project and the **Shared project**. The booolean subtractor is 100% robust which means that no floating point bugs can occur. The trick is that an arbitrary precision rational datatype is used internally. 
 Have a look at the TestProject in order to find examples on how the boolean subtractor works. Basically, you only need to create two **DeformableObjects** and initialize them with instances of the **Mesh** class.
