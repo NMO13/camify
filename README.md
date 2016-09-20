@@ -21,3 +21,75 @@ Camify is a CNC machine simulation which can be used for 3 axis milling machines
 
 ### Finished simulation
 ![alt tag](https://github.com/NMO13/camify/blob/master/img/image3.png)
+
+-- Boolean operations
+
+If you don't need a CNC simulation but only boolean subtraction on polyhedral meshes then you just need the **GeometryCalculation** project and the **Shared project**. The booolean subtractor is 100% robust which means that no floating point bugs can occur. The trick is that an arbitrary precision rational datatype is used internally. 
+Have a look at the TestProject in order to find examples on how the boolean subtractor works. Basically, you only need to create two **DeformableObjects** and initialize them with instances of the **Mesh** class.
+
+So for example:
+```C#
+Vector3d[] verts1 =
+            {
+                new Vector3d(-1, 1, -0.5f),
+                new Vector3d(-1, 1, 0),
+                new Vector3d(1, 1, -0.5f),
+                new Vector3d(1, 1, 0),
+                new Vector3d(1, -1, 0),
+                new Vector3d(-1, -1, 0),
+            };
+
+            int[] coords1 =
+            {
+                0, 1, 2,
+                2, 1, 3,
+                3, 4, 2,
+                2, 4, 0,
+                0, 4, 5,
+                5, 1, 0,
+                4, 3, 5,
+                5, 3, 1
+            };
+
+            Mesh mesh = new Mesh(verts1, coords1, Misc.CalcNormalizedFaceNormals(verts1, coords1));
+            var obj = new DeformableObject(1);
+            obj.Initialize(mesh);
+
+            Vector3d[] verts2 =
+            {
+                new Vector3d(-0.5f, -0.5f, -1),
+                new Vector3d(0.5f, -0.5f, 0.5f),
+                new Vector3d(-0.8f, -0.7f, 0.5f),
+                new Vector3d(-0.5f, 1.5f, -1),
+                new Vector3d(-0.5f, 0.5f, 0.5f),
+                new Vector3d(1, 2, -1.5f),
+                new Vector3d(0.5f, 0.8f, 1),
+                new Vector3d(0.5f, 1, -1),
+            };
+
+            int[] coords2 =
+            {
+                0, 1, 2,
+                2, 3, 0,
+                3, 2, 4,
+                4, 5, 3,
+                5, 4, 6,
+                6, 7, 5,
+                7, 6, 1,
+                1, 0, 7,
+                2, 1, 4,
+                4, 1, 6,
+                0, 3, 7,
+                7, 3, 5
+            };
+
+            Mesh mesh2 = new Mesh(verts2, coords2, Misc.CalcNormalizedFaceNormals(verts2, coords2));
+            var obj2 = new DeformableObject(1);
+            obj2.Initialize(mesh2);
+            
+            BooleanModeller.Subtract(obj, obj2);
+            // obj is now subtracted, obj2 hasn't changed and is still valid and can be used for further operations
+```
+
+##Notes 
+This project should be seen as a starting point and not as a finished project. I know that there are many possibilities for improvement but I don't have the time to work on them. So everyone is welcome to work on this project since I think that it has a lot of potential. As far as I know, there is currently no free (or even open source) CNC simulation software available. So it would be great if this project can fill this gap in the future.
